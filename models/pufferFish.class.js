@@ -1,10 +1,17 @@
 class pufferFish extends movableObject {
-    constructor() {
-        super().loadImage('img/2.Enemy/1.Puffer fish (3 color options)/1.Swim/1.swim1.png')
-        this.x = 200 + Math.random() * 500;
+    constructor(imagePath) {
+        super().loadImage(imagePath)
+        this.x = 220 + Math.random() * 500;
         this.y = Math.random() * 400
         this.width = 50;
         this.height = 50;
+        this.animate();
+    }
+
+    animate() {
+        setInterval( () => {
+            this.x -= .3;
+        }, 1000/60)
     }
 
 }
