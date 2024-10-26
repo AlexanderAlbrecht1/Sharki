@@ -1,11 +1,11 @@
 class World {
     character = new Character();
     enemies = [
-        new pufferFish('img/2.Enemy/1.Puffer fish (3 color options)/1.Swim/1.swim1.png'),
-        new pufferFish('img/2.Enemy/1.Puffer fish (3 color options)/1.Swim/1.swim1.png'),
-        new pufferFish('img/2.Enemy/1.Puffer fish (3 color options)/1.Swim/2.swim1.png'),
-        new pufferFish('img/2.Enemy/1.Puffer fish (3 color options)/1.Swim/3.swim1.png'),
+        new pufferFish(),
+        new pufferFish(),
         new JellyFish(),
+        new pufferFish(),
+        new pufferFish(),
         new JellyFish(),
     ];
 
