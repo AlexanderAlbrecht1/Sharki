@@ -1,5 +1,6 @@
 class Character extends movableObject {
-    speed = 1;
+    speed = 2;
+    speedY = 1;
 
     ImagesWatiting = [
         './img/1.Sharkie/1.IDLE/1.png',
@@ -40,30 +41,22 @@ class Character extends movableObject {
 
         this.animate();
         this.moveRight();
+        this.moveLeft();
+        this.moveUp();
+        this.moveDown();
     }
 
     animate() {
-
-        // setTimeout(() => {
-        //     setInterval(() => {
-        //         let i = this.currentImage % this.ImagesWatiting.length;
-        //         let path = this.ImagesWatiting[i];
-        //         this.img = this.imageCache[path];
-        //         this.currentImage++
-        //     }, 200)
-
-        // }, 1000);
-
         setInterval(() => {
             let i = this.currentImage % this.ImagesWatiting.length;
             let path = this.ImagesWatiting[i];
             this.img = this.imageCache[path];
             this.currentImage++
         }, 200)
-
     }
 
     moveRight() {
+        
         setInterval(() => {
             if (this.world.keyboard.RIGHT) {
                 let i = this.currentImage % this.ImagesSwimming.length;
@@ -72,21 +65,62 @@ class Character extends movableObject {
                 this.currentImage++
             }
         }, 200)
-
         setInterval(() => {
             if (this.world.keyboard.RIGHT) {
                 this.x += this.speed;
+                this.otherDirection = false;
             }
         }, 1000 / 60)
     }
 
-
-
-    moveUp() {
-
+    moveLeft() {
+       
+        setInterval(() => {
+            if (this.world.keyboard.LEFT) {
+                this.x -= this.speed;
+                this.otherDirection = true;
+            }
+        }, 1000 / 60)
+        setInterval(() => {
+            if (this.world.keyboard.LEFT) {
+                let i = this.currentImage % this.ImagesSwimming.length;
+                let path = this.ImagesSwimming[i];
+                this.img = this.imageCache[path];
+                this.currentImage++
+            }
+        }, 200)
     }
 
-    moveDown() {
+    moveUp() {
+        setInterval(() => {
+            if (this.world.keyboard.UP) {
+                this.y -= this.speed;
+            }
+        }, 1000 / 60)
+        setInterval(() => {
+            if (this.world.keyboard.UP) {
+                let i = this.currentImage % this.ImagesSwimming.length;
+                let path = this.ImagesSwimming[i];
+                this.img = this.imageCache[path];
+                this.currentImage++
+            }
+        }, 200)
+    }
+    
 
+    moveDown() {
+        setInterval(() => {
+            if (this.world.keyboard.DOWN) {
+                this.y += this.speed;
+            }
+        }, 1000 / 60)
+        setInterval(() => {
+            if (this.world.keyboard.DOWN) {
+                let i = this.currentImage % this.ImagesSwimming.length;
+                let path = this.ImagesSwimming[i];
+                this.img = this.imageCache[path];
+                this.currentImage++
+            }
+        }, 200)
     }
 }
