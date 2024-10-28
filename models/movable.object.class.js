@@ -24,12 +24,12 @@ class movableObject {
     //move from right to left
     moveLeft() {
         setInterval( () => {
-            if (this.x >= -50) {
+            // if (this.x >= -50) {
                 this.x -= this.speed;
-            } else {
-                this.x = 720;
-                this.y = Math.random() * 400;
-            };
+            // } else {
+            //     this.x = 720;
+            //     this.y = Math.random() * 400;
+            // };
         }, 1000/60)
     }
 
