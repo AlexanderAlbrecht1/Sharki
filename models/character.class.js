@@ -31,8 +31,21 @@ class Character extends movableObject {
         'img/1.Sharkie/3.Swim/5.png',
         'img/1.Sharkie/3.Swim/6.png',
     ]
+
+    bubbleAttack = [
+        './img/1.Sharkie/4.Attack/Bubble trap/op1 (with bubble formation)/1.png',
+        './img/1.Sharkie/4.Attack/Bubble trap/op1 (with bubble formation)/2.png',
+        './img/1.Sharkie/4.Attack/Bubble trap/op1 (with bubble formation)/3.png',
+        './img/1.Sharkie/4.Attack/Bubble trap/op1 (with bubble formation)/4.png',
+        './img/1.Sharkie/4.Attack/Bubble trap/op1 (with bubble formation)/5.png',
+        './img/1.Sharkie/4.Attack/Bubble trap/op1 (with bubble formation)/6.png',
+        './img/1.Sharkie/4.Attack/Bubble trap/op1 (with bubble formation)/7.png',
+        './img/1.Sharkie/4.Attack/Bubble trap/op1 (with bubble formation)/8.png',
+    ]
     currentImage = 0;
     world;
+    swimmingSound = new Audio('./audio/swimming2.mp3')
+    swimmingSound2 = new Audio('./audio/swimming.mp3')
 
     constructor() {
         super().loadImage('img/1.Sharkie/1.IDLE/1.png');
@@ -44,6 +57,7 @@ class Character extends movableObject {
         this.moveLeft();
         this.moveUp();
         this.moveDown();
+        // this.bubbleAttack();
     }
 
     animate() {
@@ -55,20 +69,32 @@ class Character extends movableObject {
         }, 200)
     }
 
+    bubbleAttack() { 0
+        setInterval(() => {
+            if (this.world.keyboard.SPACE) {
+            let i = this.currentImage % this.ImagesWbubbleAttackatiting.length;
+            let path = this.bubbleAttack[i];
+            this.img = this.imageCache[path];
+            this.currentImage++;
+        }
+        }, 200)
+    }
+
     moveRight() {
         
         setInterval(() => {
             if (this.world.keyboard.RIGHT) {
-                let i = this.currentImage % this.ImagesSwimming.length;
-                let path = this.ImagesSwimming[i];
-                this.img = this.imageCache[path];
-                this.currentImage++
+                this.playAnimation(this.ImagesSwimming);
             }
         }, 200)
+
         setInterval(() => {
+            this.swimmingSound.pause();
             if (this.world.keyboard.RIGHT  && this.x < this.world.level.levelEndX) {
                 this.x += this.speed;
                 this.otherDirection = false;
+                this.swimmingSound.volume = 0.1;
+                this.swimmingSound.play();
             }
             this.world.cameraX = -this.x + 100;
         }, 1000 / 60)
@@ -76,14 +102,7 @@ class Character extends movableObject {
     }
 
     moveLeft() {
-       
-        setInterval(() => {
-            if (this.world.keyboard.LEFT && this.x > -300) {
-                this.x -= this.speed;
-                this.otherDirection = true;
-            }
-            this.world.cameraX = -this.x + 100;
-        }, 1000 / 60)
+
         setInterval(() => {
             if (this.world.keyboard.LEFT) {
                 let i = this.currentImage % this.ImagesSwimming.length;
@@ -92,6 +111,18 @@ class Character extends movableObject {
                 this.currentImage++
             }
         }, 200)
+       
+        setInterval(() => {
+            this.swimmingSound2.pause();
+            if (this.world.keyboard.LEFT && this.x > -300) {
+                this.x -= this.speed;
+                this.otherDirection = true;
+                this.swimmingSound2.volume = 0.3;
+                this.swimmingSound2.play();
+            }
+            this.world.cameraX = -this.x + 100;
+        }, 1000 / 60)
+
     }
 
     moveUp() {

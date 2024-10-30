@@ -1,10 +1,12 @@
 let canvas;
 let world;
 let keyboard = new Keyboard();
+let backgroundSound = new Audio('./audio/background2.mp3')
 
 async function init() {
     canvas = document.getElementById('canvas');
     world = new World(canvas, keyboard);
+    // backgroundSound. play();
 }
 
 document.addEventListener("keydown", (event) => {

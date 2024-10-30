@@ -5,7 +5,7 @@ class movableObject {
     height = 150;
     width = 150;
     imageCache = {};
-    speed = 0.3; 
+    speed = 0.3;
     otherDirection = false;
 
     loadImage(path) {
@@ -15,22 +15,29 @@ class movableObject {
 
     loadImages(arr) {
         arr.forEach(path => {
-        let img = new Image();
-        img.src = path;
-        this.imageCache[path] = img;
-    });
+            let img = new Image();
+            img.src = path;
+            this.imageCache[path] = img;
+        });
     }
 
     //move from right to left
     moveLeft() {
-        setInterval( () => {
+        setInterval(() => {
             // if (this.x >= -50) {
-                this.x -= this.speed;
+            this.x -= this.speed;
             // } else {
             //     this.x = 720;
             //     this.y = Math.random() * 400;
             // };
-        }, 1000/60)
+        }, 1000 / 60)
+    }
+
+    playAnimation(images) {
+        let i = this.currentImage % images.length;
+        let path = images[i];
+        this.img = this.imageCache[path];
+        this.currentImage++
     }
 
 }

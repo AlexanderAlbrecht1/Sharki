@@ -25,10 +25,7 @@ class JellyFish extends movableObject {
         
         //swimming movement
         setInterval(() => {
-            let i = this.currentImage % this.ImagesSwimming.length;
-            let path = this.ImagesSwimming[i];
-            this.img = this.imageCache[path];
-            this.currentImage++
+            this.playAnimation(this.ImagesSwimming);
         }, 500)
     }
 }
