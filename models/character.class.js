@@ -1,5 +1,5 @@
 class Character extends movableObject {
-    speed = 2;
+    speed = 3;
     speedY = 1;
 
     ImagesWatiting = [
@@ -66,11 +66,11 @@ class Character extends movableObject {
             }
         }, 200)
         setInterval(() => {
-            if (this.world.keyboard.RIGHT) {
+            if (this.world.keyboard.RIGHT  && this.x < this.world.level.levelEndX) {
                 this.x += this.speed;
                 this.otherDirection = false;
             }
-            this.world.cameraX = -this.x;
+            this.world.cameraX = -this.x + 100;
         }, 1000 / 60)
        
     }
@@ -78,11 +78,11 @@ class Character extends movableObject {
     moveLeft() {
        
         setInterval(() => {
-            if (this.world.keyboard.LEFT) {
+            if (this.world.keyboard.LEFT && this.x > -300) {
                 this.x -= this.speed;
                 this.otherDirection = true;
             }
-            this.world.cameraX = -this.x;
+            this.world.cameraX = -this.x + 100;
         }, 1000 / 60)
         setInterval(() => {
             if (this.world.keyboard.LEFT) {
