@@ -32,7 +32,7 @@ class Character extends movableObject {
         'img/1.Sharkie/3.Swim/6.png',
     ]
 
-    bubbleAttack = [
+    ImagesBubbleAttack = [
         './img/1.Sharkie/4.Attack/Bubble trap/op1 (with bubble formation)/1.png',
         './img/1.Sharkie/4.Attack/Bubble trap/op1 (with bubble formation)/2.png',
         './img/1.Sharkie/4.Attack/Bubble trap/op1 (with bubble formation)/3.png',
@@ -42,6 +42,7 @@ class Character extends movableObject {
         './img/1.Sharkie/4.Attack/Bubble trap/op1 (with bubble formation)/7.png',
         './img/1.Sharkie/4.Attack/Bubble trap/op1 (with bubble formation)/8.png',
     ]
+
     currentImage = 0;
     world;
     swimmingSound = new Audio('./audio/swimming2.mp3')
@@ -57,7 +58,7 @@ class Character extends movableObject {
         this.moveLeft();
         this.moveUp();
         this.moveDown();
-        // this.bubbleAttack();
+        // this.attack();
     }
 
     animate() {
@@ -69,15 +70,13 @@ class Character extends movableObject {
         }, 200)
     }
 
-    bubbleAttack() { 0
+    attack() { 
+        //bubble Attack
         setInterval(() => {
             if (this.world.keyboard.SPACE) {
-            let i = this.currentImage % this.ImagesWbubbleAttackatiting.length;
-            let path = this.bubbleAttack[i];
-            this.img = this.imageCache[path];
-            this.currentImage++;
+                this.playAnimation(this.ImagesBubbleAttack);
         }
-        }, 200)
+        }, 200);
     }
 
     moveRight() {
