@@ -52,13 +52,14 @@ class Character extends movableObject {
         super().loadImage('img/1.Sharkie/1.IDLE/1.png');
         this.loadImages(this.ImagesWatiting);
         this.loadImages(this.ImagesSwimming);
+        this.loadImages(this.ImagesBubbleAttack);
 
         this.animate();
         this.moveRight();
         this.moveLeft();
         this.moveUp();
         this.moveDown();
-        // this.attack();
+        this.attack();
     }
 
     animate() {
