@@ -55,6 +55,7 @@ class Character extends movableObject {
         this.loadImages(this.ImagesBubbleAttack);
 
         this.animate();
+
         this.moveRight();
         this.moveLeft();
         this.moveUp();
@@ -96,7 +97,7 @@ class Character extends movableObject {
                 this.swimmingSound.volume = 0.1;
                 this.swimmingSound.play();
                 
-                console.log(this.x);
+                // console.log(this.x);
                 
             }
             this.world.cameraX = -this.x + 100;

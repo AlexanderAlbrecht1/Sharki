@@ -33,7 +33,7 @@ class Endboss extends movableObject {
         super().loadImage('./img/2.Enemy/3 Final Enemy/2.floating/1.png');
         this.loadImages(this.ImagesFloating);
         this.loadImages(this.ImagesArise);
-        this.x = 400;
+        this.x = 2600;
         this.y = -1;
         this.width = 400;
         this.height = 400;
@@ -46,18 +46,19 @@ class Endboss extends movableObject {
 
     animate() {
         setInterval(() => {
-            // if (this.isABoveStopLine) {
-            //     this.playAnimation(this.ImagesArise);
-            // }
             this.playAnimation(this.ImagesFloating);
         }, 200);
+
+        // setInterval(() => {
+            this.playAnimation(this.ImagesArise);
+        // }, 200)
     }
 
     arise() {
-        if (world.character.x === 700) {
+        // if (world.character.x === 700) {
             setInterval(() => {
-                this.playAnimationArise(this.ImagesArise);
+                this.playAnimation(this.ImagesArise);
             }, 200)
-        }
+        // }
     }
 }

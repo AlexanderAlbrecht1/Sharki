@@ -1,6 +1,6 @@
 class World {
     character = new Character();
-    level = level1 ;
+    level = level1;
 
     canvas;
     ctx;
@@ -13,9 +13,20 @@ class World {
         this.keyboard = keyboard;
         this.draw();
         this.setWorld();
+        this.checkCollisions();
     }
 
-    setWorld(){
+    checkCollisions() {
+        setInterval(() => {
+            this.level.enemies.forEach((enemy) => {
+                if (this.character.isColliding(enemy)) {
+                    console.log('Collision', enemy);
+                }
+            } )
+        }, 1000);
+    }
+
+    setWorld() {
         this.character.world = this;
     }
 
@@ -27,15 +38,12 @@ class World {
 
     addToMap(object) {
         if (object.otherDirection) {
-            this.ctx.save();
-            this.ctx.translate(object.width, 0);
-            this.ctx.scale(-1,1);
-            object.x = object.x * -1;
+            this.flipImage(object);
         }
-        this.ctx.drawImage(object.img, object.x, object.y, object.width, object.height);
+        object.draw(this.ctx);
+        object.drawFrame(this.ctx);
         if (object.otherDirection) {
-            object.x = object.x * -1;
-            this.ctx.restore();
+            this.flipImageBack(object);
         }
     }
 
@@ -43,13 +51,13 @@ class World {
         //clear canvas!
         this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
 
-        this.ctx.translate(this.cameraX,0);
+        this.ctx.translate(this.cameraX, 0);
 
         this.addObjectsToMap(this.level.backgroundObjects)
         this.addToMap(this.character);
         this.addObjectsToMap(this.level.enemies)
 
-        this.ctx.translate(-this.cameraX,0);
+        this.ctx.translate(-this.cameraX, 0);
 
         // repeat drawing as often as possible
         let self = this;
@@ -58,5 +66,17 @@ class World {
         });
     }
 
+    flipImage(object) {
+        this.ctx.save();
+        this.ctx.translate(object.width, 0);
+        this.ctx.scale(-1, 1);
+        object.x = object.x * -1;
+    }
 
+    flipImageBack(object) {
+        object.x = object.x * -1;
+        this.ctx.restore();
+    }
+
+    
 }

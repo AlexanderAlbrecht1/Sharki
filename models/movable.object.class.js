@@ -11,6 +11,8 @@ class movableObject {
     speed_Y = 0;
     accerlation = .75;
 
+    offsetY = 0;
+
     applyGravity() {
         setInterval(() => {
             if(this.isABoveStopLine()) {
@@ -36,6 +38,30 @@ class movableObject {
             this.imageCache[path] = img;
         });
     }
+
+    draw(ctx) {
+        ctx.drawImage(this.img, this.x, this.y, this.width, this.height);
+    }
+
+    drawFrame(ctx) {
+        if(this instanceof Character || this instanceof pufferFish || this instanceof JellyFish || this instanceof Endboss) {
+        ctx.beginPath();
+        ctx.lineWidth = '5';
+        ctx.strokeStyle = 'green';
+        ctx.rect(this.x, this.y, this.width, this.height);
+        ctx.stroke();
+    }
+    }
+
+    // Bessere Formel zur Kollisionsberechnung (Genauer)
+    isColliding(obj) {
+        return (this.x + this.width) >= obj.x && this.x <= (obj.x + obj.width) &&
+            (this.y + this.offsetY + this.height) >= obj.y &&
+            (this.y + this.offsetY) <= (obj.y + obj.height) //&&
+            obj.onCollisionCourse; // Optional: hiermit könnten wir schauen, ob ein Objekt sich in die richtige Richtung bewegt. Nur dann kollidieren wir. Nützlich bei Gegenständen, auf denen man stehen kann.
+
+    }
+
 
     //move from right to left
     moveLeft() {
