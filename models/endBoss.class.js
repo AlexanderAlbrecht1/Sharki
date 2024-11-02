@@ -1,5 +1,4 @@
-class Endboss extends movableObject{
-
+class Endboss extends movableObject {
     ImagesFloating = [
         './img/2.Enemy/3 Final Enemy/2.floating/1.png',
         './img/2.Enemy/3 Final Enemy/2.floating/2.png',
@@ -15,22 +14,50 @@ class Endboss extends movableObject{
         './img/2.Enemy/3 Final Enemy/2.floating/12.png',
         './img/2.Enemy/3 Final Enemy/2.floating/13.png',
     ];
+
+    ImagesArise = [
+        'img/2.Enemy/3 Final Enemy/1.Introduce/1.png',
+        'img/2.Enemy/3 Final Enemy/1.Introduce/2.png',
+        'img/2.Enemy/3 Final Enemy/1.Introduce/3.png',
+        'img/2.Enemy/3 Final Enemy/1.Introduce/4.png',
+        'img/2.Enemy/3 Final Enemy/1.Introduce/5.png',
+        'img/2.Enemy/3 Final Enemy/1.Introduce/6.png',
+        'img/2.Enemy/3 Final Enemy/1.Introduce/7.png',
+        'img/2.Enemy/3 Final Enemy/1.Introduce/8.png',
+        'img/2.Enemy/3 Final Enemy/1.Introduce/9.png',
+        'img/2.Enemy/3 Final Enemy/1.Introduce/10.png',
+    ]
     currentImage = 0;
 
     constructor() {
         super().loadImage('./img/2.Enemy/3 Final Enemy/2.floating/1.png');
         this.loadImages(this.ImagesFloating);
-        this.x = 700;
-        this.y = 0;
+        this.loadImages(this.ImagesArise);
+        this.x = 400;
+        this.y = -1;
         this.width = 400;
         this.height = 400;
 
         this.animate();
+        // this.arise();
+        // this.applyGravity(0);
+
     }
 
     animate() {
         setInterval(() => {
+            // if (this.isABoveStopLine) {
+            //     this.playAnimation(this.ImagesArise);
+            // }
             this.playAnimation(this.ImagesFloating);
         }, 200);
+    }
+
+    arise() {
+        if (world.character.x === 700) {
+            setInterval(() => {
+                this.playAnimationArise(this.ImagesArise);
+            }, 200)
+        }
     }
 }

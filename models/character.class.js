@@ -95,6 +95,9 @@ class Character extends movableObject {
                 this.otherDirection = false;
                 this.swimmingSound.volume = 0.1;
                 this.swimmingSound.play();
+                
+                console.log(this.x);
+                
             }
             this.world.cameraX = -this.x + 100;
         }, 1000 / 60)

@@ -8,6 +8,22 @@ class movableObject {
     speed = 0.3;
     otherDirection = false;
 
+    speed_Y = 0;
+    accerlation = .75;
+
+    applyGravity() {
+        setInterval(() => {
+            if(this.isABoveStopLine()) {
+                this.y -= this.speed_Y;
+                this.speed_Y -= this.accerlation;
+            }
+        }, 1000/25)
+    }
+
+    isABoveStopLine() {
+        return this.y < 0
+    }
+
     loadImage(path) {
         this.img = new Image();
         this.img.src = path;
