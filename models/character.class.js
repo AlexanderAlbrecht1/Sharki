@@ -2,6 +2,9 @@ class Character extends movableObject {
     speed = 3;
     speedY = 1;
 
+    poisoned = false;
+    shocked = false;
+
     ImagesWatiting = [
         './img/1.Sharkie/1.IDLE/1.png',
         './img/1.Sharkie/1.IDLE/2.png',
@@ -43,7 +46,7 @@ class Character extends movableObject {
         './img/1.Sharkie/4.Attack/Bubble trap/op1 (with bubble formation)/8.png',
     ]
 
-    ImagesPoisened = [
+    ImagesPoisoned = [
         './img/1.Sharkie/5.Hurt/1.Poisoned/1.png',
         './img/1.Sharkie/5.Hurt/1.Poisoned/2.png',
         './img/1.Sharkie/5.Hurt/1.Poisoned/3.png',
@@ -67,7 +70,7 @@ class Character extends movableObject {
         this.loadImages(this.ImagesWatiting);
         this.loadImages(this.ImagesSwimming);
         this.loadImages(this.ImagesBubbleAttack);
-        this.loadImages(this.ImagesPoisened);
+        this.loadImages(this.ImagesPoisoned);
         this.loadImages(this.ImagesShocked);
 
         this.animate();
@@ -77,6 +80,22 @@ class Character extends movableObject {
         this.moveUp();
         this.moveDown();
         this.attack();
+
+        this.attacked();
+    }
+
+    attacked() {
+        setInterval(() => {
+            if (this.poisoned) {
+                this.playAnimation(this.ImagesPoisoned);
+            }
+        }, 1000)
+
+        setInterval(() => {
+            if (this.shocked) {
+                this.playAnimation(this.ImagesShocked);
+            }
+        },500)
     }
 
     animate() {
@@ -88,17 +107,17 @@ class Character extends movableObject {
         }, 200)
     }
 
-    attack() { 
+    attack() {
         //bubble Attack
         setInterval(() => {
             if (this.world.keyboard.SPACE) {
                 this.playAnimation(this.ImagesBubbleAttack);
-        }
+            }
         }, 200);
     }
 
     moveRight() {
-        
+
         setInterval(() => {
             if (this.world.keyboard.RIGHT) {
                 this.playAnimation(this.ImagesSwimming);
@@ -107,18 +126,18 @@ class Character extends movableObject {
 
         setInterval(() => {
             this.swimmingSound.pause();
-            if (this.world.keyboard.RIGHT  && this.x < this.world.level.levelEndX) {
+            if (this.world.keyboard.RIGHT && this.x < this.world.level.levelEndX) {
                 this.x += this.speed;
                 this.otherDirection = false;
                 this.swimmingSound.volume = 0.1;
                 this.swimmingSound.play();
-                
+
                 // console.log(this.x);
-                
+
             }
             this.world.cameraX = -this.x + 100;
         }, 1000 / 60)
-       
+
     }
 
     moveLeft() {
@@ -131,7 +150,7 @@ class Character extends movableObject {
                 this.currentImage++
             }
         }, 200)
-       
+
         setInterval(() => {
             this.swimmingSound2.pause();
             if (this.world.keyboard.LEFT && this.x > -300) {
@@ -160,7 +179,7 @@ class Character extends movableObject {
             }
         }, 200)
     }
-    
+
 
     moveDown() {
         setInterval(() => {

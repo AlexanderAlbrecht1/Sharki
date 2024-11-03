@@ -20,16 +20,28 @@ class World {
         setInterval(() => {
             this.level.enemies.forEach((enemy) => {
                 if (this.character.isColliding(enemy)) {
+
                     console.log('Collision', enemy);
-                    if (enemy = 'pufferFish' ) {
-                        this.character.energy -= 5;
-                        console.log('Collision', this.character.energy);
-                    }
-                    if (enemy = 'JellyFish') {
+                    if (enemy instanceof pufferFish ) {
+                        world.character.shocked = false;
+                        world.character.poisoned = true;
+                        setTimeout(() => {
+                            world.character.poisoned = false;
+                        }, 3000);
                         this.character.energy -= 2;
                         console.log('Collision', this.character.energy);
-                    }
-                }
+                    } 
+                    if (enemy instanceof JellyFish) {
+                        world.character.poisoned = false;
+                        world.character.shocked = true;
+                        setTimeout(() => {
+                            world.character.shocked = false;
+                        }, 3000);
+                        this.character.energy -= 2;
+                        console.log('Nothing happend', this.character.energy);
+
+                    }                   
+                } 
             })
         }, 1000);
     }
