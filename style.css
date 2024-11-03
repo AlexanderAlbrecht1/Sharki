@@ -1,9 +1,11 @@
 body {
+    margin: 0;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
     background-image: url('./img/bgSite.jpg');
+    height: 100vh;
     background-size: cover;
     background-repeat: no-repeat;
 }

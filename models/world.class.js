@@ -21,8 +21,16 @@ class World {
             this.level.enemies.forEach((enemy) => {
                 if (this.character.isColliding(enemy)) {
                     console.log('Collision', enemy);
+                    if (enemy = 'pufferFish' ) {
+                        this.character.energy -= 5;
+                        console.log('Collision', this.character.energy);
+                    }
+                    if (enemy = 'JellyFish') {
+                        this.character.energy -= 2;
+                        console.log('Collision', this.character.energy);
+                    }
                 }
-            } )
+            })
         }, 1000);
     }
 
@@ -78,5 +86,5 @@ class World {
         this.ctx.restore();
     }
 
-    
+
 }

@@ -13,6 +13,8 @@ class movableObject {
 
     offsetY = 0;
 
+    energy = 100;
+
     applyGravity() {
         setInterval(() => {
             if(this.isABoveStopLine()) {

@@ -43,6 +43,20 @@ class Character extends movableObject {
         './img/1.Sharkie/4.Attack/Bubble trap/op1 (with bubble formation)/8.png',
     ]
 
+    ImagesPoisened = [
+        './img/1.Sharkie/5.Hurt/1.Poisoned/1.png',
+        './img/1.Sharkie/5.Hurt/1.Poisoned/2.png',
+        './img/1.Sharkie/5.Hurt/1.Poisoned/3.png',
+        './img/1.Sharkie/5.Hurt/1.Poisoned/4.png',
+    ]
+
+    ImagesShocked = [
+        './img/1.Sharkie/5.Hurt/2.Electric shock/1.png',
+        './img/1.Sharkie/5.Hurt/2.Electric shock/2.png',
+        './img/1.Sharkie/5.Hurt/2.Electric shock/3.png',
+    ]
+
+
     currentImage = 0;
     world;
     swimmingSound = new Audio('./audio/swimming2.mp3')
@@ -53,6 +67,8 @@ class Character extends movableObject {
         this.loadImages(this.ImagesWatiting);
         this.loadImages(this.ImagesSwimming);
         this.loadImages(this.ImagesBubbleAttack);
+        this.loadImages(this.ImagesPoisened);
+        this.loadImages(this.ImagesShocked);
 
         this.animate();
 
