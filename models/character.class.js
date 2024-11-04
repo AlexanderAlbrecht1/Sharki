@@ -59,11 +59,39 @@ class Character extends movableObject {
         './img/1.Sharkie/5.Hurt/2.Electric shock/3.png',
     ]
 
+    ImagesPoisonDead = [
+        './img/1.Sharkie/6.dead/1.Poisoned/1.png',
+        './img/1.Sharkie/6.dead/1.Poisoned/2.png',
+        './img/1.Sharkie/6.dead/1.Poisoned/3.png',
+        './img/1.Sharkie/6.dead/1.Poisoned/4.png',
+        './img/1.Sharkie/6.dead/1.Poisoned/5.png',
+        './img/1.Sharkie/6.dead/1.Poisoned/6.png',
+        './img/1.Sharkie/6.dead/1.Poisoned/7.png',
+        './img/1.Sharkie/6.dead/1.Poisoned/8.png',
+        './img/1.Sharkie/6.dead/1.Poisoned/9.png',
+        './img/1.Sharkie/6.dead/1.Poisoned/10.png',
+        './img/1.Sharkie/6.dead/1.Poisoned/11.png',
+        './img/1.Sharkie/6.dead/1.Poisoned/12.png',
+    ]
+
+    ImagesShockDead = [
+        './img/1.Sharkie/6.dead/2.Electro_shock/3.png',
+        './img/1.Sharkie/6.dead/2.Electro_shock/2.png',
+        './img/1.Sharkie/6.dead/2.Electro_shock/4.png',
+        './img/1.Sharkie/6.dead/2.Electro_shock/5.png',
+        './img/1.Sharkie/6.dead/2.Electro_shock/8.png',
+        './img/1.Sharkie/6.dead/2.Electro_shock/9.png',
+        './img/1.Sharkie/6.dead/2.Electro_shock/10.png',
+    ]
+    
+
 
     currentImage = 0;
     world;
-    swimmingSound = new Audio('./audio/swimming2.mp3')
-    swimmingSound2 = new Audio('./audio/swimming.mp3')
+    swimmingSound = new Audio('./audio/swimming2.mp3');
+    swimmingSound2 = new Audio('./audio/swimming.mp3');
+    electroShock = new Audio('./audio/electroshock.mp3');
+    poisonCough = new Audio('./audio/cough.mp3');
 
     constructor() {
         super().loadImage('img/1.Sharkie/1.IDLE/1.png');
@@ -72,6 +100,8 @@ class Character extends movableObject {
         this.loadImages(this.ImagesBubbleAttack);
         this.loadImages(this.ImagesPoisoned);
         this.loadImages(this.ImagesShocked);
+        this.loadImages(this.ImagesPoisonDead);
+        this.loadImages(this.ImagesShockDead);
 
         this.animate();
 
@@ -81,7 +111,7 @@ class Character extends movableObject {
         this.moveDown();
         this.attack();
 
-        this.attacked();
+        // this.attacked();
     }
 
     attacked() {
@@ -94,6 +124,7 @@ class Character extends movableObject {
         setInterval(() => {
             if (this.shocked) {
                 this.playAnimation(this.ImagesShocked);
+                this.electroShock.play();
             }
         },500)
     }
