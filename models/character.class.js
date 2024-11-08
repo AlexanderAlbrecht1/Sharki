@@ -46,6 +46,17 @@ class Character extends movableObject {
         './img/1.Sharkie/4.Attack/Bubble trap/op1 (with bubble formation)/8.png',
     ]
 
+    ImagesSlap = [
+        './img/1.Sharkie/4.Attack/Fin slap/1.png',
+        './img/1.Sharkie/4.Attack/Fin slap/2.png',
+        './img/1.Sharkie/4.Attack/Fin slap/3.png',
+        './img/1.Sharkie/4.Attack/Fin slap/4.png',
+        './img/1.Sharkie/4.Attack/Fin slap/5.png',
+        './img/1.Sharkie/4.Attack/Fin slap/6.png',
+        './img/1.Sharkie/4.Attack/Fin slap/7.png',
+        './img/1.Sharkie/4.Attack/Fin slap/8.png',
+    ]
+
     ImagesPoisoned = [
         './img/1.Sharkie/5.Hurt/1.Poisoned/1.png',
         './img/1.Sharkie/5.Hurt/1.Poisoned/2.png',
@@ -98,44 +109,52 @@ class Character extends movableObject {
         this.loadImages(this.ImagesWatiting);
         this.loadImages(this.ImagesSwimming);
         this.loadImages(this.ImagesBubbleAttack);
+        this.loadImages(this.ImagesSlap);
         this.loadImages(this.ImagesPoisoned);
         this.loadImages(this.ImagesShocked);
         this.loadImages(this.ImagesPoisonDead);
         this.loadImages(this.ImagesShockDead);
 
         this.animate();
-
+        
         this.moveRight();
         this.moveLeft();
         this.moveUp();
         this.moveDown();
         this.attack();
 
-        // this.attacked();
     }
 
-    attacked() {
-        setInterval(() => {
-            if (this.poisoned) {
-                this.playAnimation(this.ImagesPoisoned);
-            }
-        }, 1000)
-
-        setInterval(() => {
-            if (this.shocked) {
-                this.playAnimation(this.ImagesShocked);
-                this.electroShock.play();
-            }
-        },500)
-    }
 
     animate() {
         setInterval(() => {
-            let i = this.currentImage % this.ImagesWatiting.length;
-            let path = this.ImagesWatiting[i];
-            this.img = this.imageCache[path];
-            this.currentImage++
+            if (this.isDead()) {
+                this.playAnimation(this.ImagesShockDead);
+            }
+
+            else if (this.isHurt && this.world.character.poisoned === true) {
+                this.playAnimation(this.ImagesPoisoned);
+                this.poisonCough.play();                    
+            }
+
+            else if (this.isHurt && this.world.character.shocked === true) {
+                this.playAnimation(this.ImagesShocked); 
+                this.electroShock.play();                       
+            }
+
+            else if (this.world.keyboard.RIGHT || this.world.keyboard.LEFT || this.world.keyboard.UP || this.world.keyboard.DOWN) {
+                this.playAnimation(this.ImagesSwimming);
+            } 
+ 
+
+            else {
+            this.playAnimation(this.ImagesWatiting)
+            }
+            
         }, 200)
+
+        
+
     }
 
     attack() {
@@ -149,11 +168,11 @@ class Character extends movableObject {
 
     moveRight() {
 
-        setInterval(() => {
-            if (this.world.keyboard.RIGHT) {
-                this.playAnimation(this.ImagesSwimming);
-            }
-        }, 200)
+        // setInterval(() => {
+        //     if (this.world.keyboard.RIGHT) {
+        //         this.playAnimation(this.ImagesSwimming);
+        //     }
+        // }, 200)
 
         setInterval(() => {
             this.swimmingSound.pause();
@@ -173,14 +192,14 @@ class Character extends movableObject {
 
     moveLeft() {
 
-        setInterval(() => {
-            if (this.world.keyboard.LEFT) {
-                let i = this.currentImage % this.ImagesSwimming.length;
-                let path = this.ImagesSwimming[i];
-                this.img = this.imageCache[path];
-                this.currentImage++
-            }
-        }, 200)
+        // setInterval(() => {
+        //     if (this.world.keyboard.LEFT) {
+        //         let i = this.currentImage % this.ImagesSwimming.length;
+        //         let path = this.ImagesSwimming[i];
+        //         this.img = this.imageCache[path];
+        //         this.currentImage++
+        //     }
+        // }, 200)
 
         setInterval(() => {
             this.swimmingSound2.pause();
@@ -201,14 +220,14 @@ class Character extends movableObject {
                 this.y -= this.speed;
             }
         }, 1000 / 60)
-        setInterval(() => {
-            if (this.world.keyboard.UP) {
-                let i = this.currentImage % this.ImagesSwimming.length;
-                let path = this.ImagesSwimming[i];
-                this.img = this.imageCache[path];
-                this.currentImage++
-            }
-        }, 200)
+        // setInterval(() => {
+        //     if (this.world.keyboard.UP) {
+        //         let i = this.currentImage % this.ImagesSwimming.length;
+        //         let path = this.ImagesSwimming[i];
+        //         this.img = this.imageCache[path];
+        //         this.currentImage++
+        //     }
+        // }, 200)
     }
 
 
@@ -218,13 +237,31 @@ class Character extends movableObject {
                 this.y += this.speed;
             }
         }, 1000 / 60)
-        setInterval(() => {
-            if (this.world.keyboard.DOWN) {
-                let i = this.currentImage % this.ImagesSwimming.length;
-                let path = this.ImagesSwimming[i];
-                this.img = this.imageCache[path];
-                this.currentImage++
-            }
-        }, 200)
+        // setInterval(() => {
+        //     if (this.world.keyboard.DOWN) {
+        //         let i = this.currentImage % this.ImagesSwimming.length;
+        //         let path = this.ImagesSwimming[i];
+        //         this.img = this.imageCache[path];
+        //         this.currentImage++
+        //     }
+        // }, 200)
+    }
+
+    isPoisoned() {
+        // world.character.shocked = false;
+        // world.character.poisoned = true;
+        this.damage(3);
+        this.playAnimation(this.ImagesPoisoned); // animation timwe has to be updated -- to fast
+        this.poisonCough.play();
+        console.log('poisoned', this.energy);
+    }
+
+    isShocked() {
+        // world.character.poisoned = false;
+        // world.character.shocked = true;
+        this.damage(2);
+        this.playAnimation(this.ImagesShocked); // animation timwe has to be updated -- to fast
+        this.electroShock.play();
+        console.log('shocked', this.energy);
     }
 }

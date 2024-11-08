@@ -18,28 +18,36 @@ class World {
 
     checkCollisions() {
         setInterval(() => {
+            world.character.poisoned = false;
+            world.character.shocked = false;
+
             this.level.enemies.forEach((enemy) => {
                 if (this.character.isColliding(enemy)) {
+                    // console.log('Collision', enemy);
 
-                    console.log('Collision', enemy);
-                    if (enemy instanceof pufferFish ) {
-                        world.character.shocked = false;
+                    if (enemy instanceof pufferFish) {
+                        this.character.damage(4);
                         world.character.poisoned = true;
-                        this.character.energy -= 2;
-                        this.character.playAnimation(this.character.ImagesPoisoned);
-                        this.character.poisonCough.play();
-                        console.log('Collision', this.character.energy);
-                        
-                    } 
-                    if (enemy instanceof JellyFish) {
-                        world.character.poisoned = false;
+                        world.character.shocked = false;
+                        console.log(world.character.poisoned, this.character.energy); 
+                        // setTimeout(() => {
+                        //     world.character.poisoned = false;
+                        // }, 1000)
+                    }
+
+                    else if (enemy instanceof JellyFish) {
+                        this.character.damage(3);
                         world.character.shocked = true;
-                        this.character.energy -= 2;
-                        this.character.playAnimation(this.character.ImagesShocked);
-                        this.character.electroShock.play();
-                        console.log('Nothing happend', this.character.energy);
-                    }                
+                        world.character.poisoned = false;
+                        console.log(enemy, this.character.energy);
+                    }
+
+                    else if (enemy instanceof Endboss) {
+                        this.character.damage(7);
+                        console.log(enemy, this.character.energy);
+                    }
                 } 
+                
             })
         }, 1000);
     }

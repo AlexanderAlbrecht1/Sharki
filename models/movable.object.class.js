@@ -15,13 +15,15 @@ class movableObject {
 
     energy = 100;
 
+    lastHit = 0;
+
     applyGravity() {
         setInterval(() => {
-            if(this.isABoveStopLine()) {
+            if (this.isABoveStopLine()) {
                 this.y -= this.speed_Y;
                 this.speed_Y -= this.accerlation;
             }
-        }, 1000/25)
+        }, 1000 / 25)
     }
 
     isABoveStopLine() {
@@ -46,13 +48,13 @@ class movableObject {
     }
 
     drawFrame(ctx) {
-        if(this instanceof Character || this instanceof pufferFish || this instanceof JellyFish || this instanceof Endboss) {
-        ctx.beginPath();
-        ctx.lineWidth = '5';
-        ctx.strokeStyle = 'green';
-        ctx.rect(this.x, this.y, this.width, this.height);
-        ctx.stroke();
-    }
+        if (this instanceof Character || this instanceof pufferFish || this instanceof JellyFish || this instanceof Endboss) {
+            ctx.beginPath();
+            ctx.lineWidth = '5';
+            ctx.strokeStyle = 'green';
+            ctx.rect(this.x, this.y, this.width, this.height);
+            ctx.stroke();
+        }
     }
 
     // Bessere Formel zur Kollisionsberechnung (Genauer)
@@ -60,7 +62,7 @@ class movableObject {
         return (this.x + this.width) >= obj.x && this.x <= (obj.x + obj.width) &&
             (this.y + this.offsetY + this.height) >= obj.y &&
             (this.y + this.offsetY) <= (obj.y + obj.height) //&&
-            obj.onCollisionCourse; // Optional: hiermit könnten wir schauen, ob ein Objekt sich in die richtige Richtung bewegt. Nur dann kollidieren wir. Nützlich bei Gegenständen, auf denen man stehen kann.
+        obj.onCollisionCourse; // Optional: hiermit könnten wir schauen, ob ein Objekt sich in die richtige Richtung bewegt. Nur dann kollidieren wir. Nützlich bei Gegenständen, auf denen man stehen kann.
 
     }
 
@@ -83,5 +85,25 @@ class movableObject {
         this.img = this.imageCache[path];
         this.currentImage++
     }
+
+    damage(x) {
+        this.energy -= x;
+        if (this.energy < 0) {
+            this.energy = 0;
+        } else {
+            this.lastHit = new Date().getTime();
+        }
+    }
+
+    isHurt() {
+        let timePassed = new Date().getTime() - this.lastHit;
+        timePassed = timePassed / 1000;
+        return timePassed < 1;
+    }
+
+    isDead() {
+        return this.energy == 0;
+    }
+
 
 }
