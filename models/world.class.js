@@ -6,6 +6,7 @@ class World {
     ctx;
     keyboard;
     cameraX = 0;
+    statusBar = new StatusBar();
 
     constructor(canvas, keyboard) {
         this.ctx = canvas.getContext('2d');
@@ -30,9 +31,7 @@ class World {
                         world.character.poisoned = true;
                         world.character.shocked = false;
                         console.log(world.character.poisoned, this.character.energy); 
-                        // setTimeout(() => {
-                        //     world.character.poisoned = false;
-                        // }, 1000)
+                        world.statusBar.setPercentage(this.character.energy);
                     }
 
                     else if (enemy instanceof JellyFish) {
@@ -40,11 +39,13 @@ class World {
                         world.character.shocked = true;
                         world.character.poisoned = false;
                         console.log(enemy, this.character.energy);
+                        world.statusBar.setPercentage(this.character.energy);
                     }
 
                     else if (enemy instanceof Endboss) {
                         this.character.damage(7);
                         console.log(enemy, this.character.energy);
+                        world.statusBar.setPercentage(this.character.energy);
                     }
                 } 
                 
@@ -81,6 +82,7 @@ class World {
 
         this.addObjectsToMap(this.level.backgroundObjects)
         this.addToMap(this.character);
+        this.addToMap(this.statusBar);
         this.addObjectsToMap(this.level.enemies)
 
         this.ctx.translate(-this.cameraX, 0);

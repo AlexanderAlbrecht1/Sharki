@@ -8,7 +8,7 @@ class pufferFish extends movableObject {
         'img/2.Enemy/1.Puffer fish (3 color options)/1.Swim/3.swim4.png',
         'img/2.Enemy/1.Puffer fish (3 color options)/1.Swim/3.swim5.png',
     ]
-    currentImage = 0;
+
 
     constructor() {
         super().loadImage('img/2.Enemy/1.Puffer fish (3 color options)/1.Swim/3.swim1.png')

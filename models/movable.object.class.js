@@ -1,10 +1,8 @@
 class movableObject extends DrawableObject {
-    x = 120;
-    y = 250;
-    img;
-    height = 150;
-    width = 150;
-    imageCache = {};
+
+    
+;
+    
     speed = 0.3;
     otherDirection = false;
 
@@ -47,15 +45,7 @@ class movableObject extends DrawableObject {
     //     ctx.drawImage(this.img, this.x, this.y, this.width, this.height);
     // }
 
-    drawFrame(ctx) {
-        if (this instanceof Character || this instanceof pufferFish || this instanceof JellyFish || this instanceof Endboss) {
-            ctx.beginPath();
-            ctx.lineWidth = '5';
-            ctx.strokeStyle = 'green';
-            ctx.rect(this.x, this.y, this.width, this.height);
-            ctx.stroke();
-        }
-    }
+   
 
     // Bessere Formel zur Kollisionsberechnung (Genauer)
     isColliding(obj) {

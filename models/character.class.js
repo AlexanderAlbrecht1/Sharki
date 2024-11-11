@@ -97,7 +97,7 @@ class Character extends movableObject {
     
 
 
-    currentImage = 0;
+    
     world;
     swimmingSound = new Audio('./audio/swimming2.mp3');
     swimmingSound2 = new Audio('./audio/swimming.mp3');
