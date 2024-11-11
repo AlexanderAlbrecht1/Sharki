@@ -7,6 +7,10 @@ class World {
     keyboard;
     cameraX = 0;
     statusBar = new StatusBar();
+    poisonCounter = new PoisonCounter();
+    poison = 0;
+    coinCounter = new CoinCounter();
+    coins = 0;
 
     constructor(canvas, keyboard) {
         this.ctx = canvas.getContext('2d');
@@ -49,6 +53,17 @@ class World {
                 } 
                 
             })
+
+            this.level.collectableObjects.forEach((object) => {
+                if (this.character.isColliding(object)) {
+                    if (object instanceof Coin) {
+                        this.coins++;
+                    } else if (object instanceof Poison) {
+                        this.poison++;
+                    }
+                }
+            })
+
         }, 1000);
     }
 
@@ -83,10 +98,22 @@ class World {
         this.addObjectsToMap(this.level.collectableObjects);
         this.addToMap(this.character);
 
+
         this.ctx.translate(-this.cameraX, 0);
         //space for fixed objects
         this.addToMap(this.statusBar);
+
+        this.addToMap(this.poisonCounter);
+        this.ctx.font = "32px 'Luckiest Guy'"
+        this.ctx.fillStyle = 'aliceblue';
+        this.ctx.fillText(this.poison, 80, 110);
+
+        this.addToMap(this.coinCounter);
+        this.ctx.font = "32px 'Luckiest Guy'"
+        this.ctx.fillStyle = 'aliceblue';
+        this.ctx.fillText(this.coins, 180, 110);
         this.ctx.translate(this.cameraX, 0);
+
 
         this.ctx.translate(-this.cameraX, 0);
 
