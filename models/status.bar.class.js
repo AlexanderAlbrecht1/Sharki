@@ -1,12 +1,12 @@
 class StatusBar extends DrawableObject {
 
     ImagesEnergy = [
-        './img/4. Marcadores/green/Life/0_  copia 3.png',
-        './img/4. Marcadores/green/Life/20_ copia 4.png',
-        './img/4. Marcadores/green/Life/40_  copia 3.png',
-        './img/4. Marcadores/green/Life/60_  copia 3.png',
-        './img/4. Marcadores/green/Life/80_  copia 3.png',
-        './img/4. Marcadores/green/Life/100_  copia 2.png',
+        './img/4. Marcadores/orange/0_  copia.png',
+        './img/4. Marcadores/orange/20_ copia 2.png',
+        './img/4. Marcadores/orange/40_  copia.png',
+        './img/4. Marcadores/orange/60_  copia.png',
+        './img/4. Marcadores/orange/80_  copia.png',
+        './img/4. Marcadores/orange/100_  copia.png',
     ]
 
     percentage = 100;
@@ -41,10 +41,10 @@ class StatusBar extends DrawableObject {
         else if (this.percentage > 40) {
             return 2;
         }
-        else if (this.percentage > 20) {
+        else if (this.percentage >= 20) {
             return 1;
         }
-        else if (this.percentage == 0) {
+        else if (this.percentage < 20) {
             return 0;
         }
     }

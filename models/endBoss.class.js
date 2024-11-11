@@ -32,7 +32,7 @@ class Endboss extends movableObject {
         super().loadImage('./img/2.Enemy/3 Final Enemy/2.floating/1.png');
         this.loadImages(this.ImagesFloating);
         this.loadImages(this.ImagesArise);
-        this.x = 2600;
+        this.x = 2400;
         this.y = -1;
         this.width = 400;
         this.height = 400;

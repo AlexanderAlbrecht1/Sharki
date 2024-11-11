@@ -24,7 +24,6 @@ class World {
 
             this.level.enemies.forEach((enemy) => {
                 if (this.character.isColliding(enemy)) {
-                    // console.log('Collision', enemy);
 
                     if (enemy instanceof pufferFish) {
                         this.character.damage(4);
@@ -77,13 +76,17 @@ class World {
     draw() {
         //clear canvas!
         this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
-
         this.ctx.translate(this.cameraX, 0);
 
         this.addObjectsToMap(this.level.backgroundObjects)
-        this.addToMap(this.character);
-        this.addToMap(this.statusBar);
         this.addObjectsToMap(this.level.enemies)
+        this.addObjectsToMap(this.level.collectableObjects);
+        this.addToMap(this.character);
+
+        this.ctx.translate(-this.cameraX, 0);
+        //space for fixed objects
+        this.addToMap(this.statusBar);
+        this.ctx.translate(this.cameraX, 0);
 
         this.ctx.translate(-this.cameraX, 0);
 
