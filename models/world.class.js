@@ -11,6 +11,7 @@ class World {
     poison = 0;
     coinCounter = new CoinCounter();
     coins = 0;
+    index = 0;
 
     constructor(canvas, keyboard) {
         this.ctx = canvas.getContext('2d');
@@ -33,7 +34,7 @@ class World {
                         this.character.damage(4);
                         world.character.poisoned = true;
                         world.character.shocked = false;
-                        console.log(world.character.poisoned, this.character.energy); 
+                        console.log(world.character.poisoned, this.character.energy);
                         world.statusBar.setPercentage(this.character.energy);
                     }
 
@@ -50,21 +51,45 @@ class World {
                         console.log(enemy, this.character.energy);
                         world.statusBar.setPercentage(this.character.energy);
                     }
-                } 
-                
+                }
+
             })
 
             this.level.collectableObjects.forEach((object) => {
                 if (this.character.isColliding(object)) {
                     if (object instanceof Coin) {
-                        this.coins++;
+                        this.pickUpCoin(object);
                     } else if (object instanceof Poison) {
-                        this.poison++;
+                        this.pickUpPoison(object);
                     }
                 }
             })
 
         }, 1000);
+    }
+
+    pickUpCoin(object) {
+        this.coins++;
+        this.index = this.searchObject(object.id);
+        this.level.collectableObjects.splice(this.index, 1);
+        object.pickUpSound.volume = 0.1;
+        object.pickUpSound.play();
+    }
+
+    pickUpPoison(object) {
+        this.poison++;
+        this.index = this.searchObject(object.id);
+        this.level.collectableObjects.splice(this.index, 1);
+        object.pickUpSound.play();
+    }
+
+    searchObject(id) {
+        for (let index = 0; index < this.level.collectableObjects.length; index++) {
+            if (this.level.collectableObjects[index].id === id) {
+                return index;
+            }
+        }
+        return null;
     }
 
     setWorld() {
