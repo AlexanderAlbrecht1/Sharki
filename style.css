@@ -1,5 +1,5 @@
 *{
-    font-family: 'Luckiest Guy';
+    font-family: 'Luckiest Guy', Arial, Helvetica, sans-serif;
 }
 
 body {
@@ -12,12 +12,15 @@ body {
     height: 100vh;
     background-size: cover;
     background-repeat: no-repeat;
+    background-position: center;
 }
 
 h1 {
     color: aliceblue;
-    font-size: 42px;
+    font-size: 50px;
     font-weight: 100;
+    letter-spacing: 3px;
+    text-shadow: 4px 8px 4px  rgba(255, 255, 255, 0.25);
 }
 
 
