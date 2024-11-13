@@ -28,25 +28,6 @@ class movableObject extends DrawableObject {
         return this.y < 0
     }
 
-    // loadImage(path) {
-    //     this.img = new Image();
-    //     this.img.src = path;
-    // }
-
-    // loadImages(arr) {
-    //     arr.forEach(path => {
-    //         let img = new Image();
-    //         img.src = path;
-    //         this.imageCache[path] = img;
-    //     });
-    // }
-
-    // draw(ctx) {
-    //     ctx.drawImage(this.img, this.x, this.y, this.width, this.height);
-    // }
-
-   
-
     // Bessere Formel zur Kollisionsberechnung (Genauer)
     isColliding(obj) {
         return (this.x + this.width) >= obj.x && this.x <= (obj.x + obj.width) &&
@@ -60,12 +41,27 @@ class movableObject extends DrawableObject {
     //move from right to left
     moveLeft() {
         setInterval(() => {
-            // if (this.x >= -50) {
             this.x -= this.speed;
-            // } else {
-            //     this.x = 720;
-            //     this.y = Math.random() * 400;
-            // };
+            if(this.x < -720) {
+                this.x = 2600;
+                this.y = (10 + Math.random() * 400);
+            }
+        }, 1000 / 60)
+    }
+
+    moveUp() {
+        setInterval(() => {
+            this.y -= this.speed;
+            if (this.y < -80) {
+                this.y = 480;
+                this.x = (500 + Math.random() * 2000);
+            };
+        }, 1000 / 60)
+    }
+
+    moveDown() {
+        setInterval(() => {
+            this.y += this.speed;
         }, 1000 / 60)
     }
 
