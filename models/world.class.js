@@ -31,22 +31,10 @@ class World {
                 if (this.character.isColliding(enemy)) {
 
                     if (enemy instanceof pufferFish) {
-                        this.character.damage(4);
-                        world.character.poisoned = true;
-                        world.character.shocked = false;
-                        console.log(world.character.poisoned, this.character.energy);
-                        world.statusBar.setPercentage(this.character.energy);
-                    }
-
-                    else if (enemy instanceof JellyFish) {
-                        this.character.damage(3);
-                        world.character.shocked = true;
-                        world.character.poisoned = false;
-                        console.log(enemy, this.character.energy);
-                        world.statusBar.setPercentage(this.character.energy);
-                    }
-
-                    else if (enemy instanceof Endboss) {
+                        this.getPoisoned();
+                    } else if (enemy instanceof JellyFish) {
+                        this.getShocked();
+                    } else if (enemy instanceof Endboss) {
                         this.character.damage(7);
                         console.log(enemy, this.character.energy);
                         world.statusBar.setPercentage(this.character.energy);
@@ -66,6 +54,22 @@ class World {
             })
 
         }, 1000);
+    }
+
+    getShocked() {
+        this.character.damage(3);
+        world.character.shocked = true;
+        world.character.poisoned = false;
+        console.log(this.character.energy);
+        world.statusBar.setPercentage(this.character.energy);
+    }
+
+    getPoisoned() {
+        this.character.damage(4);
+        world.character.poisoned = true;
+        world.character.shocked = false;
+        console.log(this.character.energy);
+        world.statusBar.setPercentage(this.character.energy);
     }
 
     pickUpCoin(object) {
@@ -131,12 +135,12 @@ class World {
         this.addToMap(this.poisonCounter);
         this.ctx.font = "32px 'Luckiest Guy'"
         this.ctx.fillStyle = 'aliceblue';
-        this.ctx.fillText(this.poison, 80, 110);
+        this.ctx.fillText(this.poison, 60, 110);
 
         this.addToMap(this.coinCounter);
         this.ctx.font = "32px 'Luckiest Guy'"
         this.ctx.fillStyle = 'aliceblue';
-        this.ctx.fillText(this.coins, 180, 110);
+        this.ctx.fillText(this.coins, 60, 150);
         this.ctx.translate(this.cameraX, 0);
 
 

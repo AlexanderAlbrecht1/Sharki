@@ -1,10 +1,17 @@
 class JellyFish extends movableObject {
     speed = 0.09
     ImagesSwimming = [
-        'img/2.Enemy/2 Jelly fish/Regular damage/Lila 1.png',
-        'img/2.Enemy/2 Jelly fish/Regular damage/Lila 2.png',
-        'img/2.Enemy/2 Jelly fish/Regular damage/Lila 3.png',
-        'img/2.Enemy/2 Jelly fish/Regular damage/Lila 4.png',
+        './img/2.Enemy/2 Jelly fish/Regular damage/Lila 1.png',
+        './img/2.Enemy/2 Jelly fish/Regular damage/Lila 2.png',
+        './img/2.Enemy/2 Jelly fish/Regular damage/Lila 3.png',
+        './img/2.Enemy/2 Jelly fish/Regular damage/Lila 4.png',
+    ]
+
+    ImagesShocking = [
+        './img/2.Enemy/2 Jelly fish/Súper dangerous/Pink 1.png',
+        './img/2.Enemy/2 Jelly fish/Súper dangerous/Pink 2.png',
+        './img/2.Enemy/2 Jelly fish/Súper dangerous/Pink 3.png',
+        './img/2.Enemy/2 Jelly fish/Súper dangerous/Pink 4.png',
     ]
 
 
@@ -28,6 +35,11 @@ class JellyFish extends movableObject {
         //swimming movement
         setInterval(() => {
             this.playAnimation(this.ImagesSwimming);
+            // if(this.world.character.shocked === true) {
+            //     this.playAnimation(this.ImagesShocking);
+            // }
         }, 500)
+
+       
     }
 }

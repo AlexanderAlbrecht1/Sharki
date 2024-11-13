@@ -158,10 +158,10 @@ class Character extends movableObject {
     }
 
     attack() {
-        //bubble Attack
+        //slap
         setInterval(() => {
             if (this.world.keyboard.SPACE) {
-                this.playAnimation(this.ImagesBubbleAttack);
+                this.playAnimation(this.ImagesSlap);
             }
         }, 200);
     }
@@ -216,7 +216,7 @@ class Character extends movableObject {
 
     moveUp() {
         setInterval(() => {
-            if (this.world.keyboard.UP) {
+            if (this.world.keyboard.UP && this.y >= -50) {
                 this.y -= this.speed;
             }
         }, 1000 / 60)
@@ -233,7 +233,7 @@ class Character extends movableObject {
 
     moveDown() {
         setInterval(() => {
-            if (this.world.keyboard.DOWN) {
+            if (this.world.keyboard.DOWN && this.y <= 350) {
                 this.y += this.speed;
             }
         }, 1000 / 60)
