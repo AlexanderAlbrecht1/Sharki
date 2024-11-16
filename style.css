@@ -23,9 +23,59 @@ h1 {
     text-shadow: 4px 8px 4px  rgba(255, 255, 255, 0.25);
 }
 
+.rotateAdvice {
+    display: none;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+p {
+    color: aliceblue;
+    font-size: 32px;
+    font-weight: 100;
+    letter-spacing: 3px;
+    text-align: center;
+}
+
+.rotateArrows {
+    width: 80px;
+    height: 80px;
+}
+
+.d-none {
+    display: none;
+}
+
 
 canvas {
     background-color: rgb(9, 40, 221);
     border-radius: 5px;
     box-shadow: rgba(255, 255, 255, 0.25) 0px 54px 55px, rgba(255, 255, 255, 0.25) 0px -12px 30px, rgba(255, 255, 255, 0.25) 0px 4px 6px, rgba(255, 255, 255, 0.25) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px;
+    display: block;
 }
+
+@media only screen and (max-width: 720px) {
+    canvas {
+        width: 100%;
+    }
+}
+
+@media only screen and (max-height: 480px) {
+    canvas {
+        height: 100vh;
+    }
+
+    h1{
+        display: none;
+    }
+}
+
+@media screen and (orientation: portrait) {
+    .rotateAdvice {
+      display: flex;
+    }
+    canvas {
+        display: none;
+    }
+  }

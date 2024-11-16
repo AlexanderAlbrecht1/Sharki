@@ -33,7 +33,7 @@ class World {
                     if (enemy instanceof pufferFish) {
                         this.getPoisoned();
                     } else if (enemy instanceof JellyFish) {
-                        this.getShocked();
+                        this.getShocked(enemy);
                     } else if (enemy instanceof Endboss) {
                         this.character.damage(7);
                         console.log(enemy, this.character.energy);
@@ -56,11 +56,15 @@ class World {
         }, 1000);
     }
 
-    getShocked() {
+    getShocked(object) {
         this.character.damage(3);
         world.character.shocked = true;
         world.character.poisoned = false;
-        console.log(this.character.energy);
+
+        this.index = this.searchEnemy(object.id);
+        world.level.enemies[this.index].isShocking = true;
+        console.log(this.index,world.level.enemies[this.index].isShocking);
+
         world.statusBar.setPercentage(this.character.energy);
     }
 
@@ -90,6 +94,15 @@ class World {
     searchObject(id) {
         for (let index = 0; index < this.level.collectableObjects.length; index++) {
             if (this.level.collectableObjects[index].id === id) {
+                return index;
+            }
+        }
+        return null;
+    }
+
+    searchEnemy(id) {
+        for (let index = 0; index < world.level.enemies.length; index++) {
+            if (world.level.enemies[index].id === id) {
                 return index;
             }
         }

@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -24,14 +25,16 @@
     <script src="./models/coin.class.js"></script>
     <script src="./models/poison.class.js"></script>
 
+    <script src="./models/nothing.class.js"></script>
     <script src="./models/world.class.js"></script>
     <script src="./models/level.class.js"></script>
     <script src="./levels/level1.js"></script>
-    
+
     <script src="./js/game.js"></script>
-    
+
 
 </head>
+
 <body onload="init()">
 
     <h1>Little Sharki</h1>
@@ -39,6 +42,14 @@
     <canvas id="canvas" width="720px" height="480px">
 
     </canvas>
-    
+
+    <div class="rotateAdvice">
+        <p>
+            Portrait mode is disabled, please turn your device into landscape mode.
+        </p>
+        <img class="rotateArrows" src="./img/rotate-solid.svg" alt="rotate arrows">
+    </div>
+
 </body>
+
 </html>

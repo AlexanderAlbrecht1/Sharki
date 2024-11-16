@@ -14,15 +14,18 @@ class JellyFish extends movableObject {
         './img/2.Enemy/2 Jelly fish/Súper dangerous/Pink 4.png',
     ]
 
+    isShocking = false;
 
-    constructor(x,y) {
+
+    constructor(x,y,id) {
         super().loadImage('img/2.Enemy/2 Jelly fish/Regular damage/Lila 1.png');
         this.loadImages(this.ImagesSwimming);
+        this.loadImages(this.ImagesShocking);
         this.x = x //500 + Math.random() * 2000;
         this.y = y //300 + Math.random() * 100
         this.width = 50;
         this.height = 80;
-
+        this.id = id;
         this.speed = 0.09 + Math.random() * 0.2;
         this.animate();
     }
@@ -34,10 +37,12 @@ class JellyFish extends movableObject {
         
         //swimming movement
         setInterval(() => {
-            this.playAnimation(this.ImagesSwimming);
-            // if(this.world.character.shocked === true) {
-            //     this.playAnimation(this.ImagesShocking);
-            // }
+            // this.playAnimation(this.ImagesSwimming);
+            if(this.isShocking === true) {
+                this.playAnimation(this.ImagesShocking);   
+            } else {
+                this.playAnimation(this.ImagesSwimming);
+            }
         }, 500)
 
        
