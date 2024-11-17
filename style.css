@@ -23,17 +23,53 @@ h1 {
     text-shadow: 4px 8px 4px  rgba(255, 255, 255, 0.25);
 }
 
-.landing-screen {
+.screen {
     position: absolute;
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: center;
+    justify-content: flex-start;
     width: 720px;
     height: 480px;
+    border-radius: 5px;
     background-image: url('./img/3. Background/Dark/completo.png');
     background-size: cover;
+    z-index: 1;
 }
+
+.how-to-play-wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    justify-content: center;
+    width: 100%;
+    margin-bottom: 64px;
+}
+
+.how-to-play {
+    padding-top: 32px;
+    padding-right: 32px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.how-to-play:hover {
+    cursor: pointer;
+}
+
+.how-to-play>img {
+    width: 30px;
+    height: 30px;
+}
+
+.how-to-play>p {
+    font-size: 18px !important;
+    margin-block-start: 0;
+    margin-block-end: 0;
+}
+
 
 .start-button {
     height: 50px;
@@ -69,11 +105,80 @@ p {
 
 
 canvas {
-    background-color: rgb(9, 40, 221);
+    /* background-color: rgb(9, 40, 221); */
     border-radius: 5px;
     box-shadow: rgba(255, 255, 255, 0.25) 0px 54px 55px, rgba(255, 255, 255, 0.25) 0px -12px 30px, rgba(255, 255, 255, 0.25) 0px 4px 6px, rgba(255, 255, 255, 0.25) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px;
     display: block;
+    z-index: 0;
 }
+
+
+/* how to play section style */
+
+.htp-wrapper {
+    box-sizing: border-box;
+    padding: 16px;
+    width: 720px;
+    height: 480px;
+    background-color: rgba(255, 255, 255, 0.25);
+}
+
+.go-back {
+    display: flex;
+    width: 100%;
+    justify-content: flex-end;
+}
+
+.go-back>p {
+    margin-block-start: 0;
+    margin-block-end: 0;
+}
+
+.go-back>p:hover {
+    cursor: pointer;
+} 
+
+.movement,
+.slap,
+.bubble-trap,
+.posion-bubble {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+}
+
+.movement>.description>p,
+.slap>p,
+.bubble-trap>p,
+.posion-bubble>p,
+.text>p {
+    font-size: 20px !important;
+}
+
+.keys {
+    display: flex;
+    flex-direction: column;
+}
+
+.arrow {
+    width: 40px;
+    height: 40px;
+}
+
+.up {
+    display: flex;
+    justify-content: center;
+}
+
+.others {
+    display: flex;
+}
+
+.slap>img {
+    height: 50px;
+    width: 200px;
+}
+
 
 @media only screen and (max-width: 720px) {
     canvas,

@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" width="50" height="50">
+  <!-- Hintergrund der Taste -->
+  <rect x="5" y="5" width="90" height="90" rx="10" fill="rgb(127,255,224)" stroke="rgb(255,255,255)" stroke-width="2"/>
+  <!-- Text in der Taste -->
+  <text x="50" y="55" font-family="'Luckiest Guy', Arial, Helvetica, sans-serif" font-size="60" fill="rgb(83,26,130)" text-anchor="middle" alignment-baseline="middle">
+    E
+  </text>
+</svg>

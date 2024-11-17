@@ -4,7 +4,7 @@ let keyboard = new Keyboard();
 let backgroundSound = new Audio('./audio/background2.mp3')
 
 function startGame() {
-    document.getElementById('landing-screen').classList.add('d-none');
+    document.getElementById('screen').classList.add('d-none');
     canvas = document.getElementById('canvas');
     world = new World(canvas, keyboard);
     // backgroundSound.play();
