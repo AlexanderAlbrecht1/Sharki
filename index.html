@@ -11,6 +11,9 @@
     <link rel="stylesheet" href="./style.css">
     <link rel="stylesheet" href="./img/5.Font/luckiesGuy.css">
 
+    <script src="./js/main.js"></script>
+    <script src="./js/templates.js"></script>
+
     <script src="./models/drawable.object.class.js"></script>
     <script src="./models/movable.object.class.js"></script>
     <script src="./models/endBoss.class.js"></script>
@@ -25,7 +28,7 @@
     <script src="./models/coin.class.js"></script>
     <script src="./models/poison.class.js"></script>
 
-    <script src="./models/nothing.class.js"></script>
+
     <script src="./models/world.class.js"></script>
     <script src="./models/level.class.js"></script>
     <script src="./levels/level1.js"></script>
@@ -37,7 +40,11 @@
 
 <body onload="init()">
 
-    <h1>Little Sharki</h1>
+    
+    <div class="landing-screen" id="landing-screen">
+        <p>Little Sharkies adventure</p>
+        <img class="start-button" src="./img/6.Botones/Start/1.png" alt="Start Button" onclick="startGame()">
+    </div>
 
     <canvas id="canvas" width="720px" height="480px">
 

@@ -3,17 +3,12 @@ let world;
 let keyboard = new Keyboard();
 let backgroundSound = new Audio('./audio/background2.mp3')
 
-async function init() {
-    if (window.matchMedia("(orientation: landscape)").matches) {
-        console.log("Landscape-Modus erkannt. Anwendung startet...");
-        canvas = document.getElementById('canvas');
-        world = new World(canvas, keyboard);
-        backgroundSound. play();
-    }
+function startGame() {
+    document.getElementById('landing-screen').classList.add('d-none');
+    canvas = document.getElementById('canvas');
+    world = new World(canvas, keyboard);
+    // backgroundSound.play();
 }
-
-window.addEventListener("resize", init);
-
 
 document.addEventListener("keydown", (event) => {
     if (event.keyCode == 39) {
