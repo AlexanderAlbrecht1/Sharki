@@ -23,6 +23,10 @@ h1 {
     text-shadow: 4px 8px 4px  rgba(255, 255, 255, 0.25);
 }
 
+a {
+    color: aliceblue;
+}
+
 .screen {
     position: absolute;
     display: flex;
@@ -39,11 +43,10 @@ h1 {
 
 .how-to-play-wrapper {
     display: flex;
-    /* flex-direction: column; */
-    align-items: flex-end;
-    justify-content: space-between;
+    align-items: center;
+    justify-content: flex-end;
     width: 100%;
-    margin-bottom: 64px;
+    margin-bottom: 16px;
 }
 
 .sound {
@@ -105,6 +108,43 @@ p {
     font-weight: 100;
     letter-spacing: 3px;
     text-align: center;
+}
+
+span,
+h2 {
+    color: aliceblue;
+    letter-spacing: 3px;
+}
+
+.links {
+    margin-top: 16px;
+}
+
+.impressum {
+    display: flex;
+    flex-direction: column;
+    height: 90vh;
+    width: 80vw;
+    box-sizing: border-box;
+    background-color: rgba(14, 15, 34, 0.582);
+    padding: 32px;
+    border-radius: 15px;
+    box-shadow: rgba(255, 255, 255, 0.25) 0px 54px 55px, rgba(255, 255, 255, 0.25) 0px -12px 30px, rgba(255, 255, 255, 0.25) 0px 4px 6px, rgba(255, 255, 255, 0.25) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px;
+} 
+
+.arrow-wrapper {
+    margin-top: 32px;
+    width: 100%;
+    text-align: center;
+}
+
+.arrow-wrapper>img {
+    width: 60px;
+    height: 60px;
+}
+
+.arrow-wrapper>img:hover {
+    cursor: pointer;
 }
 
 .rotateArrows {

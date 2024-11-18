@@ -1,16 +1,15 @@
 function startScreenHTML() {
     return /*html*/  `
     <div class="how-to-play-wrapper">
-            <div class="sound" id="sound" onclick="toggleSound()">
-                
-            </div>
             <div class="how-to-play" onclick="howToPlay()">
                 <img src="./img/circle-question-regular.svg" alt="How to Play">
                 <p>How to play</p>
             </div>
-        </div>
-        <p>Little Sharkies adventure</p>
-        <img class="start-button" src="./img/6.Botones/Start/1.png" alt="Start Button" onclick="startGame()">
+    </div>
+    <p>Little Sharkies adventure</p>
+    <img class="start-button" src="./img/6.Botones/Start/1.png" alt="Start Button" onclick="startGame()">
+    <div class="links">
+        <a href="./impressum.html">Impressum</a>
     </div>
     `;
 }
