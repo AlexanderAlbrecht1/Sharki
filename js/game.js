@@ -7,7 +7,7 @@ function startGame() {
     document.getElementById('screen').classList.add('d-none');
     canvas = document.getElementById('canvas');
     world = new World(canvas, keyboard);
-    // backgroundSound.play();
+    backgroundSound.play();
 }
 
 document.addEventListener("keydown", (event) => {

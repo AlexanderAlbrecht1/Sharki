@@ -134,6 +134,7 @@ class Character extends movableObject {
 
             else if (this.isHurt && this.world.character.poisoned === true) {
                 this.playAnimation(this.ImagesPoisoned);
+                this.poisonCough.volume = 0.3;
                 this.poisonCough.play();                    
             }
 

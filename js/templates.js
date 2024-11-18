@@ -1,6 +1,9 @@
 function startScreenHTML() {
     return /*html*/  `
     <div class="how-to-play-wrapper">
+            <div class="sound" id="sound" onclick="toggleSound()">
+                
+            </div>
             <div class="how-to-play" onclick="howToPlay()">
                 <img src="./img/circle-question-regular.svg" alt="How to Play">
                 <p>How to play</p>
@@ -31,7 +34,8 @@ function howToPlayHTML() {
                         </div>
                     </div>
                     <div class="description">
-                        <p>Swim up / Swim down / Swim left / Swim right</p>
+                        <p>Swim up / <br>
+                         Swim left / Swim down / Swim right</p>
                     </div>
                 </div>
                 <div class="attacks">
@@ -40,11 +44,15 @@ function howToPlayHTML() {
                         <p>push space bar to slap an enemy</p>
                     </div>
                     <div class="bubble-trap">
-                        <img src="./img/Q-Key.svg" alt="Q Key">
-                        <p>push Q to fire a bubble trap</p>
+                        <div class="img-wrapper">
+                            <img src="./img/Q-Key.svg" alt="Q Key">
+                        </div>
+                        <p>push Q to fire a bubble trap for jellyfish</p>
                     </div>
                     <div class="posion-bubble">
-                        <img src="./img/E-Key.svg" alt="E Key">
+                        <div class="img-wrapper">
+                            <img src="./img/E-Key.svg" alt="E Key">
+                        </div>
                         <p>push E to fire a strong poison bubble</p>
                     </div>
                 </div>

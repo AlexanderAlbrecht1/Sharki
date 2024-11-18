@@ -39,11 +39,23 @@ h1 {
 
 .how-to-play-wrapper {
     display: flex;
-    flex-direction: column;
+    /* flex-direction: column; */
     align-items: flex-end;
-    justify-content: center;
+    justify-content: space-between;
     width: 100%;
     margin-bottom: 64px;
+}
+
+.sound {
+    display: flex;
+    box-sizing: border-box;
+    width: 50px;
+    height: 50px;
+    background-image: url(./img/volume-high-solid.svg);
+    background-position: center;
+    background-size: 45, 45;
+    background-repeat: no-repeat;
+    margin-left: 32px;
 }
 
 .how-to-play {
@@ -55,7 +67,8 @@ h1 {
     justify-content: center;
 }
 
-.how-to-play:hover {
+.how-to-play:hover,
+.sound:hover {
     cursor: pointer;
 }
 
@@ -120,7 +133,7 @@ canvas {
     padding: 16px;
     width: 720px;
     height: 480px;
-    background-color: rgba(255, 255, 255, 0.25);
+    background-color: rgba(14, 15, 34, 0.582);
 }
 
 .go-back {
@@ -145,6 +158,7 @@ canvas {
     display: flex;
     align-items: center;
     gap: 16px;
+    margin-bottom: 16px;
 }
 
 .movement>.description>p,
@@ -153,11 +167,15 @@ canvas {
 .posion-bubble>p,
 .text>p {
     font-size: 20px !important;
+    margin-block-start: 0;
+    margin-block-end: 0;
 }
 
 .keys {
     display: flex;
     flex-direction: column;
+    width: 200px;
+    align-items: center;
 }
 
 .arrow {
@@ -179,17 +197,22 @@ canvas {
     width: 200px;
 }
 
+.img-wrapper {
+    width: 200px;
+    text-align: center;
+}
+
 
 @media only screen and (max-width: 720px) {
     canvas,
-    .landing-screen {
+    .screen {
         width: 100%;
     }
 }
 
 @media only screen and (max-height: 480px) {
     canvas,
-    .landing-screen {
+    .screen {
         height: 100vh;
     }
 
@@ -203,7 +226,7 @@ canvas {
       display: flex;
     }
     canvas,
-    .landing-screen {
+    .screen {
         display: none;
     }
   }
