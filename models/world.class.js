@@ -28,10 +28,21 @@ class World {
             world.character.shocked = false;
 
             this.level.enemies.forEach((enemy) => {
-                if (this.character.isColliding(enemy)) {
+                if (this.character.isColliding(enemy) && !world.keyboard.SPACE) {
 
                     if (enemy instanceof pufferFish) {
                         this.getPoisoned();
+                        console.log(this.level.enemies[this.index].dead);
+                    } else if (enemy instanceof JellyFish) {
+                        this.getShocked(enemy);
+                    } else if (enemy instanceof Endboss) {
+                        this.character.damage(7);
+                        console.log(enemy, this.character.energy);
+                        world.statusBar.setPercentage(this.character.energy);
+                    }
+                } else if(this.character.isColliding(enemy) && world.keyboard.SPACE) {
+                    if (enemy instanceof pufferFish) {
+                        this.killPufferfish(enemy);
                     } else if (enemy instanceof JellyFish) {
                         this.getShocked(enemy);
                     } else if (enemy instanceof Endboss) {
@@ -54,6 +65,19 @@ class World {
             })
 
         }, 1000);
+    }
+
+    killPufferfish(object) {
+        this.index = this.searchEnemy(object.id);
+        console.log(this.index);
+        this.level.enemies[this.index].dead = true;
+        world.character.poisoned = false;
+        this.level.enemies[this.index].speed = 3;
+        this.level.enemies[this.index].speed_Y = 1;
+        console.log(this.level.enemies[this.index].dead);
+        setTimeout(() => {
+            this.level.enemies.splice(this.index, 1);
+        },500);     
     }
 
     getShocked(object) {

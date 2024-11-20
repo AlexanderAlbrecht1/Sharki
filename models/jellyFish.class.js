@@ -1,5 +1,5 @@
 class JellyFish extends movableObject {
-    speed = 0.09
+
     ImagesSwimming = [
         './img/2.Enemy/2 Jelly fish/Regular damage/Lila 1.png',
         './img/2.Enemy/2 Jelly fish/Regular damage/Lila 2.png',
@@ -26,7 +26,7 @@ class JellyFish extends movableObject {
         this.width = 50;
         this.height = 80;
         this.id = id;
-        this.speed = 0.09 + Math.random() * 0.2;
+        this.speed_Y = 0.09 + Math.random() * 0.2;
         this.animate();
     }
 
