@@ -40,7 +40,7 @@ function howToPlayHTML() {
                 <div class="attacks">
                     <div class="slap">
                         <img src="./img/6.Botones/Key/Space Bar key.png" alt="space bar">
-                        <p>push space bar to slap an enemy</p>
+                        <p>push space bar to slap a pufferfish or endboss</p>
                     </div>
                     <div class="bubble-trap">
                         <div class="img-wrapper">

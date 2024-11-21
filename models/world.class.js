@@ -2,6 +2,8 @@ class World {
     character = new Character();
     level = level1;
 
+    bubbleTrap;
+
     canvas;
     ctx;
     keyboard;
@@ -50,6 +52,8 @@ class World {
                         console.log(enemy, this.character.energy);
                         world.statusBar.setPercentage(this.character.energy);
                     }
+                } if (this.bubbleTrap.isColliding(enemy) && enemy instanceof JellyFish) {
+                    this.JellyfishGetTrapped(enemy);
                 }
 
             })
@@ -65,6 +69,11 @@ class World {
             })
 
         }, 1000);
+    }
+    JellyfishGetTrapped(object) {
+        this.index = this.searchEnemy(object.id);
+        this.level.enemies[this.index].trapped = true;
+        this.level.enemies[this.index].speed_Y = 1;
     }
 
     killPufferfish(object) {
@@ -163,6 +172,10 @@ class World {
         this.addObjectsToMap(this.level.enemies)
         this.addObjectsToMap(this.level.collectableObjects);
         this.addToMap(this.character);
+        if (this.bubbleTrap != null) {
+            this.addToMap(this.bubbleTrap);
+        }
+        
 
 
         this.ctx.translate(-this.cameraX, 0);

@@ -94,10 +94,10 @@ class Character extends movableObject {
         './img/1.Sharkie/6.dead/2.Electro_shock/9.png',
         './img/1.Sharkie/6.dead/2.Electro_shock/10.png',
     ]
-    
 
 
-    
+
+
     world;
     swimmingSound = new Audio('./audio/swimming2.mp3');
     swimmingSound2 = new Audio('./audio/swimming.mp3');
@@ -116,14 +116,22 @@ class Character extends movableObject {
         this.loadImages(this.ImagesShockDead);
 
         this.animate();
-        
+
         this.moveRight();
         this.moveLeft();
         this.moveUp();
         this.moveDown();
         this.attack();
+        // this.fireBubbleTrap();
 
     }
+
+    // fireBubbleTrap() {
+    //     if (this.world.keyboard.Q) {
+    //         new Bubble(200,200);
+    //         this.x += this.speed;
+    //     }
+    // }
 
 
     animate() {
@@ -135,26 +143,26 @@ class Character extends movableObject {
             else if (this.isHurt && this.world.character.poisoned === true) {
                 this.playAnimation(this.ImagesPoisoned);
                 this.poisonCough.volume = 0.3;
-                this.poisonCough.play();                    
+                this.poisonCough.play();
             }
 
             else if (this.isHurt && this.world.character.shocked === true) {
-                this.playAnimation(this.ImagesShocked); 
-                this.electroShock.play();                       
+                this.playAnimation(this.ImagesShocked);
+                this.electroShock.play();
             }
 
             else if (this.world.keyboard.RIGHT || this.world.keyboard.LEFT || this.world.keyboard.UP || this.world.keyboard.DOWN) {
                 this.playAnimation(this.ImagesSwimming);
-            } 
- 
+            }
+
 
             else {
-            this.playAnimation(this.ImagesWatiting)
+                this.playAnimation(this.ImagesWatiting)
             }
-            
+
         }, 200)
 
-        
+
 
     }
 
@@ -164,17 +172,15 @@ class Character extends movableObject {
             if (this.world.keyboard.SPACE) {
                 this.playAnimation(this.ImagesSlap);
             }
+            if (this.world.keyboard.Q) {
+                this.playAnimation(this.ImagesBubbleAttack);
+                this.world.bubbleTrap = new Bubble((this.x + 100), (this.y + 80));
+                // this.x += this.speed;
+            }
         }, 200);
     }
 
     moveRight() {
-
-        // setInterval(() => {
-        //     if (this.world.keyboard.RIGHT) {
-        //         this.playAnimation(this.ImagesSwimming);
-        //     }
-        // }, 200)
-
         setInterval(() => {
             this.swimmingSound.pause();
             if (this.world.keyboard.RIGHT && this.x < this.world.level.levelEndX) {
@@ -182,9 +188,6 @@ class Character extends movableObject {
                 this.otherDirection = false;
                 this.swimmingSound.volume = 0.1;
                 this.swimmingSound.play();
-
-                // console.log(this.x);
-
             }
             this.world.cameraX = -this.x + 100;
         }, 1000 / 60)
@@ -192,16 +195,6 @@ class Character extends movableObject {
     }
 
     moveLeft() {
-
-        // setInterval(() => {
-        //     if (this.world.keyboard.LEFT) {
-        //         let i = this.currentImage % this.ImagesSwimming.length;
-        //         let path = this.ImagesSwimming[i];
-        //         this.img = this.imageCache[path];
-        //         this.currentImage++
-        //     }
-        // }, 200)
-
         setInterval(() => {
             this.swimmingSound2.pause();
             if (this.world.keyboard.LEFT && this.x > -300) {
@@ -221,14 +214,6 @@ class Character extends movableObject {
                 this.y -= this.speed;
             }
         }, 1000 / 60)
-        // setInterval(() => {
-        //     if (this.world.keyboard.UP) {
-        //         let i = this.currentImage % this.ImagesSwimming.length;
-        //         let path = this.ImagesSwimming[i];
-        //         this.img = this.imageCache[path];
-        //         this.currentImage++
-        //     }
-        // }, 200)
     }
 
 
@@ -238,14 +223,6 @@ class Character extends movableObject {
                 this.y += this.speed;
             }
         }, 1000 / 60)
-        // setInterval(() => {
-        //     if (this.world.keyboard.DOWN) {
-        //         let i = this.currentImage % this.ImagesSwimming.length;
-        //         let path = this.ImagesSwimming[i];
-        //         this.img = this.imageCache[path];
-        //         this.currentImage++
-        //     }
-        // }, 200)
     }
 
     isPoisoned() {
