@@ -3,6 +3,7 @@ class World {
     level = level1;
 
     bubbleTrap;
+    poisonBubble;
 
     canvas;
     ctx;
@@ -74,6 +75,9 @@ class World {
         this.index = this.searchEnemy(object.id);
         this.level.enemies[this.index].trapped = true;
         this.level.enemies[this.index].speed_Y = 1;
+        setTimeout(() => {
+            this.level.enemies.splice(this.index, 1);
+        },2000);
     }
 
     killPufferfish(object) {
@@ -174,7 +178,10 @@ class World {
         this.addToMap(this.character);
         if (this.bubbleTrap != null) {
             this.addToMap(this.bubbleTrap);
-        }
+        };
+        if (this.poisonBubble != null) {
+            this.addToMap(this.poisonBubble);
+        };
         
 
 

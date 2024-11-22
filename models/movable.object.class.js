@@ -52,9 +52,9 @@ class movableObject extends DrawableObject {
     moveUp() {
         setInterval(() => {
             this.y -= this.speed_Y;
-            if (this.y < -80) {
+            if (this.y < -90) {
                 this.y = 480;
-                this.x = (500 + Math.random() * 2000);
+                // this.x = (500 + Math.random() * 2000);
             };
         }, 1000 / 60)
     }

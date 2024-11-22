@@ -1,12 +1,12 @@
-class Bubble extends movableObject {
+class PoisonBubble extends movableObject {
 
     constructor(x,y) {
-        super().loadImage('./img/1.Sharkie/4.Attack/Bubble trap/Bubble.png');
+        super().loadImage('./img/1.Sharkie/4.Attack/Bubble trap/Poisoned Bubble (for whale).png');
         this.x = x;
         this.y = y;
         this.speed = 2;
-        this.width = 40;
-        this.height = 40;
+        this.width = 50;
+        this.height = 50;
         
         // this.moveLeft();
         this.moveRight();
@@ -29,15 +29,6 @@ class Bubble extends movableObject {
                 this.x += this.speed;
             // }
         }, 1000/60)
-    }
-
-    animate() {
-        setInterval(() => {
-            if (this.world.keyboard.Q) {
-                new Bubble(200,200);
-                this.x += this.speed;
-            }
-        }, 1000/60);
     }
 
 }
