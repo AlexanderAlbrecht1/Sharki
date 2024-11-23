@@ -11,6 +11,10 @@ function startScreenHTML() {
     <div class="links">
         <a href="./impressum.html">Impressum</a>
     </div>
+    <div class="start-sharkie-wrapper">
+        <img class="start-sharkie-img" src="./img/sharkie_start_screen.png" alt="sharkie flaoting">
+        <img class="start-puffer-fish" src="./img/2.Enemy/1.Puffer fish (3 color options)/1.Swim/3.swim4.png" alt="bubblefish floating">
+    </div>
     `;
 }
 

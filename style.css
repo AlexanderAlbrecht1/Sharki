@@ -41,24 +41,14 @@ a {
     z-index: 1;
 }
 
+/* startscreen */
+
 .how-to-play-wrapper {
     display: flex;
     align-items: center;
     justify-content: flex-end;
     width: 100%;
     margin-bottom: 16px;
-}
-
-.sound {
-    display: flex;
-    box-sizing: border-box;
-    width: 50px;
-    height: 50px;
-    background-image: url(./img/volume-high-solid.svg);
-    background-position: center;
-    background-size: 45, 45;
-    background-repeat: no-repeat;
-    margin-left: 32px;
 }
 
 .how-to-play {
@@ -131,6 +121,60 @@ h2 {
     border-radius: 15px;
     box-shadow: rgba(255, 255, 255, 0.25) 0px 54px 55px, rgba(255, 255, 255, 0.25) 0px -12px 30px, rgba(255, 255, 255, 0.25) 0px 4px 6px, rgba(255, 255, 255, 0.25) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px;
 }
+
+.start-sharkie-wrapper {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+}
+
+.start-sharkie-img {
+    width: 200px;
+    position: absolute;
+    left: 64px;
+    animation: linear infinite;
+    animation-name: floatSharkie;
+    animation-duration: 8s;
+}
+
+@keyframes floatSharkie {
+    0% {
+      top: 250px;
+    }
+    50% { 
+      top: 350px; 
+     }
+    100% {
+      top: 250px;     
+    }
+  }
+
+
+.start-puffer-fish {
+    height: 70px;
+    position: absolute;
+    right: 64px;
+    animation: linear infinite;
+    animation-name: floatPufferfish;
+    animation-duration: 5s;
+}
+
+@keyframes floatPufferfish {
+    0% {
+      top: 200px;
+    }
+    50% { 
+      top: 250px; 
+     }
+    100% {
+      top: 200px;     
+    }
+  }
+
+
+
+/* rotate device */
 
 .arrow-wrapper {
     margin-top: 32px;
