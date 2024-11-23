@@ -63,3 +63,19 @@ function howToPlayHTML() {
     </div>
     `
 }
+
+function gameOverHTML() {
+    return /*html*/ `
+            <div class="game-over">
+            <div class="go-back">
+                <p onclick="goBack()">X</p>
+            </div>
+            <div class="space-between">
+                <img class="game-over-text" src="./img/6.Botones/Tittles/Game Over/Recurso 11.png" alt="game over text">
+                <img class="sharkie-dead" src="./img/sharkie_game_over_screen.png" alt="sharkie dead">
+                <img onclick="startGame()" class="try-again-btn" src="./img/6.Botones/Try again/Recurso 16.png"
+                    alt="try again button">
+            </div>
+        </div>
+    `
+}

@@ -11,7 +11,7 @@ class movableObject extends DrawableObject {
 
     offsetY = 0;
 
-    energy = 100;
+    energy = 10;
 
     lastHit = 0;
 

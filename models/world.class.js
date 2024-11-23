@@ -23,6 +23,7 @@ class World {
         this.draw();
         this.setWorld();
         this.checkCollisions();
+        this.gameOver();
     }
 
     checkCollisions() {
@@ -144,6 +145,17 @@ class World {
             }
         }
         return null;
+    }
+
+    gameOver() {
+    const GameOver =   setInterval(() => {
+            if(this.character.isDead()) {
+                this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
+                document.getElementById('screen').classList.remove('d-none');
+                document.getElementById('screen').innerHTML = gameOverHTML();
+                clearInterval(GameOver);
+            }
+        },200)
     }
 
     setWorld() {

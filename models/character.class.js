@@ -150,6 +150,9 @@ class Character extends movableObject {
         setInterval(() => {
             if (this.isDead()) {
                 this.playAnimation(this.ImagesShockDead);
+                // setTimeout(() => {
+                //     world.gameOver()
+                // },1000)
             }
 
             else if (this.isHurt && this.world.character.poisoned === true) {
@@ -179,7 +182,6 @@ class Character extends movableObject {
     }
 
     attack() {
-        //slap
         setInterval(() => {
             if (this.world.keyboard.SPACE) {
                 this.playAnimation(this.ImagesSlap);

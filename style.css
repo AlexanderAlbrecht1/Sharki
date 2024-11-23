@@ -1,4 +1,4 @@
-*{
+* {
     font-family: 'Luckiest Guy', Arial, Helvetica, sans-serif;
 }
 
@@ -20,7 +20,7 @@ h1 {
     font-size: 50px;
     font-weight: 100;
     letter-spacing: 3px;
-    text-shadow: 4px 8px 4px  rgba(255, 255, 255, 0.25);
+    text-shadow: 4px 8px 4px rgba(255, 255, 255, 0.25);
 }
 
 a {
@@ -92,7 +92,7 @@ a {
 }
 
 .start-button:hover {
-    cursor:pointer;
+    cursor: pointer;
 }
 
 .rotateAdvice {
@@ -130,7 +130,7 @@ h2 {
     padding: 32px;
     border-radius: 15px;
     box-shadow: rgba(255, 255, 255, 0.25) 0px 54px 55px, rgba(255, 255, 255, 0.25) 0px -12px 30px, rgba(255, 255, 255, 0.25) 0px 4px 6px, rgba(255, 255, 255, 0.25) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px;
-} 
+}
 
 .arrow-wrapper {
     margin-top: 32px;
@@ -189,7 +189,7 @@ canvas {
 
 .go-back>p:hover {
     cursor: pointer;
-} 
+}
 
 .movement,
 .slap,
@@ -242,8 +242,63 @@ canvas {
     text-align: center;
 }
 
+/* Game Over Screen*/
+
+.game-over {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding-right: 16px;
+}
+
+.space-between {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+    margin-top: 32px;
+}
+
+.game-over-text {
+    width: 600px;
+    margin: 32px, 32px, 32px, 32px;
+}
+
+.sharkie-dead {
+    width: 300px;
+    position: absolute;
+    animation: linear infinite;
+    animation-name: float;
+    animation-duration: 4s;
+}
+
+.try-again-btn {
+    width: 300px;
+    margin: 32px;
+}
+
+.try-again-btn:hover {
+    cursor: pointer;
+}
+
+@keyframes float {
+    0% {
+      top: 160px;
+    }
+    50% { 
+      top: 200px; 
+     }
+    100% {
+      top: 160px;     
+    }
+  }
+
 
 @media only screen and (max-width: 720px) {
+
     canvas,
     .screen {
         width: 100%;
@@ -251,22 +306,24 @@ canvas {
 }
 
 @media only screen and (max-height: 480px) {
+
     canvas,
     .screen {
         height: 100vh;
     }
 
-    h1{
+    h1 {
         display: none;
     }
 }
 
 @media screen and (orientation: portrait) {
     .rotateAdvice {
-      display: flex;
+        display: flex;
     }
+
     canvas,
     .screen {
         display: none;
     }
-  }
+}
