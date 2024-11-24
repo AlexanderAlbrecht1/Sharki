@@ -4,10 +4,15 @@ let keyboard = new Keyboard();
 let backgroundSound = new Audio('./audio/background2.mp3')
 
 function startGame() {
-    document.getElementById('screen').classList.add('d-none');
+    resetWorld();
     canvas = document.getElementById('canvas');
     world = new World(canvas, keyboard);
+    document.getElementById('screen').classList.add('d-none');
     // backgroundSound.play();
+}
+
+function resetWorld() {
+    JellyFish.isShocking = false;
 }
 
 document.addEventListener("keydown", (event) => {

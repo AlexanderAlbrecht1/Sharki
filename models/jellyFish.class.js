@@ -21,7 +21,7 @@ class JellyFish extends movableObject {
         './img/2.Enemy/2 Jelly fish/Dead/Lila/L4.png',
     ]
 
-    isShocking = false;
+    
 
 
     constructor(x,y,id) {
@@ -35,6 +35,7 @@ class JellyFish extends movableObject {
         this.height = 80;
         this.id = id;
         this.trapped = false;
+        this.isShocking = false;
         this.speed_Y = 0.09 + Math.random() * 0.2;
         this.animate();
     }
