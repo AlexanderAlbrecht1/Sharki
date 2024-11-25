@@ -1,5 +1,5 @@
 const level1 = new Level(
-    [
+    enemies = [
         new pufferFish((500 + Math.random() * 1500),1),
         new pufferFish((500 + Math.random() * 1500),2),
         new pufferFish((500 + Math.random() * 1500),3),
@@ -25,6 +25,7 @@ const level1 = new Level(
         
         new Endboss(),
     ],
+
     [ 
         new BackgroundObjects('img/3. Background/Layers/5. Water/D2.png', -720),
         new BackgroundObjects('img/3. Background/Layers/3.Fondo 1/D2.png', -720),
@@ -85,3 +86,5 @@ const level1 = new Level(
         new Poison(19),
     ]
 );
+
+let enemiesClone = [...enemies];

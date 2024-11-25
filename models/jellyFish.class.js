@@ -34,7 +34,7 @@ class JellyFish extends movableObject {
         this.width = 50;
         this.height = 80;
         this.id = id;
-        this.trapped = false;
+        // this.trapped = false;
         this.isShocking = false;
         this.speed_Y = 0.09 + Math.random() * 0.2;
         this.animate();

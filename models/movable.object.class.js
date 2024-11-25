@@ -1,8 +1,4 @@
-class movableObject extends DrawableObject {
-
-    
-;
-    
+class movableObject extends DrawableObject {    
     speed = 0.3;
     otherDirection = false;
 
@@ -14,6 +10,8 @@ class movableObject extends DrawableObject {
     energy = 10;
 
     lastHit = 0;
+
+    // isDead = false;
 
     applyGravity() {
         setInterval(() => {

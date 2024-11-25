@@ -4,15 +4,36 @@ let keyboard = new Keyboard();
 let backgroundSound = new Audio('./audio/background2.mp3')
 
 function startGame() {
+
+    canvas = document.getElementById('canvas');
+    world = new World(canvas, keyboard);
+    document.getElementById('screen').classList.add('d-none');
+    backgroundSound.play();
+}
+
+function restartGame() {
     resetWorld();
     canvas = document.getElementById('canvas');
     world = new World(canvas, keyboard);
     document.getElementById('screen').classList.add('d-none');
-    // backgroundSound.play();
+    backgroundSound.play();
 }
 
 function resetWorld() {
-    JellyFish.isShocking = false;
+    world.level.enemies.forEach(enemy => {
+        if (enemy instanceof pufferFish) {
+            enemy.dead = false;
+        }
+        if (enemy instanceof JellyFish) {
+            enemy.dead = false;
+            enemy.isShocking = false;
+            enemy.speed_Y = 0.09 + Math.random() * 0.2;
+        }
+    });
+    world.level.collectableObjects.forEach(item => {
+        item.dead = false;
+    });
+    
 }
 
 document.addEventListener("keydown", (event) => {

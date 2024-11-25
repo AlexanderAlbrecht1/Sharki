@@ -37,7 +37,7 @@ class World {
                 world.character.shocked = false;
 
                 this.level.enemies.forEach((enemy) => {
-                    if (this.character.isColliding(enemy) && !world.keyboard.SPACE) {
+                    if (this.character.isColliding(enemy) && !world.keyboard.SPACE && enemy.dead == false) {
 
                         if (enemy instanceof pufferFish) {
                             this.getPoisoned();
@@ -84,11 +84,11 @@ class World {
 
 JellyfishGetTrapped(object) {
     this.index = this.searchEnemy(object.id);
-    this.level.enemies[this.index].trapped = true;
+    this.level.enemies[this.index].dead = true;
     this.level.enemies[this.index].speed_Y = 1;
-    setTimeout(() => {
-        this.level.enemies.splice(this.index, 1);
-    }, 2000);
+    // setTimeout(() => {
+    //     this.level.enemies.splice(this.index, 1);
+    // }, 2000);
 }
 
 killPufferfish(object) {
@@ -96,12 +96,12 @@ killPufferfish(object) {
     console.log(this.index);
     this.level.enemies[this.index].dead = true;
     world.character.poisoned = false;
-    this.level.enemies[this.index].speed = 3;
-    this.level.enemies[this.index].speed_Y = 1;
+    // this.level.enemies[this.index].speed = 3;
+    // this.level.enemies[this.index].speed_Y = 1;
     console.log(this.level.enemies[this.index].dead);
     setTimeout(() => {
         // this.ctx.clearRect(this.level.enemies[this.index].x, this.level.enemies[this.index].y,this.level.enemies[this.index].width, this.level.enemies[this.index].height);
-        this.level.enemies.splice(this.index, 1);
+        // this.level.enemies.splice(this.index, 1);
     }, 500);
 }
 
@@ -126,18 +126,23 @@ getPoisoned() {
 }
 
 pickUpCoin(object) {
-    this.coins++;
     this.index = this.searchObject(object.id);
-    this.level.collectableObjects.splice(this.index, 1);
-    object.pickUpSound.volume = 0.1;
-    object.pickUpSound.play();
+    if (this.level.collectableObjects[this.index].dead == false) {
+        this.coins++;
+        this.level.collectableObjects[this.index].dead = true;
+        object.pickUpSound.volume = 0.1;
+        object.pickUpSound.play();
+    }
 }
 
 pickUpPoison(object) {
-    this.poison++;
     this.index = this.searchObject(object.id);
-    this.level.collectableObjects.splice(this.index, 1);
-    object.pickUpSound.play();
+    if (this.level.collectableObjects[this.index].dead == false) {
+        object.pickUpSound.play();
+        this.poison++;
+        this.level.collectableObjects[this.index].dead = true;
+    }
+
 }
 
 searchObject(id) {
@@ -176,7 +181,9 @@ setWorld() {
 
 addObjectsToMap(objects) {
     objects.forEach(o => {
-        this.addToMap(o);
+        if (o.dead == false) {
+            this.addToMap(o);
+        }
     })
 }
 
@@ -197,6 +204,7 @@ draw() {
     this.ctx.translate(this.cameraX, 0);
 
     this.addObjectsToMap(this.level.backgroundObjects)
+
     this.addObjectsToMap(this.level.enemies)
     this.addObjectsToMap(this.level.collectableObjects);
     this.addToMap(this.character);

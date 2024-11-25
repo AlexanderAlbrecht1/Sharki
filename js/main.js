@@ -1,7 +1,7 @@
 async function init() {
     if (window.matchMedia("(orientation: landscape)").matches) {
         console.log("Landscape-Modus erkannt. Anwendung startet...");
-        document.getElementById('screen').innerHTML =  startScreenHTML();
+        document.getElementById('screen').innerHTML = startScreenHTML();
     }
 }
 
@@ -16,4 +16,8 @@ function goBack() {
 
 function toggleSound() {
     backgroundSound.muted = true;
+}
+
+function clearAllIntervals() {
+    for (let i = 0; i < 9999; i++) window.clearInterval(i);
 }
