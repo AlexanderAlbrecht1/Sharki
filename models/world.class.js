@@ -39,10 +39,10 @@ class World {
                 this.level.enemies.forEach((enemy) => {
                     if (this.character.isColliding(enemy) && !world.keyboard.SPACE && enemy.dead == false) {
 
-                        if (enemy instanceof pufferFish) {
+                        if (enemy instanceof pufferFish && enemy.getHit == false) {
                             this.getPoisoned();
                             console.log(this.level.enemies[this.index].dead);
-                        } else if (enemy instanceof JellyFish) {
+                        } else if (enemy instanceof JellyFish && enemy.trapped == false) {
                             this.getShocked(enemy);
                         } else if (enemy instanceof Endboss) {
                             this.character.damage(7);
@@ -78,30 +78,32 @@ class World {
                 })
 
             }
-        }, 1000);
+        }, 500);
     }
 
 
 JellyfishGetTrapped(object) {
     this.index = this.searchEnemy(object.id);
-    this.level.enemies[this.index].dead = true;
+    this.level.enemies[this.index].trapped = true;
     this.level.enemies[this.index].speed_Y = 1;
-    // setTimeout(() => {
-    //     this.level.enemies.splice(this.index, 1);
-    // }, 2000);
+    setTimeout(() => {
+        this.level.enemies[this.index].dead = true;
+        console.log(this.level.enemies[this.index].dead);
+    }, 1500);
 }
 
 killPufferfish(object) {
     this.index = this.searchEnemy(object.id);
     console.log(this.index);
-    this.level.enemies[this.index].dead = true;
+    this.level.enemies[this.index].getHit = true;
     world.character.poisoned = false;
-    // this.level.enemies[this.index].speed = 3;
-    // this.level.enemies[this.index].speed_Y = 1;
+    this.level.enemies[this.index].speed = 3;
+    this.level.enemies[this.index].speed_Y = 1;
     console.log(this.level.enemies[this.index].dead);
     setTimeout(() => {
-        // this.ctx.clearRect(this.level.enemies[this.index].x, this.level.enemies[this.index].y,this.level.enemies[this.index].width, this.level.enemies[this.index].height);
-        // this.level.enemies.splice(this.index, 1);
+        this.level.enemies[this.index].dead = true;
+        console.log(this.level.enemies[this.index].dead);
+        
     }, 500);
 }
 

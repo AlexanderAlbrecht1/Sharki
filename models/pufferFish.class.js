@@ -36,6 +36,7 @@ class pufferFish extends movableObject {
         this.height = 50;
         this.id = id;
         this.dead = false;
+        this.getHit = false;
 
         this.speed = 0.1 + Math.random() * 0.1;
         this.speed_Y = 0;
@@ -48,7 +49,7 @@ class pufferFish extends movableObject {
 
         //swimming movement
         setInterval(() => {
-            if(this.dead) {
+            if(this.getHit) {
                 this.playAnimation(this.ImagesDead);
             } else {
                 this.playAnimation(this.ImagesSwimming);

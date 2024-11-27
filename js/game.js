@@ -23,9 +23,13 @@ function resetWorld() {
     world.level.enemies.forEach(enemy => {
         if (enemy instanceof pufferFish) {
             enemy.dead = false;
+            enemy.getHit = false;
+            enemy.speed_Y = 0;
+            enemy.speed = 0.1 + Math.random() * 0.1;
         }
         if (enemy instanceof JellyFish) {
             enemy.dead = false;
+            enemy.trapped = false;
             enemy.isShocking = false;
             enemy.speed_Y = 0.09 + Math.random() * 0.2;
         }
