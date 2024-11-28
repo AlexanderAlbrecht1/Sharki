@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="300" height="80" viewBox="0 0 300 100">
+  <!-- Rechteck mit Border-Radius und weißem Rand -->
+  <rect x="0.5" y="0.5" width="295" height="75" rx="15" ry="15" fill="#5E2E9A" stroke="rgb(255, 255, 255)" stroke-width="5" />
+  <!-- Text zentriert -->
+  <text x="50%" y="50%" dy="-10px" dominant-baseline="middle" text-anchor="middle" fill="#FFFFFF" font-family="'Luckiest Guy', Arial, Helvetica, sans-serif" font-size="30px" font-weight="100">
+    Homescreen
+  </text>
+</svg>

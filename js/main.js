@@ -18,6 +18,15 @@ function goBack() {
     document.getElementById('screen').innerHTML = startScreenHTML();
 }
 
+function showWinningScreen() {
+    document.getElementById('screen').innerHTML = showWinningScreenHTML();
+    document.getElementById('screen').classList.remove('d-none');
+}
+
+function stopGame() {
+    clearAllIntervals();
+}
+
 function toggleSound() {
     backgroundSound.muted = true;
 }

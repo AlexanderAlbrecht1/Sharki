@@ -85,3 +85,15 @@ function gameOverHTML() {
         </div>
     `
 }
+
+function showWinningScreenHTML() {
+    return /*html*/ `
+            <div class="you-win">
+            <div class="space-between-w">
+                <img class="you-win-text" src="./img/6.Botones/Tittles/You win/Mesa de trabajo 1.png" alt="you win text">
+                <img onclick="init()" class="try-again-btn-winnig" src="./img/go-home.svg"
+                    alt="try again button">
+            </div>
+        </div>
+    `
+}

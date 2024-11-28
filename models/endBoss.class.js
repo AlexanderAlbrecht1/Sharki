@@ -80,6 +80,7 @@ class Endboss extends movableObject {
 
     animate() {
         let i = 0;
+        let d = 0;
         // setInterval(() => {
 
         //     if (i < 10) {
@@ -107,6 +108,19 @@ class Endboss extends movableObject {
 
             } if(this.getHurt == true) {
                 this.playAnimation(this.ImagesHurt);
+            }
+
+            if (this.energy == 0) {
+                if (d < 5) {
+                    this.playAnimation(this.ImagesDead)
+                    d++;
+                }
+                if (d == 4) {
+                    showWinningScreen();
+                    stopGame();
+                    backgroundSound.pause();
+                }
+
             }
         }, 200)
     }
