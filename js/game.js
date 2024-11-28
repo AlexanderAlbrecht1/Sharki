@@ -5,8 +5,8 @@ let backgroundSound = new Audio('./audio/background2.mp3')
 
 function startGame() {
 
-    canvas = document.getElementById('canvas');
-    world = new World(canvas, keyboard);
+    // canvas = document.getElementById('canvas');
+    // world = new World(canvas, keyboard);
     document.getElementById('screen').classList.add('d-none');
     backgroundSound.play();
 }

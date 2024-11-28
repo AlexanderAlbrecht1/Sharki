@@ -172,6 +172,23 @@ h2 {
     }
   }
 
+  #muteWrapper {
+    position: absolute;
+    right: 32px;
+    bottom: 32px;
+    display: flex;
+    width: 50px;
+    height: 50px;
+    background-image: url(./img/volume-high-solid.svg);
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: 40px,40px;
+  }
+
+  #muteWrapper:hover {
+    cursor: pointer;
+    background-size: 45px,45px;
+  }
 
 
 /* rotate device */
