@@ -4,8 +4,8 @@ async function init() {
     if (window.matchMedia("(orientation: landscape)").matches) {
         console.log("Landscape-Modus erkannt. Anwendung startet...");
         document.getElementById('screen').innerHTML = startScreenHTML();
-        canvas = document.getElementById('canvas');
-        world = new World(canvas, keyboard);
+        // canvas = document.getElementById('canvas');
+        // world = new World(canvas, keyboard);
     }
 }
 

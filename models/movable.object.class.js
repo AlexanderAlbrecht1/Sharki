@@ -5,7 +5,7 @@ class movableObject extends DrawableObject {
     speed_Y = 0;
     accerlation = .75;
 
-    offsetY = 0;
+
 
     energy = 100;
 
@@ -26,17 +26,14 @@ class movableObject extends DrawableObject {
         return this.y < 0
     }
 
-    // Bessere Formel zur Kollisionsberechnung (Genauer)
     isColliding(obj) {
-        return (this.x + this.width) >= obj.x && this.x <= (obj.x + obj.width) &&
-            (this.y + this.offsetY + this.height) >= obj.y &&
-            (this.y + this.offsetY) <= (obj.y + obj.height) //&&
-        obj.onCollisionCourse; // Optional: hiermit könnten wir schauen, ob ein Objekt sich in die richtige Richtung bewegt. Nur dann kollidieren wir. Nützlich bei Gegenständen, auf denen man stehen kann.
+        return this.x + this.height - this.offsetLeft > obj.x + obj.offsetRight &&
+            this.y + this.width - this.offsetLeft > obj.y + obj.offsetTop &&
+            this.x + this.offsetLeft < obj.x + obj.width - obj.offsetRight &&
+            this.y + this.offsetTop < obj.y + obj.height - obj.offsetBottom;
 
     }
 
-
-    //move from right to left
     moveLeft() {
         setInterval(() => {
             this.x -= this.speed;

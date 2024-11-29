@@ -3,6 +3,11 @@ class Endboss extends movableObject {
     hadFirstContact = false;
     getHurt = false;
 
+    offsetLeft = 10;
+    offsetRight = 0;
+    offsetTop = 125;
+    offsetBottom = 175;
+
 
     ImagesFloating = [
         './img/2.Enemy/3 Final Enemy/2.floating/1.png',
@@ -70,7 +75,7 @@ class Endboss extends movableObject {
         this.y = -1;
         this.width = 400;
         this.height = 400;
-        this.hadFirstContact = false;
+
 
         this.animate();
 
@@ -81,6 +86,7 @@ class Endboss extends movableObject {
     animate() {
         let i = 0;
         let d = 0;
+        let a = 0;
         // setInterval(() => {
 
         //     if (i < 10) {
@@ -96,17 +102,17 @@ class Endboss extends movableObject {
         //     }
         // }, 150);
 
-        setInterval(() => {
-            if (world.character.x > 2200) {
+        const endBossAnimation = setInterval(() => {
+            if (world.character.x > 2100) {
                 console.log('Sharkie' + world.character.x);
                 if (i < 10) {
                     this.playAnimation(this.ImagesArise)
+                    this.hadFirstContact = true;
                 } else {
                     this.playAnimation(this.ImagesFloating)
                 }
                 i++;
-
-            } if(this.getHurt == true) {
+            } if (this.getHurt == true) {
                 this.playAnimation(this.ImagesHurt);
             }
 
@@ -120,9 +126,19 @@ class Endboss extends movableObject {
                     stopGame();
                     backgroundSound.pause();
                 }
-
             }
         }, 200)
+
+        setInterval(() => {
+            // if (this.hadFirstContact) {
+                this.x -= 100;
+                this.playAnimation(this.ImagesAttack)
+                setTimeout(() => {
+                    this.x += 100
+                }, 750)
+            // }
+
+        }, 3000)
     }
 
 

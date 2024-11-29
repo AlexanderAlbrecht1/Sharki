@@ -68,7 +68,7 @@ class World {
                     } if (this.poisonBubble != null && this.poisonBubble.isColliding(enemy) && enemy instanceof Endboss) {
                         let boss = world.level.enemies.findLast((enemy) => enemy instanceof Endboss);
                         boss.getHurt = true;
-                        boss.damage(100);
+                        boss.damage(15);
                         console.log('Boss Energy ' + boss.energy);
                         this.poisonBubble = null;
                     }
@@ -95,7 +95,7 @@ class World {
         this.level.enemies[this.index].speed_Y = 1;
         setTimeout(() => {
             this.level.enemies[this.index].dead = true;
-            console.log(this.level.enemies[this.index].dead);
+            console.log(object.id,this.index,this.level.enemies[this.index], this.level.enemies[this.index].dead);
         }, 1500);
     }
 
@@ -109,7 +109,7 @@ class World {
         console.log(this.level.enemies[this.index].dead);
         setTimeout(() => {
             this.level.enemies[this.index].dead = true;
-            console.log(this.level.enemies[this.index].dead);
+            console.log(object.id,this.index,this.level.enemies[this.index], this.level.enemies[this.index].dead);
 
         }, 500);
     }
@@ -182,6 +182,8 @@ class World {
                 backgroundSound.pause();
                 clearInterval(GameOver);
                 clearInterval(this.checkCollisions)
+                clearInterval(this.level.enemies[21].endBossAnimation)
+
             }
         }, 200);
     }
@@ -192,7 +194,7 @@ class World {
 
     addObjectsToMap(objects) {
         objects.forEach(o => {
-            if (o.dead == false) {
+            if (o.dead != true) {
                 this.addToMap(o);
             }
         })
@@ -204,6 +206,7 @@ class World {
         }
         object.draw(this.ctx);
         object.drawFrame(this.ctx);
+        object.drawFrameoffset(this.ctx);
         if (object.otherDirection) {
             this.flipImageBack(object);
         }

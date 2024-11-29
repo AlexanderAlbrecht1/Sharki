@@ -1,6 +1,11 @@
 class Character extends movableObject {
     speed = 3;
     speedY = 1;
+    
+    offsetLeft = 25;
+    offsetRight = 45;
+    offsetTop = 70;
+    offsetBottom = 95;
 
     poisoned = false;
     shocked = false;

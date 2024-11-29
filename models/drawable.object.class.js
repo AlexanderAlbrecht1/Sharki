@@ -7,6 +7,11 @@ class DrawableObject {
     imageCache = {};
     currentImage = 0;
 
+    offsetLeft = 0;
+    offsetRight = 0;
+    offsetTop = 0;
+    offsetBottom = 0;
+
     dead = false;
 
     loadImage(path) {
@@ -36,4 +41,15 @@ class DrawableObject {
         }
     }
 
+    drawFrameoffset(ctx) {
+        if (this instanceof Character || this instanceof pufferFish || this instanceof JellyFish|| this instanceof Endboss) {
+            ctx.beginPath();
+            ctx.lineWidth = '1';
+            ctx.strokeStyle = 'red';
+            ctx.rect(this.x+this.offsetLeft, this.y+this.offsetTop,this.width-this.offsetRight, this.height-this.offsetBottom);
+            ctx.stroke();
+        }
+
+    }
+   
 }
