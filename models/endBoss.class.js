@@ -66,7 +66,7 @@ class Endboss extends movableObject {
     ]
 
 
-    constructor() {
+    constructor(id) {
         super().loadImage('');
         this.loadImages(this.ImagesFloating);
         this.loadImages(this.ImagesArise);
@@ -74,6 +74,7 @@ class Endboss extends movableObject {
         this.loadImages(this.ImagesDead);
         this.loadImages(this.ImagesAttack);
 
+        this.id = id;
         this.x = 2400;
         this.y = -1;
         this.width = 400;
