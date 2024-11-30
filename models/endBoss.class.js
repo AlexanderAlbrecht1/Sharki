@@ -8,6 +8,9 @@ class Endboss extends movableObject {
     offsetTop = 125;
     offsetBottom = 175;
 
+    winningSound = new Audio ('./audio/win.mp3');
+    bossHurtSound = new Audio('./audio/bossHurt.mp3');
+
 
     ImagesFloating = [
         './img/2.Enemy/3 Final Enemy/2.floating/1.png',
@@ -103,7 +106,7 @@ class Endboss extends movableObject {
         // }, 150);
 
         const endBossAnimation = setInterval(() => {
-            if (world.character.x > 2100) {
+            if (world.character.x > 2000) {
                 console.log('Sharkie' + world.character.x);
                 if (i < 10) {
                     this.playAnimation(this.ImagesArise)
@@ -113,15 +116,16 @@ class Endboss extends movableObject {
                 }
                 i++;
             } if (this.getHurt == true) {
+                this.bossHurtSound.play();
                 this.playAnimation(this.ImagesHurt);
             }
-
             if (this.energy == 0) {
                 if (d < 5) {
                     this.playAnimation(this.ImagesDead)
                     d++;
                 }
                 if (d == 4) {
+                    this.winningSound.play(),
                     showWinningScreen();
                     stopGame();
                     backgroundSound.pause();
@@ -130,15 +134,17 @@ class Endboss extends movableObject {
         }, 200)
 
         setInterval(() => {
-            // if (this.hadFirstContact) {
+            if (this.hadFirstContact) {
                 this.x -= 100;
                 this.playAnimation(this.ImagesAttack)
                 setTimeout(() => {
                     this.x += 100
                 }, 750)
-            // }
+            }
 
         }, 3000)
+
+
     }
 
 

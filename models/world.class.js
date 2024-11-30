@@ -70,7 +70,7 @@ class World {
                     } if (this.poisonBubble != null && this.poisonBubble.isColliding(enemy) && enemy instanceof Endboss) {
                         let boss = world.level.enemies.findLast((enemy) => enemy instanceof Endboss);
                         boss.getHurt = true;
-                        boss.damage(15);
+                        boss.damage(25);
                         console.log('Boss Energy ' + boss.energy);
                         this.poisonBubble = null;
                     }
@@ -185,7 +185,7 @@ class World {
                 backgroundSound.pause();
                 clearInterval(GameOver);
                 clearInterval(this.checkCollisions)
-                clearInterval(this.level.enemies[21].endBossAnimation)
+                // clearInterval(this.level.enemies[21].endBossAnimation)
                 this.gameOver.volume = 0.5;
                 this.gameOverSound.play();
             }

@@ -37,17 +37,17 @@ class movableObject extends DrawableObject {
     moveLeft() {
         setInterval(() => {
             this.x -= this.speed;
-            if(this.x < -720) {
-                this.x = 2600;
-                this.y = (10 + Math.random() * 400);
-            }
+            // if(this.x < -720) {
+            //     this.x = 2600;
+            //     this.y = (10 + Math.random() * 400);
+            // }
         }, 1000 / 60)
     }
 
     moveUp() {
         setInterval(() => {
             this.y -= this.speed_Y;
-            if (this.y < -90) {
+            if (this.y < -90 && this.dead == false) {
                 this.y = 480;
                 // this.x = (500 + Math.random() * 2000);
             };

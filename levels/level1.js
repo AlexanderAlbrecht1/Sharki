@@ -1,12 +1,12 @@
 const level1 = new Level(
     enemies = [
-        new pufferFish((500 + Math.random() * 1500),0),
+        // new pufferFish((500 + Math.random() * 1500),0),
         new pufferFish((500 + Math.random() * 1500),1),
         new pufferFish((500 + Math.random() * 1500),2),
         new pufferFish((1000 + Math.random() * 1600),3),
         new pufferFish((1000 + Math.random() * 1600),4),
-        new pufferFish((1000 + Math.random() * 1600),5),
-        new pufferFish((2000 + Math.random() * 200),6),
+        // new pufferFish((1000 + Math.random() * 1600),5),
+        // new pufferFish((2000 + Math.random() * 200),6),
         new pufferFish((2000 + Math.random() * 200),7),
         new pufferFish((2000 + Math.random() * 200),8),
         new pufferFish((2),9),
@@ -19,8 +19,8 @@ const level1 = new Level(
         new JellyFish(1100,450,16),
         new JellyFish(1369,(300 + Math.random() * 100),17),
         new JellyFish(1965,450,18),
-        new JellyFish(2400,350,19),
-        new JellyFish(2265,(300 + Math.random() * 100),20),
+        new JellyFish(2100,350,19),
+        // new JellyFish(2265,(300 + Math.random() * 100),20),
 
         
         new Endboss(),
