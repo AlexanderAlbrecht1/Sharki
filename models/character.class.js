@@ -119,6 +119,7 @@ class Character extends movableObject {
     swimmingSound2 = new Audio('./audio/swimming.mp3');
     electroShock = new Audio('./audio/electroshock.mp3');
     poisonCough = new Audio('./audio/cough.mp3');
+    bubbleSound = new Audio('./audio/bubble.mp3');
 
     constructor() {
         super().loadImage('img/1.Sharkie/1.IDLE/1.png');
@@ -192,6 +193,7 @@ class Character extends movableObject {
                 this.playAnimation(this.ImagesSlap);
             }
             if (this.world.keyboard.Q) {
+                this.bubbleSound.play();
                 this.playAnimation(this.ImagesBubbleAttack);
                 this.world.bubbleTrap = new Bubble((this.x + 100), (this.y + 80));
             }

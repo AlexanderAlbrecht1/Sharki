@@ -1,5 +1,7 @@
 class World {
     character = new Character();
+    gameOverSound = new Audio ('./audio/game_over.mp3');
+    slapSound = new Audio ('./audio/slap.mp3');
     level = level1;
 
     bubbleTrap;
@@ -100,6 +102,7 @@ class World {
     }
 
     killPufferfish(object) {
+        this.slapSound.play();
         this.index = this.searchEnemy(object.id);
         console.log(this.index);
         this.level.enemies[this.index].getHit = true;
@@ -183,7 +186,8 @@ class World {
                 clearInterval(GameOver);
                 clearInterval(this.checkCollisions)
                 clearInterval(this.level.enemies[21].endBossAnimation)
-
+                this.gameOver.volume = 0.5;
+                this.gameOverSound.play();
             }
         }, 200);
     }
