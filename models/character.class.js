@@ -10,6 +10,8 @@ class Character extends movableObject {
     poisoned = false;
     shocked = false;
 
+    sleepCounter = 0;
+
     ImagesWatiting = [
         './img/1.Sharkie/1.IDLE/1.png',
         './img/1.Sharkie/1.IDLE/2.png',
@@ -31,13 +33,36 @@ class Character extends movableObject {
         './img/1.Sharkie/1.IDLE/18.png',
     ]
 
+    ImagesFallAsSleep = [
+        './img/1.Sharkie/2.Long_IDLE/i1.png',
+        './img/1.Sharkie/2.Long_IDLE/I2.png',
+        './img/1.Sharkie/2.Long_IDLE/I3.png',
+        './img/1.Sharkie/2.Long_IDLE/I4.png',
+        './img/1.Sharkie/2.Long_IDLE/I5.png',
+        './img/1.Sharkie/2.Long_IDLE/I6.png',
+        './img/1.Sharkie/2.Long_IDLE/I7.png',
+        './img/1.Sharkie/2.Long_IDLE/I8.png',
+        './img/1.Sharkie/2.Long_IDLE/I9.png',
+        './img/1.Sharkie/2.Long_IDLE/I10.png',
+        './img/1.Sharkie/2.Long_IDLE/I11.png',
+        './img/1.Sharkie/2.Long_IDLE/I12.png',
+        './img/1.Sharkie/2.Long_IDLE/I13.png',
+        './img/1.Sharkie/2.Long_IDLE/I14.png',
+    ]
+
+    ImagesSleeping = [
+        './img/1.Sharkie/2.Long_IDLE/I11.png',
+        './img/1.Sharkie/2.Long_IDLE/I12.png',
+        './img/1.Sharkie/2.Long_IDLE/I13.png',
+    ]
+
     ImagesSwimming = [
-        'img/1.Sharkie/3.Swim/1.png',
-        'img/1.Sharkie/3.Swim/2.png',
-        'img/1.Sharkie/3.Swim/3.png',
-        'img/1.Sharkie/3.Swim/4.png',
-        'img/1.Sharkie/3.Swim/5.png',
-        'img/1.Sharkie/3.Swim/6.png',
+        './img/1.Sharkie/3.Swim/1.png',
+        './img/1.Sharkie/3.Swim/2.png',
+        './img/1.Sharkie/3.Swim/3.png',
+        './img/1.Sharkie/3.Swim/4.png',
+        './img/1.Sharkie/3.Swim/5.png',
+        './img/1.Sharkie/3.Swim/6.png',
     ]
 
     ImagesBubbleAttack = [
@@ -120,6 +145,7 @@ class Character extends movableObject {
     electroShock = new Audio('./audio/electroshock.mp3');
     poisonCough = new Audio('./audio/cough.mp3');
     bubbleSound = new Audio('./audio/bubble.mp3');
+    snoringSound = new Audio('./audio/snoring.mp3');
 
     constructor() {
         super().loadImage('img/1.Sharkie/1.IDLE/1.png');
@@ -132,6 +158,8 @@ class Character extends movableObject {
         this.loadImages(this.ImagesShocked);
         this.loadImages(this.ImagesPoisonDead);
         this.loadImages(this.ImagesShockDead);
+        this.loadImages(this.ImagesFallAsSleep);
+        this.loadImages(this.ImagesSleeping);
 
         this.animate();
 
@@ -140,6 +168,8 @@ class Character extends movableObject {
         this.moveUp();
         this.moveDown();
         this.attack();
+        this.count();
+        this.wakeUp();
         // this.fireBubbleTrap();
 
     }
@@ -152,7 +182,16 @@ class Character extends movableObject {
     // }
 
 
+    count() {
+        setInterval(() => {
+            this.sleepCounter++;
+            console.log(this.sleepCounter);
+            
+        },1000)
+    }
+
     animate() {
+       let i = 0;
         setInterval(() => {
             if (this.isDead()) {
                 this.playAnimation(this.ImagesShockDead);
@@ -173,7 +212,21 @@ class Character extends movableObject {
             }
 
             else if (this.world.keyboard.RIGHT || this.world.keyboard.LEFT || this.world.keyboard.UP || this.world.keyboard.DOWN) {
+                this.wakeUp();
                 this.playAnimation(this.ImagesSwimming);
+            }
+
+            else if (this.sleepCounter > 5) {
+                this.snoringSound.play();
+                if (i < 14) {
+                    this.playAnimation(this.ImagesFallAsSleep);
+                    i++;
+                } else {
+                    this.playAnimation(this.ImagesSleeping);
+                }
+                
+                // this.playAnimation(this.ImagesSleeping);
+                // this.fallAsSleep = true;
             }
 
 
@@ -190,14 +243,17 @@ class Character extends movableObject {
     attack() {
         setInterval(() => {
             if (this.world.keyboard.SPACE) {
+                this.wakeUp();
                 this.playAnimation(this.ImagesSlap);
             }
             if (this.world.keyboard.Q) {
+                this.wakeUp();
                 this.bubbleSound.play();
                 this.playAnimation(this.ImagesBubbleAttack);
                 this.world.bubbleTrap = new Bubble((this.x + 100), (this.y + 80));
             }
             if (this.world.keyboard.E && this.world.poison > 0) {
+                this.wakeUp();
                 this.playAnimation(this.ImagesPoisonBubbleAttack);
                 this.world.poisonBubble = new PoisonBubble((this.x + 100), (this.y + 80));
                 this.world.poison--;
@@ -266,5 +322,10 @@ class Character extends movableObject {
         this.playAnimation(this.ImagesShocked); // animation timwe has to be updated -- to fast
         this.electroShock.play();
         console.log('shocked', this.energy);
+    }
+
+    wakeUp() {
+        this.sleepCounter = 0;
+        this.snoringSound.pause();
     }
 }

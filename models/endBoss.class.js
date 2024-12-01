@@ -6,7 +6,7 @@ class Endboss extends movableObject {
     offsetLeft = 10;
     offsetRight = 0;
     offsetTop = 125;
-    offsetBottom = 175;
+    offsetBottom = 75;
 
     winningSound = new Audio ('./audio/win.mp3');
     bossHurtSound = new Audio('./audio/bossHurt.mp3');

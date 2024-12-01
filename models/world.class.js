@@ -12,6 +12,7 @@ class World {
     keyboard;
     cameraX = 0;
     statusBar = new StatusBar();
+    statusBarBoss = new StatusBarBoss();
     poisonCounter = new PoisonCounter();
     poison = 0;
     coinCounter = new CoinCounter();
@@ -42,7 +43,8 @@ class World {
 
                 this.level.enemies.forEach((enemy) => {
                     if (this.character.isColliding(enemy) && !world.keyboard.SPACE && enemy.dead == false) {
-
+                        this.character.sleepCounter = 0;
+                        this.character.snoringSound.pause();
                         if (enemy instanceof pufferFish && enemy.getHit == false) {
                             this.getPoisoned();
                             console.log(this.level.enemies[this.index].dead);
@@ -73,6 +75,7 @@ class World {
                         boss.damage(25);
                         console.log('Boss Energy ' + boss.energy);
                         this.poisonBubble = null;
+                        world.statusBarBoss.setPercentage(boss.energy);
                     }
                 })
 
@@ -209,8 +212,8 @@ class World {
             this.flipImage(object);
         }
         object.draw(this.ctx);
-        object.drawFrame(this.ctx);
-        object.drawFrameoffset(this.ctx);
+        // object.drawFrame(this.ctx);
+        // object.drawFrameoffset(this.ctx);
         if (object.otherDirection) {
             this.flipImageBack(object);
         }
@@ -238,6 +241,9 @@ class World {
         this.ctx.translate(-this.cameraX, 0);
         //space for fixed objects
         this.addToMap(this.statusBar);
+        if (this.character.x > 2000) {
+            this.addToMap(this.statusBarBoss);
+        };
 
         this.addToMap(this.poisonCounter);
         this.ctx.font = "32px 'Luckiest Guy'"
