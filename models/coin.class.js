@@ -1,6 +1,5 @@
 class Coin extends DrawableObject {
 
-    pickUpSound = new Audio('./audio/coin-pickUp.mp3')
 
     constructor(x,y,id) {
         super().loadImage('./img/4. Marcadores/1. Coins/1.png');

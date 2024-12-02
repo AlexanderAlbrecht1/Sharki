@@ -1,7 +1,6 @@
 class World {
     character = new Character();
-    gameOverSound = new Audio ('./audio/game_over.mp3');
-    slapSound = new Audio ('./audio/slap.mp3');
+
     level = level1;
 
     bubbleTrap;
@@ -44,7 +43,7 @@ class World {
                 this.level.enemies.forEach((enemy) => {
                     if (this.character.isColliding(enemy) && !world.keyboard.SPACE && enemy.dead == false) {
                         this.character.sleepCounter = 0;
-                        this.character.snoringSound.pause();
+                        snoringSound.pause();
                         if (enemy instanceof pufferFish && enemy.getHit == false) {
                             this.getPoisoned();
                             console.log(this.level.enemies[this.index].dead);
@@ -105,7 +104,7 @@ class World {
     }
 
     killPufferfish(object) {
-        this.slapSound.play();
+        slapSound.play();
         this.index = this.searchEnemy(object.id);
         console.log(this.index);
         this.level.enemies[this.index].getHit = true;
@@ -145,15 +144,15 @@ class World {
         if (this.level.collectableObjects[this.index].dead == false) {
             this.coins++;
             this.level.collectableObjects[this.index].dead = true;
-            object.pickUpSound.volume = 0.1;
-            object.pickUpSound.play();
+            pickUpSound.volume = 0.1;
+            pickUpSound.play();
         }
     }
 
     pickUpPoison(object) {
         this.index = this.searchObject(object.id);
         if (this.level.collectableObjects[this.index].dead == false) {
-            object.pickUpSound.play();
+            pickUpSoundPoison.play();
             this.poison++;
             this.level.collectableObjects[this.index].dead = true;
         }
@@ -190,7 +189,7 @@ class World {
                 clearInterval(this.checkCollisions)
                 // clearInterval(this.level.enemies[21].endBossAnimation)
                 this.gameOver.volume = 0.5;
-                this.gameOverSound.play();
+                gameOverSound.play();
             }
         }, 200);
     }
@@ -212,8 +211,8 @@ class World {
             this.flipImage(object);
         }
         object.draw(this.ctx);
-        // object.drawFrame(this.ctx);
-        // object.drawFrameoffset(this.ctx);
+        object.drawFrame(this.ctx);
+        object.drawFrameoffset(this.ctx);
         if (object.otherDirection) {
             this.flipImageBack(object);
         }

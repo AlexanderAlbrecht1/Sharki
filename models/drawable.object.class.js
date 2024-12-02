@@ -1,8 +1,8 @@
 class DrawableObject {
     x = 120;
     y = 250;
-    height = 150;
-    width = 150
+    height = 200;
+    width = 200;
     img;
     imageCache = {};
     currentImage = 0;

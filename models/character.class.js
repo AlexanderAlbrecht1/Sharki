@@ -4,8 +4,8 @@ class Character extends movableObject {
     
     offsetLeft = 25;
     offsetRight = 45;
-    offsetTop = 70;
-    offsetBottom = 95;
+    offsetTop = 95;
+    offsetBottom = 135;
 
     poisoned = false;
     shocked = false;
@@ -140,12 +140,6 @@ class Character extends movableObject {
 
 
     world;
-    swimmingSound = new Audio('./audio/swimming2.mp3');
-    swimmingSound2 = new Audio('./audio/swimming.mp3');
-    electroShock = new Audio('./audio/electroshock.mp3');
-    poisonCough = new Audio('./audio/cough.mp3');
-    bubbleSound = new Audio('./audio/bubble.mp3');
-    snoringSound = new Audio('./audio/snoring.mp3');
 
     constructor() {
         super().loadImage('img/1.Sharkie/1.IDLE/1.png');
@@ -202,13 +196,13 @@ class Character extends movableObject {
 
             else if (this.isHurt && this.world.character.poisoned === true) {
                 this.playAnimation(this.ImagesPoisoned);
-                this.poisonCough.volume = 0.3;
-                this.poisonCough.play();
+                poisonCough.volume = 0.3;
+                poisonCough.play();
             }
 
             else if (this.isHurt && this.world.character.shocked === true) {
                 this.playAnimation(this.ImagesShocked);
-                this.electroShock.play();
+                electroShock.play();
             }
 
             else if (this.world.keyboard.RIGHT || this.world.keyboard.LEFT || this.world.keyboard.UP || this.world.keyboard.DOWN) {
@@ -217,7 +211,7 @@ class Character extends movableObject {
             }
 
             else if (this.sleepCounter > 5) {
-                this.snoringSound.play();
+                snoringSound.play();
                 if (i < 14) {
                     this.playAnimation(this.ImagesFallAsSleep);
                     i++;
@@ -248,7 +242,7 @@ class Character extends movableObject {
             }
             if (this.world.keyboard.Q) {
                 this.wakeUp();
-                this.bubbleSound.play();
+                bubbleSound.play();
                 this.playAnimation(this.ImagesBubbleAttack);
                 this.world.bubbleTrap = new Bubble((this.x + 100), (this.y + 80));
             }
@@ -263,12 +257,12 @@ class Character extends movableObject {
 
     moveRight() {
         setInterval(() => {
-            this.swimmingSound.pause();
+            swimmingSound.pause();
             if (this.world.keyboard.RIGHT && this.x < this.world.level.levelEndX) {
                 this.x += this.speed;
                 this.otherDirection = false;
-                this.swimmingSound.volume = 0.1;
-                this.swimmingSound.play();
+                swimmingSound.volume = 0.1;
+                swimmingSound.play();
             }
             this.world.cameraX = -this.x + 100;
         }, 1000 / 60)
@@ -277,12 +271,12 @@ class Character extends movableObject {
 
     moveLeft() {
         setInterval(() => {
-            this.swimmingSound2.pause();
+            swimmingSound2.pause();
             if (this.world.keyboard.LEFT && this.x > -300) {
                 this.x -= this.speed;
                 this.otherDirection = true;
-                this.swimmingSound2.volume = 0.3;
-                this.swimmingSound2.play();
+                swimmingSound2.volume = 0.3;
+                swimmingSound2.play();
             }
             this.world.cameraX = -this.x + 100;
         }, 1000 / 60)
@@ -311,7 +305,7 @@ class Character extends movableObject {
         // world.character.poisoned = true;
         this.damage(3);
         this.playAnimation(this.ImagesPoisoned); // animation timwe has to be updated -- to fast
-        this.poisonCough.play();
+        poisonCough.play();
         console.log('poisoned', this.energy);
     }
 
@@ -320,12 +314,12 @@ class Character extends movableObject {
         // world.character.shocked = true;
         this.damage(2);
         this.playAnimation(this.ImagesShocked); // animation timwe has to be updated -- to fast
-        this.electroShock.play();
+        electroShock.play();
         console.log('shocked', this.energy);
     }
 
     wakeUp() {
         this.sleepCounter = 0;
-        this.snoringSound.pause();
+        snoringSound.pause();
     }
 }

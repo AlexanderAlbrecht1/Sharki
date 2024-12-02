@@ -41,7 +41,18 @@ a {
     z-index: 1;
 }
 
-/* startscreen */
+#overlay {
+    position: absolute;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    width: 720px;
+    height: 400px;
+    border-radius: 5px;
+    background: transparent;
+    z-index: 2;
+}
 
 .how-to-play-wrapper {
     display: flex;
@@ -214,7 +225,7 @@ h2 {
 }
 
 .d-none {
-    display: none;
+    display: none !important;
 }
 
 

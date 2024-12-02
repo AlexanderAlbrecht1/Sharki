@@ -1,6 +1,6 @@
 class Poison extends DrawableObject {
 
-    pickUpSound = new Audio('./audio/poison_pickUp.mp3')
+    
 
     constructor(x,y,id) {
         super().loadImage('./img/4. Marcadores/Posión/Animada/1.png');
