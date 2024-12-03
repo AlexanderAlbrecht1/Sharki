@@ -55,14 +55,14 @@ class World {
                             world.statusBar.setPercentage(this.character.energy);
                         }
                     } else if (this.character.isColliding(enemy) && world.keyboard.SPACE) {
-                        if (enemy instanceof pufferFish) {
+                        if (enemy instanceof pufferFish && enemy.getHit == false) {
                             this.killPufferfish(enemy);
-                        } else if (enemy instanceof JellyFish) {
-                            this.getShocked(enemy);
-                        } else if (enemy instanceof Endboss) {
-                            this.character.damage(7);
-                            console.log(enemy, this.character.energy);
-                            world.statusBar.setPercentage(this.character.energy);
+                            // } else if (enemy instanceof JellyFish) {
+                            //     this.getShocked(enemy);
+                            // } else if (enemy instanceof Endboss) {
+                            //     this.character.damage(7);
+                            //     console.log(enemy, this.character.energy);
+                            //     world.statusBar.setPercentage(this.character.energy);
                         }
                     } if (this.bubbleTrap != null && this.bubbleTrap.isColliding(enemy) && enemy instanceof JellyFish) {
                         this.JellyfishGetTrapped(enemy);
@@ -97,9 +97,9 @@ class World {
         this.index = this.searchEnemy(object.id);
         this.level.enemies[this.index].trapped = true;
         this.level.enemies[this.index].speed_Y = 1;
+        const enemyIndex = this.index;
         setTimeout(() => {
-            this.level.enemies[this.index].dead = true;
-            console.log(object.id,this.index,this.level.enemies[this.index], this.level.enemies[this.index].dead);
+            this.level.enemies[enemyIndex].dead = true;
         }, 1500);
     }
 
@@ -111,11 +111,9 @@ class World {
         world.character.poisoned = false;
         this.level.enemies[this.index].speed = 3;
         this.level.enemies[this.index].speed_Y = 1;
-        console.log(this.level.enemies[this.index].dead);
+        const enemyIndex = this.index;
         setTimeout(() => {
-            this.level.enemies[this.index].dead = true;
-            console.log(object.id,this.index,this.level.enemies[this.index], this.level.enemies[this.index].dead);
-
+            this.level.enemies[enemyIndex].dead = true;
         }, 500);
     }
 
@@ -169,8 +167,8 @@ class World {
     }
 
     searchEnemy(id) {
-        for (let index = 0; index < world.level.enemies.length; index++) {
-            if (world.level.enemies[index].id === id) {
+        for (let index = 0; index < this.level.enemies.length; index++) {
+            if (this.level.enemies[index].id === id) {
                 return index;
             }
         }
