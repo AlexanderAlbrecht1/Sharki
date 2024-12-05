@@ -400,6 +400,50 @@ canvas {
     cursor: pointer;
 }
 
+/* mobile buttons */
+
+.mobile-buttons {
+    z-index: 5;
+    position: absolute;
+    display: flex;
+    justify-content: space-between;
+    width: 900px;
+}
+
+.up-arrow,
+.down-arrow {
+    display: flex;
+    justify-content: center;
+}
+
+.others-arrows {
+    display: flex;
+    gap: 50px;
+}
+
+.up-arrow>img,
+.down-arrow>img,
+.others-arrows>img {
+    height: 50px;
+    width: 50px;
+}
+
+.action-buttons {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+}
+
+.bubble-action {
+    display: flex;
+    justify-content: space-between;
+}
+
+.space-bar {
+    width: 150px;
+    height: 50px;
+}
+
 @media only screen and (max-width: 720px) {
 
     canvas,
