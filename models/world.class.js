@@ -180,8 +180,11 @@ class World {
             if (this.character.isDead()) {
                 this.gameActive = false;
                 this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
-                document.getElementById('screen').classList.remove('d-none');
-                document.getElementById('screen').innerHTML = gameOverHTML();
+                document.getElementById('game-over-screen').classList.remove('d-none');
+                if (isMobileDevice()) {
+                    document.getElementById('mobile-buttons').classList.add('d-none');
+                };
+                // document.getElementById('screen').innerHTML = gameOverHTML();
                 backgroundSound.pause();
                 clearInterval(GameOver);
                 clearInterval(this.checkCollisions)

@@ -1,27 +1,60 @@
 let mute = false;
 
-async function init() {
+function checkLandscapeMode() {
     if (window.matchMedia("(orientation: landscape)").matches) {
-        console.log("Landscape-Modus erkannt. Anwendung startet...");
-        document.getElementById('overlay').innerHTML = startScreenHTML();
-        // canvas = document.getElementById('canvas');
-        // world = new World(canvas, keyboard);
+        console.log("Landscape-Modus erkannt!");
+        document.getElementById('start-screen').style.display = 'flex';
+    } else {
+        console.log("Portrait-Modus erkannt!");
+        document.getElementById('start-screen').style.display = 'none';
+        if (isMobileDevice() && world.gameActive == true) {
+            document.getElementById('mobile-buttons').classList.remove('d-none');
+        }
     }
 }
 
-function howToPlay(screen) {
-    document.getElementById('screen').innerHTML = howToPlayHTML();
+function isMobileDevice() {
+    return /Mobi|Android|iPhone|iPad|iPod|BlackBerry|Windows Phone/i.test(navigator.userAgent);
+}
+
+window.addEventListener("resize", checkLandscapeMode);
+
+async function init() {
+    checkLandscapeMode();
+        // mobilePlay();
+        // document.getElementById('start-screen').style.display = 'flex';
+        // canvas = document.getElementById('canvas');
+        // world = new World(canvas, keyboard);    
+}
+
+function howToPlay() {
+    document.getElementById('start-screen').classList.add('d-none');
+    document.getElementById('how-to-play-screen').classList.remove('d-none');
 
 }
 
 function goBack() {
-    document.getElementById('screen').innerHTML = startScreenHTML();
+    document.getElementById('how-to-play-screen').classList.add('d-none');
+    document.getElementById('start-screen').classList.remove('d-none');
+}
+
+function goBack2() {
+    document.getElementById('game-over-screen').classList.add('d-none');
+    document.getElementById('start-screen').classList.remove('d-none');
+}
+
+function goToHomeScreen() {
+    resetWorld();
+    document.getElementById('winning-screen').classList.add('d-none');
+    document.getElementById('start-screen').classList.remove('d-none');
 }
 
 function showWinningScreen() {
-    document.getElementById('screen').style.backgroundImage = "url('./img/3. Background/Dark/completo.png')"
-    document.getElementById('overlay').classList.remove('d-none');
-    document.getElementById('overlay').innerHTML = showWinningScreenHTML();
+    document.getElementById('winning-screen').classList.remove('d-none');
+    if (isMobileDevice()) {
+        document.getElementById('mobile-buttons').classList.add('d-none');
+    }
+
 }
 
 function stopGame() {
@@ -67,5 +100,16 @@ function toggleMuteSound() {
         //     item.pickUpSound.muted = false;
         // });
     }
+
+    function isMobileDevice() {
+        return /Mobi|Android|iPhone|iPad|iPod|BlackBerry|Windows Phone/i.test(navigator.userAgent);
+    }
+
+    if (isMobileDevice() && world.gameActive == true) {
+        document.getElementById('mobile-buttons').classList.remove('d-none');
+    }
+
+
+
 
 }

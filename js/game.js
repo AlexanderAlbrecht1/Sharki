@@ -39,19 +39,22 @@ let gameSounds = [
 
 
 async function startGame() {
-
     canvas = document.getElementById('canvas');
     world = new World(canvas, keyboard);
-    document.getElementById('overlay').classList.add('d-none');
-    document.getElementById('screen').style.background = 'transparent';
+    document.getElementById('start-screen').classList.add('d-none');
     backgroundSound.play();
+    if (isMobileDevice() && world.gameActive == true) {
+        document.getElementById('mobile-buttons').classList.remove('d-none');
+        mobilePlay();
+    }
 }
 
 function restartGame() {
-    resetWorld();
+    // resetWorld();
     canvas = document.getElementById('canvas');
     world = new World(canvas, keyboard);
-    document.getElementById('screen').classList.add('d-none');
+    resetWorld();
+    document.getElementById('game-over-screen').classList.add('d-none');
     backgroundSound.play();
 }
 

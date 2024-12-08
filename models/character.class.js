@@ -177,10 +177,12 @@ class Character extends movableObject {
 
 
     count() {
+         
         setInterval(() => {
-            this.sleepCounter++;
-            console.log(this.sleepCounter);
-            
+            if(this.energy > 0 ) {
+                this.sleepCounter++;
+                console.log(this.sleepCounter);
+            }
         },1000)
     }
 

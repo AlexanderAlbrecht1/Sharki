@@ -129,6 +129,7 @@ class Endboss extends movableObject {
                     showWinningScreen();
                     stopGame();
                     backgroundSound.pause();
+
                 }
             }
         }, 200)
