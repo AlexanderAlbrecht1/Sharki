@@ -9,6 +9,7 @@ class Character extends movableObject {
 
     poisoned = false;
     shocked = false;
+    endbossed = false;
 
     sleepCounter = 0;
 
@@ -105,6 +106,13 @@ class Character extends movableObject {
         './img/1.Sharkie/5.Hurt/1.Poisoned/4.png',
     ]
 
+    ImagesEndbossed = [
+        './img/1.Sharkie/5.Hurt/1.Poisoned/2.png',
+        './img/1.Sharkie/5.Hurt/1.Poisoned/3.png',
+        './img/1.Sharkie/5.Hurt/1.Poisoned/4.png',
+        './img/1.Sharkie/5.Hurt/1.Poisoned/5.png',
+    ]
+
     ImagesShocked = [
         './img/1.Sharkie/5.Hurt/2.Electric shock/1.png',
         './img/1.Sharkie/5.Hurt/2.Electric shock/2.png',
@@ -154,6 +162,7 @@ class Character extends movableObject {
         this.loadImages(this.ImagesShockDead);
         this.loadImages(this.ImagesFallAsSleep);
         this.loadImages(this.ImagesSleeping);
+        this.loadImages(this.ImagesEndbossed);
 
         this.animate();
 
@@ -205,6 +214,10 @@ class Character extends movableObject {
             else if (this.isHurt && this.world.character.shocked === true) {
                 this.playAnimation(this.ImagesShocked);
                 electroShock.play();
+            }
+            else if (this.world.character.endbossed) {
+                this.playAnimation(this.ImagesEndbossed);
+                hurtByEndboss.play();
             }
 
             else if (this.world.keyboard.RIGHT || this.world.keyboard.LEFT || this.world.keyboard.UP || this.world.keyboard.DOWN) {

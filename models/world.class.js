@@ -39,7 +39,7 @@ class World {
                 boss.getHurt = false;
                 world.character.poisoned = false;
                 world.character.shocked = false;
-
+                world.character.endbossed = false;
                 this.level.enemies.forEach((enemy) => {
                     if (this.character.isColliding(enemy) && !world.keyboard.SPACE && enemy.dead == false) {
                         this.character.sleepCounter = 0;
@@ -50,9 +50,7 @@ class World {
                         } else if (enemy instanceof JellyFish && enemy.trapped == false) {
                             this.getShocked(enemy);
                         } else if (enemy instanceof Endboss) {
-                            this.character.damage(7);
-                            console.log(enemy, this.character.energy);
-                            world.statusBar.setPercentage(this.character.energy);
+                            this.getHurt(enemy);
                         }
                     } else if (this.character.isColliding(enemy) && world.keyboard.SPACE) {
                         if (enemy instanceof pufferFish && enemy.getHit == false) {
@@ -121,11 +119,9 @@ class World {
         this.character.damage(3);
         world.character.shocked = true;
         world.character.poisoned = false;
-
         this.index = this.searchEnemy(object.id);
         world.level.enemies[this.index].isShocking = true;
         console.log(this.index, world.level.enemies[this.index].isShocking);
-
         world.statusBar.setPercentage(this.character.energy);
     }
 
@@ -134,6 +130,13 @@ class World {
         world.character.poisoned = true;
         world.character.shocked = false;
         console.log(this.character.energy);
+        world.statusBar.setPercentage(this.character.energy);
+    }
+
+    getHurt(enemy) {
+        this.character.damage(7);
+        world.character.endbossed = true;
+        console.log(enemy, this.character.energy);
         world.statusBar.setPercentage(this.character.energy);
     }
 

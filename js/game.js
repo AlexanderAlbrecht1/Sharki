@@ -3,6 +3,7 @@ let world;
 let keyboard = new Keyboard();
 
 
+
 let gameSounds = [
     backgroundSound = new Audio('./audio/background2.mp3'),
     swimmingSound = new Audio('./audio/swimming2.mp3'),
@@ -19,27 +20,11 @@ let gameSounds = [
     endbossAttackSound = new Audio('./audio/endboss_attack.mp3'),
     gameOverSound = new Audio('./audio/game_over.mp3'),
     slapSound = new Audio('./audio/slap.mp3'),
+    hurtByEndboss = new Audio('./audio/hurt-by-endboss.mp3')
 ]
 
-// let backgroundSound = new Audio('./audio/background2.mp3');
-// let swimmingSound = new Audio('./audio/swimming2.mp3');
-// let swimmingSound2 = new Audio('./audio/swimming.mp3');
-// let electroShock = new Audio('./audio/electroshock.mp3');
-// let poisonCough = new Audio('./audio/cough.mp3');
-// let bubbleSound = new Audio('./audio/bubble.mp3');
-// let snoringSound = new Audio('./audio/snoring.mp3');
-// let pickUpSound = new Audio('./audio/coin-pickUp.mp3');
-// let pickUpSoundPoison = new Audio('./audio/poison_pickUp.mp3');
-// let winningSound = new Audio ('./audio/win.mp3');
-// let bossHurtSound = new Audio('./audio/bossHurt.mp3');
-// let endbossSpanSound = new Audio ('./audio/endboss_span.mp3');
-// let endbossAttackSound = new Audio ('./audio/endboss_attack.mp3');
-// let gameOverSound = new Audio ('./audio/game_over.mp3');
-// let slapSound = new Audio ('./audio/slap.mp3');
-
-
 async function startGame() {
-    canvas = document.getElementById('canvas');
+    gameOn = true;    canvas = document.getElementById('canvas');
     world = new World(canvas, keyboard);
     document.getElementById('start-screen').classList.add('d-none');
     backgroundSound.play();

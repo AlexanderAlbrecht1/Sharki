@@ -1,4 +1,5 @@
 let mute = false;
+let gameOn = false;
 
 function checkLandscapeMode() {
     if (window.matchMedia("(orientation: landscape)").matches) {

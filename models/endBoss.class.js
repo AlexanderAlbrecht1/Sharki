@@ -102,8 +102,9 @@ class Endboss extends movableObject {
         //         this.hadFirstContact = true;
         //     }
         // }, 150);
-
-        const endBossAnimation = setInterval(() => {
+        
+       let endBossAnimation = setInterval(() => {
+            if(gameOn == true) {
             if (world.character.x > 2000) {
                 // endbossSpanSound.play();
                 console.log('Sharkie' + world.character.x);
@@ -132,7 +133,9 @@ class Endboss extends movableObject {
 
                 }
             }
+        }
         }, 200)
+    
 
         setInterval(() => {
             if (this.hadFirstContact) {
