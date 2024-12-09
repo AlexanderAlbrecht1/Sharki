@@ -1,11 +1,11 @@
 class Character extends movableObject {
     speed = 3;
     speedY = 1;
-    
-    offsetLeft = 25;
-    offsetRight = 45;
-    offsetTop = 95;
-    offsetBottom = 135;
+
+    offsetLeft = 45;
+    offsetRight = 90;
+    offsetTop = 105;
+    offsetBottom = 145;
 
     poisoned = false;
     shocked = false;
@@ -144,9 +144,6 @@ class Character extends movableObject {
         './img/1.Sharkie/6.dead/2.Electro_shock/10.png',
     ]
 
-
-
-
     world;
 
     constructor() {
@@ -165,174 +162,254 @@ class Character extends movableObject {
         this.loadImages(this.ImagesEndbossed);
 
         this.animate();
-
-        this.moveRight();
-        this.moveLeft();
-        this.moveUp();
-        this.moveDown();
+        this.motionSharkie();
         this.attack();
         this.count();
         this.wakeUp();
-        // this.fireBubbleTrap();
-
     }
 
-    // fireBubbleTrap() {
-    //     if (this.world.keyboard.Q) {
-    //         new Bubble(200,200);
-    //         this.x += this.speed;
-    //     }
-    // }
-
-
+    /**
+     * 
+     * increases a counter by 1 every second
+     * 
+     */
     count() {
-         
         setInterval(() => {
-            if(this.energy > 0 ) {
+            if (this.energy > 0) {
                 this.sleepCounter++;
-                console.log(this.sleepCounter);
             }
-        },1000)
+        }, 1000)
     }
 
+    /**
+     * 
+     * shows different animations depending on the condition
+     * 
+     */
     animate() {
-       let i = 0;
+        let i = 0;
         setInterval(() => {
             if (this.isDead()) {
                 this.playAnimation(this.ImagesShockDead);
-                // setTimeout(() => {
-                //     world.gameOver()
-                // },1000)
-            }
-
-            else if (this.isHurt && this.world.character.poisoned === true) {
-                this.playAnimation(this.ImagesPoisoned);
-                poisonCough.volume = 0.3;
-                poisonCough.play();
-            }
-
-            else if (this.isHurt && this.world.character.shocked === true) {
-                this.playAnimation(this.ImagesShocked);
-                electroShock.play();
-            }
-            else if (this.world.character.endbossed) {
-                this.playAnimation(this.ImagesEndbossed);
-                hurtByEndboss.play();
-            }
-
-            else if (this.world.keyboard.RIGHT || this.world.keyboard.LEFT || this.world.keyboard.UP || this.world.keyboard.DOWN) {
-                this.wakeUp();
-                this.playAnimation(this.ImagesSwimming);
-            }
-
-            else if (this.sleepCounter > 5) {
-                snoringSound.play();
-                if (i < 14) {
-                    this.playAnimation(this.ImagesFallAsSleep);
-                    i++;
-                } else {
-                    this.playAnimation(this.ImagesSleeping);
-                }
-                
-                // this.playAnimation(this.ImagesSleeping);
-                // this.fallAsSleep = true;
-            }
-
-
-            else {
+            } else if (this.isHurt && this.world.character.poisoned === true) {
+                this.poisonAnimation();
+            } else if (this.isHurt && this.world.character.shocked === true) {
+                this.shockAnimation();
+            } else if (this.world.character.endbossed) {
+                this.hurtByEndbossAnimation();
+            } else if (this.world.keyboard.RIGHT || this.world.keyboard.LEFT || this.world.keyboard.UP || this.world.keyboard.DOWN) {
+                this.swimAnimation();
+            } else if (this.sleepCounter > 5) {
+                this.sleeping(i);
+                i++;
+            } else {
                 this.playAnimation(this.ImagesWatiting)
             }
-
         }, 200)
-
-
-
     }
 
+    /**
+     * 
+     * carries out attacks to injure enemies
+     * 
+     */
     attack() {
         setInterval(() => {
             if (this.world.keyboard.SPACE) {
-                this.wakeUp();
-                this.playAnimation(this.ImagesSlap);
-            }
-            if (this.world.keyboard.Q) {
-                this.wakeUp();
-                bubbleSound.play();
-                this.playAnimation(this.ImagesBubbleAttack);
-                this.world.bubbleTrap = new Bubble((this.x + 100), (this.y + 80));
-            }
-            if (this.world.keyboard.E && this.world.poison > 0) {
-                this.wakeUp();
-                this.playAnimation(this.ImagesPoisonBubbleAttack);
-                this.world.poisonBubble = new PoisonBubble((this.x + 100), (this.y + 80));
-                this.world.poison--;
+                this.slapAttack();
+            } if (this.world.keyboard.Q) {
+                this.bubbleAttack();
+            } if (this.world.keyboard.E && this.world.poison > 0) {
+                this.poisonBubbleAttack();
             }
         }, 200);
     }
 
-    moveRight() {
-        setInterval(() => {
+    /**
+     * 
+     * moves sharkie through the level
+     * 
+     */
+    motionSharkie() {
+        const motionShakrie = setInterval(() => {
             swimmingSound.pause();
             if (this.world.keyboard.RIGHT && this.x < this.world.level.levelEndX) {
-                this.x += this.speed;
-                this.otherDirection = false;
-                swimmingSound.volume = 0.1;
-                swimmingSound.play();
+                this.moveRight();
+            } if (this.world.keyboard.LEFT && this.x > -300) {
+                this.moveLeft();
+            } if (this.world.keyboard.UP && this.y >= -50) {
+                this.moveUp();
+            } if (this.world.keyboard.DOWN && this.y <= 350) {
+                this.moveDown();
             }
-            this.world.cameraX = -this.x + 100;
         }, 1000 / 60)
-
     }
 
+    /**
+     * 
+     * shows the swimming animation
+     * 
+     */
+    swimAnimation() {
+        this.wakeUp();
+        this.playAnimation(this.ImagesSwimming);
+    }
+
+    /**
+     * 
+     * shows the animation when sharkie is injured by the final boss
+     * 
+     */
+    hurtByEndbossAnimation() {
+        this.playAnimation(this.ImagesEndbossed);
+        hurtByEndboss.play();
+    }
+
+    /**
+     * 
+     * shows the animation when sharkie is shocked by a jellyfish
+     * 
+     */
+    shockAnimation() {
+        this.playAnimation(this.ImagesShocked);
+        electroShock.play();
+    }
+
+    /**
+     * 
+     * shows the animation when sharkie is poisoned by a pufferfish
+     * 
+     */
+    poisonAnimation() {
+        this.playAnimation(this.ImagesPoisoned);
+        poisonCough.volume = 0.3;
+        poisonCough.play();
+    }
+
+    /**
+     * 
+     * shows the animation when sharkie is not moved and falls asleep
+     * 
+     * @param {number} i - frame counter that starts at 0 and increments by 1 at each interval
+     */
+    sleeping(i) {
+        snoringSound.play();
+        if (i < 14) {
+            this.playAnimation(this.ImagesFallAsSleep);
+            console.log(i);
+            
+        } else {
+            this.playAnimation(this.ImagesSleeping);
+        }
+    }
+
+    /**
+     * 
+     * shows the animation when sharkie fires a bubble attack
+     * 
+     */
+    poisonBubbleAttack() {
+        this.wakeUp();
+        this.playAnimation(this.ImagesPoisonBubbleAttack);
+        this.world.poisonBubble = new PoisonBubble((this.x + 140), (this.y + 100));
+        this.world.poison--;
+    }
+
+    /**
+     * 
+     * shows the animation when sharkie fires a poison bubble attack
+     * 
+     */
+    bubbleAttack() {
+        this.wakeUp();
+        bubbleSound.play();
+        this.playAnimation(this.ImagesBubbleAttack);
+        this.world.bubbleTrap = new Bubble((this.x + 140), (this.y + 100));
+    }
+
+    /**
+     * 
+     * shows the animation when sharkie strikes with his tail
+     * 
+     */
+    slapAttack() {
+        this.wakeUp();
+        this.playAnimation(this.ImagesSlap);
+    }
+
+    /**
+     * 
+     * moves sharkie to the right and plays swimming sound
+     * 
+     */
+    moveRight() {
+        this.x += this.speed;
+        this.otherDirection = false;
+        swimmingSound.volume = 0.1;
+        swimmingSound.play();
+        this.world.cameraX = -this.x + 100;
+    }
+
+    /**
+     * 
+     * moves sharkie to the left and plays swimming sound
+     * 
+     */
     moveLeft() {
-        setInterval(() => {
-            swimmingSound2.pause();
-            if (this.world.keyboard.LEFT && this.x > -300) {
-                this.x -= this.speed;
-                this.otherDirection = true;
-                swimmingSound2.volume = 0.3;
-                swimmingSound2.play();
-            }
-            this.world.cameraX = -this.x + 100;
-        }, 1000 / 60)
-
+        this.x -= this.speed;
+        this.otherDirection = true;
+        swimmingSound2.volume = 0.3;
+        swimmingSound2.play();
+        this.world.cameraX = -this.x + 100;
     }
 
+    /**
+     * 
+     * moves sharkie up
+     * 
+     */
     moveUp() {
-        setInterval(() => {
-            if (this.world.keyboard.UP && this.y >= -50) {
-                this.y -= this.speed;
-            }
-        }, 1000 / 60)
+        this.y -= this.speed;
     }
 
-
+    /**
+     * 
+     * moves sharkie down
+     * 
+     */
     moveDown() {
-        setInterval(() => {
-            if (this.world.keyboard.DOWN && this.y <= 350) {
-                this.y += this.speed;
-            }
-        }, 1000 / 60)
+        this.y += this.speed;
     }
 
+    /**
+     * 
+     * drains sharkie energy and shows the animation when he is poisoned
+     * 
+     */
     isPoisoned() {
-        // world.character.shocked = false;
-        // world.character.poisoned = true;
-        this.damage(3);
-        this.playAnimation(this.ImagesPoisoned); // animation timwe has to be updated -- to fast
+        this.damage(6);
+        this.playAnimation(this.ImagesPoisoned);
         poisonCough.play();
         console.log('poisoned', this.energy);
     }
 
+    /**
+     * 
+     * drains sharkie energy and shows the animation when he is shocked
+     * 
+     */
     isShocked() {
-        // world.character.poisoned = false;
-        // world.character.shocked = true;
-        this.damage(2);
-        this.playAnimation(this.ImagesShocked); // animation timwe has to be updated -- to fast
+        this.damage(4);
+        this.playAnimation(this.ImagesShocked);
         electroShock.play();
         console.log('shocked', this.energy);
     }
 
+    /**
+     * 
+     * resets the sleep counter to 0
+     * 
+     */
     wakeUp() {
         this.sleepCounter = 0;
         snoringSound.pause();

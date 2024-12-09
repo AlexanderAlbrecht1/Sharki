@@ -1,5 +1,10 @@
 class JellyFish extends movableObject {
 
+    offsetLeft = 5;
+    offsetRight = 15;
+    offsetTop = 10;
+    offsetBottom = 20;
+
     ImagesSwimming = [
         './img/2.Enemy/2 Jelly fish/Regular damage/Lila 1.png',
         './img/2.Enemy/2 Jelly fish/Regular damage/Lila 2.png',
@@ -47,9 +52,14 @@ class JellyFish extends movableObject {
         setInterval(() => {
             if(this.isShocking) {
                 this.playAnimation(this.ImagesShocking);   
-            } else if (this.trapped) {
+            } 
+            else if (this.trapped) {
                 this.playAnimation(this.ImagesDead);
-            } else {
+            } 
+            //  if (this.trapped && this.isShocking) {
+            //     this.playAnimation(this.ImagesDead);
+            // }
+            else {
                 this.playAnimation(this.ImagesSwimming);
             }
         }, 300)

@@ -94,6 +94,7 @@ class World {
     JellyfishGetTrapped(object) {
         this.index = this.searchEnemy(object.id);
         this.level.enemies[this.index].trapped = true;
+        this.level.enemies[this.index].isShocking = false;
         this.level.enemies[this.index].speed_Y = 1;
         const enemyIndex = this.index;
         setTimeout(() => {
@@ -215,8 +216,8 @@ class World {
             this.flipImage(object);
         }
         object.draw(this.ctx);
-        object.drawFrame(this.ctx);
-        object.drawFrameoffset(this.ctx);
+        // object.drawFrame(this.ctx);
+        // object.drawFrameoffset(this.ctx);
         if (object.otherDirection) {
             this.flipImageBack(object);
         }
