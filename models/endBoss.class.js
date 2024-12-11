@@ -77,67 +77,45 @@ class Endboss extends movableObject {
         this.width = 400;
         this.height = 400;
 
-
         this.animate();
-
-        // this.applyGravity(0);
-
     }
 
     animate() {
         let i = 0;
         let d = 0;
         let a = 0;
-        // setInterval(() => {
-
-        //     if (i < 10) {
-        //         this.playAnimation(this.ImagesArise)
-        //     } else {
-        //         this.playAnimation(this.ImagesFloating)
-        //     }
-        //     i++;
-
-        //     if (world.character.x > 2000 && !this.hadFirstContact) {
-        //         i = 0;
-        //         this.hadFirstContact = true;
-        //     }
-        // }, 150);
-        
-       let endBossAnimation = setInterval(() => {
-            if(gameOn == true) {
-            if (world.character.x > 2000) {
-                // endbossSpanSound.play();
-                console.log('Sharkie' + world.character.x);
-                if (i < 10) {
-                    this.playAnimation(this.ImagesArise);
-                    endbossSpanSound.play();
-                    this.hadFirstContact = true;
-                } else {
-                    this.playAnimation(this.ImagesFloating)
-                }
-                i++;
-            } if (this.getHurt == true) {
-                bossHurtSound.play();
-                this.playAnimation(this.ImagesHurt);
-            }
-            if (this.energy == 0) {
-                if (d < 5) {
-                    this.playAnimation(this.ImagesDead)
-                    d++;
-                }
-                if (d == 4) {
-                    winningSound.play(),
-                    showWinningScreen();
-                    stopGame();
-                    backgroundSound.pause();
-
-                }
-            }
-        }
-        }, 200)
-    
-
         setInterval(() => {
+            if (gameOn) {
+                if (world.character.x > 2000) {
+                    // endbossSpanSound.play();
+                    console.log('Sharkie' + world.character.x);
+                    if (i < 10) {
+                        this.playAnimation(this.ImagesArise);
+                        endbossSpanSound.play();
+                        this.hadFirstContact = true;
+                    } else {
+                        this.playAnimation(this.ImagesFloating)
+                    }
+                    i++;
+                } if (this.getHurt == true) {
+                    bossHurtSound.play();
+                    this.playAnimation(this.ImagesHurt);
+                }
+                if (this.energy == 0) {
+                    if (d < 5) {
+                        this.playAnimation(this.ImagesDead)
+                        d++;
+                    }
+                    if (d == 4) {
+                        youWin();
+                    }
+                }
+            }
+        }, 200)
+
+
+        let endbossAttack = setInterval(() => {
+            if (gameOn && world.character.x > 2000) {
             if (this.hadFirstContact) {
                 endbossAttackSound.play();
                 this.x -= 100;
@@ -146,7 +124,7 @@ class Endboss extends movableObject {
                     this.x += 100
                 }, 750)
             }
-
+        }
         }, 3000)
 
 

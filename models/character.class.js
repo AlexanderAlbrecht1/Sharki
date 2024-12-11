@@ -174,12 +174,15 @@ class Character extends movableObject {
      * 
      */
     count() {
-        setInterval(() => {
-            if (this.energy > 0) {
-                this.sleepCounter++;
-            }
-        }, 1000)
+        if (gameOn) {
+            setInterval(() => {
+                if (this.energy > 0) {
+                    this.sleepCounter++;
+                }
+            }, 1000)
+        }
     }
+
 
     /**
      * 
@@ -296,8 +299,6 @@ class Character extends movableObject {
         snoringSound.play();
         if (i < 14) {
             this.playAnimation(this.ImagesFallAsSleep);
-            console.log(i);
-            
         } else {
             this.playAnimation(this.ImagesSleeping);
         }

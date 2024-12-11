@@ -34,7 +34,7 @@ class World {
     checkCollisions() {
 
         setInterval(() => {
-            if (this.gameActive == true) {
+            if (gameOn == true) {
                 let boss = world.level.enemies.findLast((enemy) => enemy instanceof Endboss);
                 boss.getHurt = false;
                 world.character.poisoned = false;
@@ -182,17 +182,17 @@ class World {
     gameOver() {
         const GameOver = setInterval(() => {
             if (this.character.isDead()) {
-                this.gameActive = false;
+                clearAllIntervals();
+                gameOn = false;
+                world = undefined;
                 this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
                 document.getElementById('game-over-screen').classList.remove('d-none');
                 if (isMobileDevice()) {
                     document.getElementById('mobile-buttons').classList.add('d-none');
                 };
-                // document.getElementById('screen').innerHTML = gameOverHTML();
                 backgroundSound.pause();
                 clearInterval(GameOver);
                 clearInterval(this.checkCollisions)
-                // clearInterval(this.level.enemies[21].endBossAnimation)
                 this.gameOver.volume = 0.5;
                 gameOverSound.play();
             }

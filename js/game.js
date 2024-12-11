@@ -24,7 +24,9 @@ let gameSounds = [
 ]
 
 async function startGame() {
-    gameOn = true;    canvas = document.getElementById('canvas');
+    gameOn = true;
+    buildLevel();
+    canvas = document.getElementById('canvas');
     world = new World(canvas, keyboard);
     document.getElementById('start-screen').classList.add('d-none');
     backgroundSound.play();
@@ -34,34 +36,58 @@ async function startGame() {
     }
 }
 
-function restartGame() {
-    // resetWorld();
+async function restartGame() {
+    gameOn = true;
+    buildLevel();
     canvas = document.getElementById('canvas');
     world = new World(canvas, keyboard);
-    resetWorld();
+    // resetLevel();
     document.getElementById('game-over-screen').classList.add('d-none');
     backgroundSound.play();
 }
 
-function resetWorld() {
+function youWin() {
+    clearAllIntervals();
+    gameOn = false;
+    backgroundSound.pause();
+    endbossAttackSound.pause();
+
+    // clearInterval(world.checkCollisions());
+    clearInterval(world.level.enemies[17].endbossAttack);
+
+    winningSound.play();
+    showWinningScreen();
+}
+
+function resetLevel() {
+    start = 350;
     world.level.enemies.forEach(enemy => {
+        start = +start + 250;
         if (enemy instanceof pufferFish) {
-            enemy.dead = false;
-            enemy.getHit = false;
-            enemy.speed_Y = 0;
-            enemy.speed = 0.1 + Math.random() * 0.1;
-        }
-        if (enemy instanceof JellyFish) {
-            enemy.dead = false;
-            enemy.trapped = false;
-            enemy.isShocking = false;
-            enemy.speed_Y = 0.09 + Math.random() * 0.2;
+            resetPufferfish(enemy);
+        } if (enemy instanceof JellyFish) {
+            resetJellyFish(enemy);
         }
     });
     world.level.collectableObjects.forEach(item => {
         item.dead = false;
     });
 
+}
+
+function resetPufferfish(enemy) {
+    enemy.dead = false;
+    enemy.getHit = false;
+    enemy.speed_Y = 0;
+    enemy.speed = 0.1 + Math.random() * 0.1;
+    enemy.x = start;
+}
+
+function resetJellyFish(enemy) {
+    enemy.dead = false;
+    enemy.trapped = false;
+    enemy.isShocking = false;
+    enemy.speed_Y = 0.09 + Math.random() * 0.2;
 }
 
 document.addEventListener("keydown", (event) => {
@@ -114,60 +140,60 @@ document.addEventListener("keyup", (event) => {
 })
 
 function mobilePlay() {
-    document.getElementById('up-arrow').addEventListener('touchstart',(event) => {
+    document.getElementById('up-arrow').addEventListener('touchstart', (event) => {
         event.preventDefault();
         keyboard.UP = true;
     })
-    document.getElementById('up-arrow').addEventListener('touchend',(event) => {
+    document.getElementById('up-arrow').addEventListener('touchend', (event) => {
         event.preventDefault();
         keyboard.UP = false;
     })
-    document.getElementById('down-arrow').addEventListener('touchstart',(event) => {
+    document.getElementById('down-arrow').addEventListener('touchstart', (event) => {
         event.preventDefault();
         keyboard.DOWN = true;
     })
-    document.getElementById('down-arrow').addEventListener('touchend',(event) => {
+    document.getElementById('down-arrow').addEventListener('touchend', (event) => {
         event.preventDefault();
         keyboard.DOWN = false;
     })
-    document.getElementById('left-arrow').addEventListener('touchstart',(event) => {
+    document.getElementById('left-arrow').addEventListener('touchstart', (event) => {
         event.preventDefault();
         keyboard.LEFT = true;
     })
-    document.getElementById('left-arrow').addEventListener('touchend',(event) => {
+    document.getElementById('left-arrow').addEventListener('touchend', (event) => {
         event.preventDefault();
         keyboard.LEFT = false;
     })
-    document.getElementById('right-arrow').addEventListener('touchstart',(event) => {
+    document.getElementById('right-arrow').addEventListener('touchstart', (event) => {
         event.preventDefault();
         keyboard.RIGHT = true;
     })
-    document.getElementById('right-arrow').addEventListener('touchend',(event) => {
+    document.getElementById('right-arrow').addEventListener('touchend', (event) => {
         event.preventDefault();
         keyboard.RIGHT = false;
     })
 
-    document.getElementById('Q').addEventListener('touchstart',(event) => {
+    document.getElementById('Q').addEventListener('touchstart', (event) => {
         event.preventDefault();
         keyboard.Q = true;
     })
-    document.getElementById('Q').addEventListener('touchend',(event) => {
+    document.getElementById('Q').addEventListener('touchend', (event) => {
         event.preventDefault();
         keyboard.Q = false;
     })
-    document.getElementById('E').addEventListener('touchstart',(event) => {
+    document.getElementById('E').addEventListener('touchstart', (event) => {
         event.preventDefault();
         keyboard.E = true;
     })
-    document.getElementById('E').addEventListener('touchend',(event) => {
+    document.getElementById('E').addEventListener('touchend', (event) => {
         event.preventDefault();
         keyboard.E = false;
     })
-    document.getElementById('space-bar').addEventListener('touchstart',(event) => {
+    document.getElementById('space-bar').addEventListener('touchstart', (event) => {
         event.preventDefault();
         keyboard.SPACE = true;
     })
-    document.getElementById('space-bar').addEventListener('touchend',(event) => {
+    document.getElementById('space-bar').addEventListener('touchend', (event) => {
         event.preventDefault();
         keyboard.SPACE = false;
     })
