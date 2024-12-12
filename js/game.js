@@ -25,7 +25,8 @@ let gameSounds = [
 
 async function startGame() {
     gameOn = true;
-    buildLevel();
+    await buildLevel();
+    // await buildWorld();
     canvas = document.getElementById('canvas');
     world = new World(canvas, keyboard);
     document.getElementById('start-screen').classList.add('d-none');
@@ -34,6 +35,11 @@ async function startGame() {
         document.getElementById('mobile-buttons').classList.remove('d-none');
         mobilePlay();
     }
+}
+
+async function buildWorld() {
+    canvas = document.getElementById('canvas');
+    world = new World(canvas, keyboard);
 }
 
 async function restartGame() {
