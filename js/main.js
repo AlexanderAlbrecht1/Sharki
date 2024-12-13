@@ -19,17 +19,12 @@ function isMobileDevice() {
 window.addEventListener("resize", checkLandscapeMode);
 
 async function init() {
-    checkLandscapeMode();
-        // mobilePlay();
-        // document.getElementById('start-screen').style.display = 'flex';
-        // canvas = document.getElementById('canvas');
-        // world = new World(canvas, keyboard);    
+    checkLandscapeMode();   
 }
 
 function howToPlay() {
     document.getElementById('start-screen').classList.add('d-none');
     document.getElementById('how-to-play-screen').classList.remove('d-none');
-
 }
 
 function goBack() {
@@ -43,7 +38,6 @@ function goBack2() {
 }
 
 function goToHomeScreen() {
-    // resetWorld();
     document.getElementById('winning-screen').classList.add('d-none');
     document.getElementById('start-screen').classList.remove('d-none');
 }
@@ -53,7 +47,6 @@ function showWinningScreen() {
     if (isMobileDevice()) {
         document.getElementById('mobile-buttons').classList.add('d-none');
     }
-
 }
 
 function toggleSound() {
@@ -71,38 +64,13 @@ function toggleMuteSound() {
         gameSounds.forEach(sound => {
             sound.muted = true;
         });
-
-        // backgroundSound.muted = true;
-        // world.character.swimmingSound.muted = true;
-        // world.character.swimmingSound2.muted = true;
-        // world.character.electroShock.muted = true;
-        // world.character.poisonCough.muted = true;
-        // world.level.collectableObjects.forEach(item => {
-        //     item.pickUpSound.muted = true;
-        // });
     } else {
         document.getElementById('muteWrapper').style.backgroundImage = "url(./img/volume-high-solid.svg)";
         mute = false
         gameSounds.forEach(sound => {
             sound.muted = false;
         });
-        // backgroundSound.muted = false;
-        // world.character.swimmingSound.muted = false;
-        // world.character.swimmingSound2.muted = false;
-        // world.character.electroShock.muted = false;
-        // world.character.poisonCough.muted = false;
-        // world.level.collectableObjects.forEach(item => {
-        //     item.pickUpSound.muted = false;
-        // });
     }
-
-    // function isMobileDevice() {
-    //     return /Mobi|Android|iPhone|iPad|iPod|BlackBerry|Windows Phone/i.test(navigator.userAgent);
-    // }
-
-    // if (isMobileDevice() && world.gameActive == true) {
-    //     document.getElementById('mobile-buttons').classList.remove('d-none');
-    // }
 
 
 

@@ -55,12 +55,6 @@ class World {
                     } else if (this.character.isColliding(enemy) && world.keyboard.SPACE) {
                         if (enemy instanceof pufferFish && enemy.getHit == false) {
                             this.killPufferfish(enemy);
-                            // } else if (enemy instanceof JellyFish) {
-                            //     this.getShocked(enemy);
-                            // } else if (enemy instanceof Endboss) {
-                            //     this.character.damage(7);
-                            //     console.log(enemy, this.character.energy);
-                            //     world.statusBar.setPercentage(this.character.energy);
                         }
                     } if (this.bubbleTrap != null && this.bubbleTrap.isColliding(enemy) && enemy instanceof JellyFish) {
                         this.JellyfishGetTrapped(enemy);

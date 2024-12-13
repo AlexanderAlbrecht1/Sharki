@@ -118,7 +118,7 @@ class Endboss extends movableObject {
      * @param {number} id - The unique identifier for the Endboss instance.
      */
     constructor(id) {
-        super().loadImage('');
+        super();
         this.loadImages(this.ImagesFloating);
         this.loadImages(this.ImagesArise);
         this.loadImages(this.ImagesHurt);
@@ -173,7 +173,7 @@ class Endboss extends movableObject {
                 if (world.character.x > 2000) {
                     this.endbossAppears(i);
                     i++;
-                }
+                } 
                 if (this.getHurt) {
                     bossHurtSound.play();
                     this.playAnimation(this.ImagesHurt);
@@ -196,6 +196,8 @@ class Endboss extends movableObject {
             this.playAnimation(this.ImagesArise);
             endbossSpanSound.play();
             this.hadFirstContact = true;
+        } else {
+            this.playAnimation(this.ImagesFloating)
         }
     }
 
@@ -211,7 +213,7 @@ class Endboss extends movableObject {
                 this.playAnimation(this.ImagesAttack);
                 setTimeout(() => {
                     this.x += 100;
-                }, 750);
+                }, 1000);
             }
         }, 3000);
     }
