@@ -27,6 +27,7 @@ a {
     color: aliceblue;
 }
 
+#loading-screen,
 .start-screen,
 .how-to-play-screen,
 .game-over-screen,
@@ -320,6 +321,14 @@ canvas {
 .img-wrapper {
     width: 200px;
     text-align: center;
+}
+
+/* Loading Screen */
+
+#loading-screen {
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 /* Game Over Screen*/

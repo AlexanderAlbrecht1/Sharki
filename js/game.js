@@ -24,32 +24,37 @@ let gameSounds = [
 ]
 
 async function startGame() {
-    gameOn = true;
-    await buildLevel();
-    // await buildWorld();
-    canvas = document.getElementById('canvas');
-    world = new World(canvas, keyboard);
-    document.getElementById('start-screen').classList.add('d-none');
-    backgroundSound.play();
+    showLoadingScreen('start-screen');
+    await buildWorld();
+    setTimeout(hideLoadingScreen,5000);
     if (isMobileDevice() && world.gameActive == true) {
         document.getElementById('mobile-buttons').classList.remove('d-none');
         mobilePlay();
     }
 }
 
+function showLoadingScreen(screenID) {
+    document.getElementById(screenID).classList.add('d-none');
+    document.getElementById('loading-screen').classList.remove('d-none');
+}
+
+function hideLoadingScreen() {
+    gameOn = true;
+    document.getElementById('loading-screen').classList.add('d-none');
+}
+
 async function buildWorld() {
+    await buildLevel();
     canvas = document.getElementById('canvas');
     world = new World(canvas, keyboard);
+    backgroundSound.play();
 }
 
 async function restartGame() {
-    gameOn = true;
-    buildLevel();
-    canvas = document.getElementById('canvas');
-    world = new World(canvas, keyboard);
+    showLoadingScreen('game-over-screen');
+    await buildWorld();
+    setTimeout(hideLoadingScreen,3000);
     // resetLevel();
-    document.getElementById('game-over-screen').classList.add('d-none');
-    backgroundSound.play();
 }
 
 function youWin() {
