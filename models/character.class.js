@@ -1,25 +1,28 @@
-
+/**
+ * Represents the main character, inheriting from the MovableObject class.
+ * Handles animations, movements, attacks, and interactions in the game world.
+ */
 class Character extends movableObject {
+
     speed = 3;
     speedY = 1;
     imagePath;
-
     offsetLeft = 45;
     offsetRight = 90;
     offsetTop = 105;
     offsetBottom = 145;
-
     poisoned = false;
     shocked = false;
     endbossed = false;
-
     sleepCounter = 0;
-
     world;
 
+    /**
+     * Initializes the character, loading images and starting animations.
+     */
     constructor() {
         super().loadImage('img/1.Sharkie/1.IDLE/1.png');
-        this.imagePath= new ImagesCharacter();
+        this.imagePath = new ImagesCharacter();
         this.loadImages(this.imagePath.ImagesWatiting);
         this.loadImages(this.imagePath.ImagesSwimming);
         this.loadImages(this.imagePath.ImagesBubbleAttack);
@@ -40,7 +43,9 @@ class Character extends movableObject {
         this.wakeUp();
     }
 
-
+    /**
+     * Increments the sleep counter every second if the game is running and the character has energy.
+     */
     count() {
         if (gameOn) {
             setInterval(() => {
@@ -51,7 +56,9 @@ class Character extends movableObject {
         }
     }
 
-
+    /**
+    * Animates the character based on its state and inputs from the game world.
+    */
     animate() {
         let i = 0;
         setInterval(() => {
@@ -74,7 +81,9 @@ class Character extends movableObject {
         }, 200)
     }
 
-
+    /**
+     * Handles the character's attack actions based on keyboard inputs.
+     */
     attack() {
         setInterval(() => {
             if (this.world.keyboard.SPACE) {
@@ -87,11 +96,13 @@ class Character extends movableObject {
         }, 200);
     }
 
-
+    /**
+     * Handles the character's movement based on keyboard inputs.
+     */
     motionSharkie() {
         const motionShakrie = setInterval(() => {
             swimmingSound.pause();
-            if (this.world.keyboard.RIGHT && this.x < this.world.level.levelEndX) {
+            if (this.world.keyboard.RIGHT && this.x < (this.world.level.levelEndX -300 )) {
                 this.moveRight();
             } if (this.world.keyboard.LEFT && this.x > -300) {
                 this.moveLeft();
@@ -104,31 +115,45 @@ class Character extends movableObject {
     }
 
 
+    /**
+     * Plays the swimming animation and wakes the character up if sleeping.
+     */
     swimAnimation() {
         this.wakeUp();
         this.playAnimation(this.imagePath.ImagesSwimming);
     }
 
-
+    /**
+     * Plays the animation for being hurt by the end boss and triggers the corresponding sound effect.
+     */
     hurtByEndbossAnimation() {
         this.playAnimation(this.imagePath.ImagesEndbossed);
         hurtByEndboss.play();
     }
 
-
+    /**
+     * Plays the shocked animation and triggers the electric shock sound effect.
+     */
     shockAnimation() {
         this.playAnimation(this.imagePath.ImagesShocked);
         electroShock.play();
     }
 
-
+    /**
+     * Plays the poisoned animation and triggers the poison cough sound effect.
+     */
     poisonAnimation() {
         this.playAnimation(this.imagePath.ImagesPoisoned);
         poisonCough.volume = 0.3;
         poisonCough.play();
     }
 
-
+    /**
+     * Plays the sleeping animation. If the character is still falling asleep,
+     * it shows a transition animation; otherwise, it plays the fully asleep animation.
+     * 
+     * @param {number} i - The current step of the sleeping animation.
+     */
     sleeping(i) {
         snoringSound.play();
         if (i < 14) {
@@ -138,28 +163,54 @@ class Character extends movableObject {
         }
     }
 
+    /**
+     * Executes the poison bubble attack animation, creates a poison bubble object,
+     * and decreases the poison supply.
+     */
     poisonBubbleAttack() {
+        let poisonBubble;
         this.wakeUp();
         this.playAnimation(this.imagePath.ImagesPoisonBubbleAttack);
-        this.world.poisonBubble = new PoisonBubble((this.x + 140), (this.y + 100));
+        this.world.poisonBubbleCounter++;
+        poisonBubble = new PoisonBubble((this.x + 140),(this.y + 100),this.world.poisonBubbleCounter)
+        this.world.poisonBubble.push(poisonBubble);
         this.world.poison--;
     }
 
-
+    /**
+     * Executes the regular bubble attack animation and creates a bubble object.
+     */
     bubbleAttack() {
+        let bubble;
         this.wakeUp();
         bubbleSound.play();
         this.playAnimation(this.imagePath.ImagesBubbleAttack);
-        this.world.bubbleTrap = new Bubble((this.x + 140), (this.y + 100));
+        if (this.world.character.otherDirection) {
+            this.world.bubbleCounter++;
+            bubble = new Bubble((this.x), (this.y + 100),this.world.bubbleCounter);
+            bubble.otherDirection = this.world.character.otherDirection;
+            this.world.bubbleTrap.push(bubble);
+        } else {
+            this.world.bubbleCounter++;
+            bubble = new Bubble((this.x +140), (this.y + 100),this.world.bubbleCounter);
+            bubble.otherDirection = this.world.character.otherDirection;
+            this.world.bubbleTrap.push(bubble);
+        }
+        // this.world.bubbleTrap.otherDirection = this.worsld.character.otherDirection;
     }
 
-
+    /**
+     * Executes the slap attack animation.
+     */
     slapAttack() {
         this.wakeUp();
         this.playAnimation(this.imagePath.ImagesSlap);
     }
 
-
+    /**
+     * Moves the character to the right, updates the camera position,
+     * and plays the swimming sound.
+     */
     moveRight() {
         this.x += this.speed;
         this.otherDirection = false;
@@ -168,7 +219,10 @@ class Character extends movableObject {
         this.world.cameraX = -this.x + 100;
     }
 
-
+    /**
+     * Moves the character to the left, updates the camera position,
+     * and plays an alternative swimming sound.
+     */
     moveLeft() {
         this.x -= this.speed;
         this.otherDirection = true;
@@ -177,34 +231,46 @@ class Character extends movableObject {
         this.world.cameraX = -this.x + 100;
     }
 
-
+    /**
+     * Moves the character upwards.
+     */
     moveUp() {
         this.y -= this.speed;
     }
 
+    /**
+     * Moves the character downwards.
+     */
     moveDown() {
         this.y += this.speed;
     }
 
-
+    /**
+     * Reduces the character's energy due to poisoning, plays the poisoned animation,
+     * and triggers the poison cough sound effect.
+     */
     isPoisoned() {
         this.damage(6);
         this.playAnimation(this.imagePath.ImagesPoisoned);
         poisonCough.play();
-        console.log('poisoned', this.energy);
     }
 
-
+    /**
+     * Reduces the character's energy due to an electric shock, plays the shocked animation,
+     * and triggers the electric shock sound effect.
+     */
     isShocked() {
         this.damage(4);
         this.playAnimation(this.imagePath.ImagesShocked);
         electroShock.play();
-        console.log('shocked', this.energy);
     }
 
-
+    /**
+     * Resets the sleep counter and pauses the snoring sound, effectively waking up the character.
+     */
     wakeUp() {
         this.sleepCounter = 0;
         snoringSound.pause();
     }
+
 }

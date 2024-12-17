@@ -9,15 +9,16 @@ class Bubble extends movableObject {
      * @param {number} x 
      * @param {number} y 
      */
-    constructor(x, y) {
+    constructor(x, y, id) {
         super().loadImage('./img/1.Sharkie/4.Attack/Bubble trap/Bubble.png');
         this.x = x;
         this.y = y;
+        this.id = id;
         this.speed = 2;  
         this.width = 40; 
         this.height = 40; 
         
-        this.moveRight();
+        this.move();
     }
 
     /**
@@ -25,23 +26,17 @@ class Bubble extends movableObject {
      * Called every frame using setInterval.
      * @private
      */
-    moveRight() {
+    move() {
         setInterval(() => {
-            this.x += this.speed; 
-        }, 1000 / 60); 
-    }
-
-    /**
-     * Animates the Bubble object based on keyboard input.
-     * When the 'Q' key is pressed, a new Bubble object is created at a fixed position.
-     * @private
-     */
-    animate() {
-        setInterval(() => {
-            if (this.world.keyboard.Q) {
-                new Bubble(200, 200); 
-                this.x += this.speed; 
-            }
+            if(world.bubbleTrap) {
+                world.bubbleTrap.forEach(bubble => {
+                    if (bubble.otherDirection) {
+                        bubble.x -= bubble.speed; 
+                    } else {
+                        bubble.x += bubble.speed;
+                    }
+                });
+            } 
         }, 1000 / 60); 
     }
 }

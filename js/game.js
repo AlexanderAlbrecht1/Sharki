@@ -1,9 +1,25 @@
+/**
+ * Reference to the canvas element used for rendering the game.
+ * @type {HTMLCanvasElement}
+ */
 let canvas;
+
+/**
+ * Instance of the World class, managing the game logic and state.
+ * @type {World}
+ */
 let world;
+
+/**
+ * Instance of the Keyboard class to handle user input.
+ * @type {Keyboard}
+ */
 let keyboard = new Keyboard();
 
-
-
+/**
+ * Array containing audio objects for game sounds.
+ * @type {Audio[]}
+ */
 let gameSounds = [
     backgroundSound = new Audio('./audio/background2.mp3'),
     swimmingSound = new Audio('./audio/swimming2.mp3'),
@@ -23,26 +39,41 @@ let gameSounds = [
     hurtByEndboss = new Audio('./audio/hurt-by-endboss.mp3')
 ]
 
+/**
+ * Starts the game by showing the loading screen, building the game world, and initializing the mobile buttons.
+ * @async
+ */
 async function startGame() {
     showLoadingScreen('start-screen');
     await buildWorld();
     setTimeout(hideLoadingScreen,5000);
-    if (isMobileDevice() && world.gameActive == true) {
+    if (isMobileDevice() || isTouchDevice() && world.gameActive == true) {
         document.getElementById('mobile-buttons').classList.remove('d-none');
         mobilePlay();
     }
 }
 
+/**
+ * Displays the loading screen and hides the specified screen.
+ * @param {string} screenID - The ID of the screen to hide.
+ */
 function showLoadingScreen(screenID) {
     document.getElementById(screenID).classList.add('d-none');
     document.getElementById('loading-screen').classList.remove('d-none');
 }
 
+/**
+ * Hides the loading screen and sets the game to active.
+ */
 function hideLoadingScreen() {
     gameOn = true;
     document.getElementById('loading-screen').classList.add('d-none');
 }
 
+/**
+ * Builds the game world by setting up the level and initializing the World object.
+ * @async
+ */
 async function buildWorld() {
     await buildLevel();
     canvas = document.getElementById('canvas');
@@ -50,26 +81,32 @@ async function buildWorld() {
     backgroundSound.play();
 }
 
+/**
+ * Restarts the game by resetting the world and showing the loading screen.
+ * @async
+ */
 async function restartGame() {
     showLoadingScreen('game-over-screen');
     await buildWorld();
     setTimeout(hideLoadingScreen,3000);
-    // resetLevel();
 }
 
+/**
+ * Handles the actions when the player wins the game, including stopping sounds and showing the winning screen.
+ */
 function youWin() {
     clearAllIntervals();
     gameOn = false;
     backgroundSound.pause();
     endbossAttackSound.pause();
-
-    // clearInterval(world.checkCollisions());
     clearInterval(world.level.enemies[17].endbossAttack);
-
     winningSound.play();
     showWinningScreen();
 }
 
+/**
+ * Resets the level by repositioning enemies and resetting collectable objects.
+ */
 function resetLevel() {
     start = 350;
     world.level.enemies.forEach(enemy => {
@@ -86,6 +123,10 @@ function resetLevel() {
 
 }
 
+/**
+ * Resets the state of a pufferfish enemy.
+ * @param {pufferFish} enemy - The pufferfish enemy to reset.
+ */
 function resetPufferfish(enemy) {
     enemy.dead = false;
     enemy.getHit = false;
@@ -94,6 +135,10 @@ function resetPufferfish(enemy) {
     enemy.x = start;
 }
 
+/**
+ * Resets the state of a jellyfish enemy.
+ * @param {JellyFish} enemy - The jellyfish enemy to reset.
+ */
 function resetJellyFish(enemy) {
     enemy.dead = false;
     enemy.trapped = false;
@@ -101,6 +146,7 @@ function resetJellyFish(enemy) {
     enemy.speed_Y = 0.09 + Math.random() * 0.2;
 }
 
+// Event listeners for keydown events to manage keyboard input.
 document.addEventListener("keydown", (event) => {
     if (event.keyCode == 39) {
         keyboard.RIGHT = true
@@ -123,9 +169,9 @@ document.addEventListener("keydown", (event) => {
     if (event.keyCode == 69) {
         keyboard.E = true;
     }
-    // console.log(event);
 })
 
+// Event listeners for keyup events to manage keyboard input.
 document.addEventListener("keyup", (event) => {
     if (event.keyCode == 39) {
         keyboard.RIGHT = false
@@ -150,62 +196,93 @@ document.addEventListener("keyup", (event) => {
     }
 })
 
+/**
+ * Sets up event listeners for touch controls on mobile devices.
+ */
 function mobilePlay() {
-    document.getElementById('up-arrow').addEventListener('touchstart', (event) => {
-        event.preventDefault();
-        keyboard.UP = true;
-    })
-    document.getElementById('up-arrow').addEventListener('touchend', (event) => {
-        event.preventDefault();
-        keyboard.UP = false;
-    })
-    document.getElementById('down-arrow').addEventListener('touchstart', (event) => {
-        event.preventDefault();
-        keyboard.DOWN = true;
-    })
-    document.getElementById('down-arrow').addEventListener('touchend', (event) => {
-        event.preventDefault();
-        keyboard.DOWN = false;
-    })
-    document.getElementById('left-arrow').addEventListener('touchstart', (event) => {
-        event.preventDefault();
-        keyboard.LEFT = true;
-    })
-    document.getElementById('left-arrow').addEventListener('touchend', (event) => {
-        event.preventDefault();
-        keyboard.LEFT = false;
-    })
-    document.getElementById('right-arrow').addEventListener('touchstart', (event) => {
-        event.preventDefault();
-        keyboard.RIGHT = true;
-    })
-    document.getElementById('right-arrow').addEventListener('touchend', (event) => {
-        event.preventDefault();
-        keyboard.RIGHT = false;
-    })
+    const controls = [
+        { id: 'up-arrow', key: 'UP' },
+        { id: 'down-arrow', key: 'DOWN' },
+        { id: 'left-arrow', key: 'LEFT' },
+        { id: 'right-arrow', key: 'RIGHT' },
+        { id: 'Q', key: 'Q' },
+        { id: 'E', key: 'E' },
+        { id: 'space-bar', key: 'SPACE' }
+    ];
 
-    document.getElementById('Q').addEventListener('touchstart', (event) => {
-        event.preventDefault();
-        keyboard.Q = true;
-    })
-    document.getElementById('Q').addEventListener('touchend', (event) => {
-        event.preventDefault();
-        keyboard.Q = false;
-    })
-    document.getElementById('E').addEventListener('touchstart', (event) => {
-        event.preventDefault();
-        keyboard.E = true;
-    })
-    document.getElementById('E').addEventListener('touchend', (event) => {
-        event.preventDefault();
-        keyboard.E = false;
-    })
-    document.getElementById('space-bar').addEventListener('touchstart', (event) => {
-        event.preventDefault();
-        keyboard.SPACE = true;
-    })
-    document.getElementById('space-bar').addEventListener('touchend', (event) => {
-        event.preventDefault();
-        keyboard.SPACE = false;
-    })
+    controls.forEach(control => {
+        const element = document.getElementById(control.id);
+
+        if (element) {
+            element.addEventListener('touchstart', (event) => {
+                event.preventDefault();
+                keyboard[control.key] = true;
+            });
+
+            element.addEventListener('touchend', (event) => {
+                event.preventDefault();
+                keyboard[control.key] = false;
+            });
+        }
+    });
 }
+
+// function mobilePlay() {
+//     document.getElementById('up-arrow').addEventListener('touchstart', (event) => {
+//         event.preventDefault();
+//         keyboard.UP = true;
+//     })
+//     document.getElementById('up-arrow').addEventListener('touchend', (event) => {
+//         event.preventDefault();
+//         keyboard.UP = false;
+//     })
+//     document.getElementById('down-arrow').addEventListener('touchstart', (event) => {
+//         event.preventDefault();
+//         keyboard.DOWN = true;
+//     })
+//     document.getElementById('down-arrow').addEventListener('touchend', (event) => {
+//         event.preventDefault();
+//         keyboard.DOWN = false;
+//     })
+//     document.getElementById('left-arrow').addEventListener('touchstart', (event) => {
+//         event.preventDefault();
+//         keyboard.LEFT = true;
+//     })
+//     document.getElementById('left-arrow').addEventListener('touchend', (event) => {
+//         event.preventDefault();
+//         keyboard.LEFT = false;
+//     })
+//     document.getElementById('right-arrow').addEventListener('touchstart', (event) => {
+//         event.preventDefault();
+//         keyboard.RIGHT = true;
+//     })
+//     document.getElementById('right-arrow').addEventListener('touchend', (event) => {
+//         event.preventDefault();
+//         keyboard.RIGHT = false;
+//     })
+
+//     document.getElementById('Q').addEventListener('touchstart', (event) => {
+//         event.preventDefault();
+//         keyboard.Q = true;
+//     })
+//     document.getElementById('Q').addEventListener('touchend', (event) => {
+//         event.preventDefault();
+//         keyboard.Q = false;
+//     })
+//     document.getElementById('E').addEventListener('touchstart', (event) => {
+//         event.preventDefault();
+//         keyboard.E = true;
+//     })
+//     document.getElementById('E').addEventListener('touchend', (event) => {
+//         event.preventDefault();
+//         keyboard.E = false;
+//     })
+//     document.getElementById('space-bar').addEventListener('touchstart', (event) => {
+//         event.preventDefault();
+//         keyboard.SPACE = true;
+//     })
+//     document.getElementById('space-bar').addEventListener('touchend', (event) => {
+//         event.preventDefault();
+//         keyboard.SPACE = false;
+//     })
+// }

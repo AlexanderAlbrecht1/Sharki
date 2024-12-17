@@ -1,7 +1,23 @@
-
+/**
+ * Global variable representing the level instance.
+ * @type {Level}
+ */
 let level1;
 
+
+/**
+ * Asynchronously builds a game level by initializing enemies, background objects,
+ * and collectibles (coins and poison items) for the level.
+ * 
+ * @async
+ * @function buildLevel
+ * @returns {Promise<void>} Resolves when the level is fully constructed.
+ */
 async function buildLevel() {
+    /**
+    * List of enemy objects in the level.
+    * @type {(PufferFish|JellyFish|Endboss)[]}
+    */
     level1 = new Level(
         enemies = [
             new pufferFish(350, 0),
@@ -23,7 +39,10 @@ async function buildLevel() {
             new JellyFish(2100, 350, 16),
             new Endboss(161),
         ],
-
+    /**
+     * List of background objects for the level.
+     * @type {BackgroundObjects[]}
+     */
         [
             new BackgroundObjects('img/3. Background/Layers/5. Water/D2.png', -720),
             new BackgroundObjects('img/3. Background/Layers/3.Fondo 1/D2.png', -720),
@@ -61,6 +80,10 @@ async function buildLevel() {
             new BackgroundObjects('img/3. Background/Layers/2. Floor/D1.png', 2880),
             new BackgroundObjects('img/3. Background/Layers/1. Light/2.png', 2880),
         ],
+    /**
+    * List of collectible items (coins and poison) in the level.
+    * @type {(Coin|Poison)[]}
+    */
         [
             new Coin(300, 250, 0),
             new Coin(400, 300, 1),

@@ -10,22 +10,13 @@ class PoisonBubble extends movableObject {
      * @param {number} x - The initial x-coordinate of the bubble.
      * @param {number} y - The initial y-coordinate of the bubble.
      */
-    constructor(x, y) {
+    constructor(x, y, id) {
         super().loadImage('./img/1.Sharkie/4.Attack/Bubble trap/Poisoned Bubble (for whale).png');
-        
-        /** @type {number} The x-coordinate of the bubble. */
         this.x = x;
-
-        /** @type {number} The y-coordinate of the bubble. */
         this.y = y;
-
-        /** @type {number} The speed at which the bubble moves. */
+        this.id = id;
         this.speed = 2;
-
-        /** @type {number} The width of the bubble. */
         this.width = 50;
-
-        /** @type {number} The height of the bubble. */
         this.height = 50;
 
         this.moveRight();

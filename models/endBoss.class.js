@@ -155,6 +155,9 @@ class Endboss extends movableObject {
          */
         this.height = 400;
 
+        /** @type {boolean} Indicates if the puffer fish is dead. */
+        this.dead = true;
+
         this.animate();
         this.endbossAttack();
         this.endbossAppears();
@@ -170,18 +173,22 @@ class Endboss extends movableObject {
         let d = 0; // Counter for the "dead" animation frames
         setInterval(() => {
             if (gameOn) {
-                if (world.character.x > 2000) {
+                if (this.hadFirstContact) {
+                    this.playAnimation(this.ImagesFloating);
+                    if (this.getHurt) {
+                        bossHurtSound.play();
+                        this.playAnimation(this.ImagesHurt);
+                    }
+                    else if (this.energy === 0) {
+                        this.endbossDies(d);
+                        d++;
+                    }
+                }
+                else if (world.character.x > 2000 && !this.hadFirstContact) {
+                    this.dead = false;
                     this.endbossAppears(i);
                     i++;
                 } 
-                if (this.getHurt) {
-                    bossHurtSound.play();
-                    this.playAnimation(this.ImagesHurt);
-                }
-                if (this.energy === 0) {
-                    this.endbossDies(d);
-                    d++;
-                }
             }
         }, 200);
         this.endbossAttack();
