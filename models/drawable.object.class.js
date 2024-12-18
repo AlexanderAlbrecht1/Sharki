@@ -1,7 +1,4 @@
-/**
- * Represents a drawable object in the game. 
- * Provides methods to load images, cache them, and draw them onto a canvas.
- */
+
 class DrawableObject {
 
     x = 120;

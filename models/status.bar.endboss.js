@@ -1,8 +1,4 @@
-/**
- * Represents the status bar for the boss in the game.
- * The status bar dynamically updates its appearance based on the boss's current health percentage.
- * Inherits from the `DrawableObject` class.
- */
+
 class StatusBarBoss extends DrawableObject {
 
     ImagesEnergy = [
@@ -16,10 +12,6 @@ class StatusBarBoss extends DrawableObject {
 
     percentageBoss = 100;
 
-    /**
-     * Creates a new `StatusBarBoss` instance.
-     * Initializes the position, size, and default health percentage for the boss's status bar.
-     */
     constructor() {
         super();
         this.loadImages(this.ImagesEnergy);

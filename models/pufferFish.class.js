@@ -1,14 +1,6 @@
-/**
- * Represents a puffer fish enemy in the game.
- * The puffer fish can swim, animate, and respond to hits by transitioning to a "dead" state.
- * Inherits from the `movableObject` class.
- */
+
 class pufferFish extends movableObject {
 
-    /**
-     * Array of image paths for the swimming animation of the puffer fish.
-     * @type {string[]}
-     */
     ImagesSwimming = [
         './img/2.Enemy/1.Puffer fish (3 color options)/1.Swim/3.swim1.png',
         './img/2.Enemy/1.Puffer fish (3 color options)/1.Swim/3.swim2.png',
@@ -27,22 +19,12 @@ class pufferFish extends movableObject {
         './img/2.Enemy/1.Puffer fish (3 color options)/3.Bubbleeswim/2.bubbleswim5.png',
     ];
 
-    /**
-     * Array of image paths for the "dead" animation of the puffer fish.
-     * @type {string[]}
-     */
     ImagesDead = [
         './img/2.Enemy/1.Puffer fish (3 color options)/4.DIE/1.Dead 1 (can animate by going up).png',
         './img/2.Enemy/1.Puffer fish (3 color options)/4.DIE/1.Dead 2 (can animate by going down to the floor after the Fin Slap attack).png',
         './img/2.Enemy/1.Puffer fish (3 color options)/4.DIE/1.Dead 3 (can animate by going down to the floor after the Fin Slap attack).png',
     ];
 
-    /**
-     * Creates a new pufferFish instance.
-     * 
-     * @param {number} x - The initial x-coordinate of the puffer fish.
-     * @param {number|string} id - The unique identifier for the puffer fish.
-     */
     constructor(x, id) {
         super().loadImage('img/2.Enemy/1.Puffer fish (3 color options)/1.Swim/3.swim1.png');
         this.loadImages(this.ImagesSwimming);

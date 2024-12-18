@@ -22,11 +22,6 @@ class World {
     index = 0;
     gameActive = false;
 
-    /**
-     * Creates an instance of the game world.
-     * @param {HTMLCanvasElement} canvas - The canvas element for rendering the game.
-     * @param {Keyboard} keyboard - The keyboard instance for input handling.
-     */
     constructor(canvas, keyboard) {
         this.ctx = canvas.getContext('2d');
         this.canvas = canvas;
@@ -64,6 +59,11 @@ class World {
         }, 200);
     }
 
+    /**
+     * 
+     * checks if the poison bubble hits an enemy and if this enemy is the end boss, deals damage to the end boss and makes the bubble disappear
+     * @param {Enemy} enemy - The enemy hit by the bubble.
+     */
     checkPosionBubbleHit(enemy) {
         world.poisonBubble.forEach(bubble => {
             if(bubble.isColliding(enemy)) {
@@ -76,6 +76,11 @@ class World {
          });
     }
 
+    /**
+     * 
+     * checks if the bubble hits an enemy and if this enemy is a jelly fish, trap and disappear the trapped jellyfish
+     * @param {Enemy} enemy - The enemy hit by the bubble.
+     */
     checkEnemyBubbleHit(enemy) {
         world.bubbleTrap.forEach(bubble => {
            if(bubble.isColliding(enemy)) {
@@ -260,6 +265,11 @@ class World {
         return null;
     }
 
+    /**
+    * Searches for a bubble in the bubble array by its ID.
+    * @param {number} id - The ID of the buuble to find.
+    * @returns {number | null} The index of the buuble if found, otherwise null.
+    */
     searchBubble(id) {
         for (let index = 0; index < world.bubbleTrap.length; index++) {
             if (world.bubbleTrap[index].id === id);
@@ -267,6 +277,11 @@ class World {
         }
     }
 
+   /**
+    * Searches for a poison bubble in the poison bubble array by its ID.
+    * @param {number} id - The ID of the poison bubble to find.
+    * @returns {number | null} The index of the poison bubble if found, otherwise null.
+    */
     searchPoisonBubble(id) {
         for (let index = 0; index < world.poisonBubble.length; index++) {
             if (world.poisonBubble[index].id === id);
@@ -280,6 +295,7 @@ class World {
     gameOver() {
         const GameOver = setInterval(() => {
             if (this.character.isDead()) {
+                playerDied = true;
                 gameOn = false;
                 world = undefined;
                 clearAllIntervals();

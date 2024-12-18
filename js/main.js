@@ -7,15 +7,24 @@ let gameOn = false;
  * of the start screen and mobile buttons accordingly.
  */
 function checkLandscapeMode() {
+    if (window.matchMedia("(orientation: landscape)").matches && playerDied) {
+        document.getElementById('game-over-screen').classList.remove('d-none');
+        document.getElementById('rotateAdvice').classList.add('d-none');
+    }
+    if (window.matchMedia("(orientation: landscape)").matches && playerWon) {
+        document.getElementById('winning-screen').classList.remove('d-none');
+        document.getElementById('rotateAdvice').classList.add('d-none');
+    }
     if (window.matchMedia("(orientation: landscape)").matches) {
         document.getElementById('start-screen').classList.remove('d-none');
         document.getElementById('rotateAdvice').classList.add('d-none');
-    } else {
+    } 
+    else {
         document.getElementById('rotateAdvice').classList.remove('d-none');
         document.getElementById('start-screen').classList.add('d-none');
         document.getElementById('game-over-screen').classList.add('d-none');
-        document.getElementById('mobile-buttons').classList.add('d-none');
-        
+        document.getElementById('winning-screen').classList.add('d-none');
+        document.getElementById('mobile-buttons').classList.add('d-none'); 
         if (isMobileDevice() && gameOn == true) {
             document.getElementById('mobile-buttons').classList.remove('d-none');
         }
@@ -36,7 +45,6 @@ function isTouchDevice() {
        (navigator.msMaxTouchPoints > 0));
   }
 
-// Attach a listener to handle window resize events.
 window.addEventListener("resize", checkLandscapeMode);
 
 /**

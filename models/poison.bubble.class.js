@@ -1,15 +1,6 @@
-/**
- * Represents a poisonous bubble that can move across the screen.
- * Inherits from the `movableObject` class.
- */
+
 class PoisonBubble extends movableObject {
 
-    /**
-     * Creates a new PoisonBubble instance.
-     * 
-     * @param {number} x - The initial x-coordinate of the bubble.
-     * @param {number} y - The initial y-coordinate of the bubble.
-     */
     constructor(x, y, id) {
         super().loadImage('./img/1.Sharkie/4.Attack/Bubble trap/Poisoned Bubble (for whale).png');
         this.x = x;

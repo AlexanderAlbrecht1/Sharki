@@ -1,12 +1,6 @@
-/**
- * Represents a jellyfish enemy in the game.
- * The jellyfish can swim, shock, and appear dead depending on the game state.
- * Inherits from the `movableObject` class.
- */
+
 class JellyFish extends movableObject {
-    /**
-     * @type {number} Offset from the left for collision detection.
-     */
+
     offsetLeft = 5;
     offsetRight = 15;
     offsetTop = 10;
@@ -33,13 +27,6 @@ class JellyFish extends movableObject {
         './img/2.Enemy/2 Jelly fish/Dead/Lila/L4.png',
     ];
 
-    /**
-     * Creates a new JellyFish instance.
-     * 
-     * @param {number} x - The initial x-coordinate of the jellyfish.
-     * @param {number} y - The initial y-coordinate of the jellyfish.
-     * @param {number|string} id - The unique identifier for the jellyfish.
-     */
     constructor(x, y, id) {
         super().loadImage('img/2.Enemy/2 Jelly fish/Regular damage/Lila 1.png');
         this.loadImages(this.ImagesSwimming);

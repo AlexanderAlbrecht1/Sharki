@@ -20,15 +20,19 @@ let gameSounds = [
     slapSound = new Audio('./audio/slap.mp3'),
     hurtByEndboss = new Audio('./audio/hurt-by-endboss.mp3')
 ]
+let playerDied = false;
+let playerWon = false;
 
 /**
  * Starts the game by showing the loading screen, building the game world, and initializing the mobile buttons.
  * @async
  */
 async function startGame() {
+    playerDied = false;
+    playerWon = false;
     showLoadingScreen('start-screen');
     await buildWorld();
-    setTimeout(hideLoadingScreen,5000);
+    setTimeout(hideLoadingScreen, 5000);
     if (isMobileDevice() || isTouchDevice() && world.gameActive == true) {
         document.getElementById('mobile-buttons').classList.remove('d-none');
         mobilePlay();
@@ -68,15 +72,18 @@ async function buildWorld() {
  * @async
  */
 async function restartGame() {
+    playerDied = false;
+    playerWon = false
     showLoadingScreen('game-over-screen');
     await buildWorld();
-    setTimeout(hideLoadingScreen,3000);
+    setTimeout(hideLoadingScreen, 3000);
 }
 
 /**
  * Handles the actions when the player wins the game, including stopping sounds and showing the winning screen.
  */
 function youWin() {
+    playerWon = true;
     clearAllIntervals();
     gameOn = false;
     backgroundSound.pause();
@@ -128,7 +135,6 @@ function resetJellyFish(enemy) {
     enemy.speed_Y = 0.09 + Math.random() * 0.2;
 }
 
-// Event listeners for keydown events to manage keyboard input.
 document.addEventListener("keydown", (event) => {
     if (event.keyCode == 39) {
         keyboard.RIGHT = true
@@ -153,7 +159,6 @@ document.addEventListener("keydown", (event) => {
     }
 })
 
-// Event listeners for keyup events to manage keyboard input.
 document.addEventListener("keyup", (event) => {
     if (event.keyCode == 39) {
         keyboard.RIGHT = false
@@ -191,16 +196,13 @@ function mobilePlay() {
         { id: 'E', key: 'E' },
         { id: 'space-bar', key: 'SPACE' }
     ];
-
     controls.forEach(control => {
         const element = document.getElementById(control.id);
-
         if (element) {
             element.addEventListener('touchstart', (event) => {
                 event.preventDefault();
                 keyboard[control.key] = true;
             });
-
             element.addEventListener('touchend', (event) => {
                 event.preventDefault();
                 keyboard[control.key] = false;

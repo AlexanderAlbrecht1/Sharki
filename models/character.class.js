@@ -1,7 +1,4 @@
-/**
- * Represents the main character, inheriting from the MovableObject class.
- * Handles animations, movements, attacks, and interactions in the game world.
- */
+
 class Character extends movableObject {
 
     speed = 3;
@@ -17,9 +14,6 @@ class Character extends movableObject {
     sleepCounter = 0;
     world;
 
-    /**
-     * Initializes the character, loading images and starting animations.
-     */
     constructor() {
         super().loadImage('img/1.Sharkie/1.IDLE/1.png');
         this.imagePath = new ImagesCharacter();
@@ -196,7 +190,6 @@ class Character extends movableObject {
             bubble.otherDirection = this.world.character.otherDirection;
             this.world.bubbleTrap.push(bubble);
         }
-        // this.world.bubbleTrap.otherDirection = this.worsld.character.otherDirection;
     }
 
     /**

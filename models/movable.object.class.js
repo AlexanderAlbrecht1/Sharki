@@ -1,7 +1,4 @@
-/**
- * Represents a movable object in the game, extending the drawable object with motion and interaction capabilities.
- * @extends DrawableObject
- */
+
 class movableObject extends DrawableObject {    
 
     speed = 0.3;

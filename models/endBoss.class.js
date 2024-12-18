@@ -1,7 +1,4 @@
-/**
- * Represents the Endboss character in the game, inheriting from `movableObject`.
- * This class handles animations, attack logic, and state management for the Endboss.
- */
+
 class Endboss extends movableObject {
 
     hadFirstContact = false;
@@ -47,10 +44,6 @@ class Endboss extends movableObject {
         './img/2.Enemy/3 Final Enemy/Hurt/4.png'
     ];
 
-    /**
-     * Image paths for the "dead" animation.
-     * @type {string[]}
-     */
     ImagesDead = [
         './img/2.Enemy/3 Final Enemy/Dead/Mesa de trabajo 2 copia 6.png',
         './img/2.Enemy/3 Final Enemy/Dead/Mesa de trabajo 2 copia 7.png',
@@ -59,10 +52,6 @@ class Endboss extends movableObject {
         './img/2.Enemy/3 Final Enemy/Dead/Mesa de trabajo 2 copia 10.png'
     ];
 
-    /**
-     * Image paths for the "attack" animation.
-     * @type {string[]}
-     */
     ImagesAttack = [
         './img/2.Enemy/3 Final Enemy/Attack/1.png',
         './img/2.Enemy/3 Final Enemy/Attack/2.png',
@@ -72,10 +61,6 @@ class Endboss extends movableObject {
         './img/2.Enemy/3 Final Enemy/Attack/6.png'
     ];
 
-    /**
-     * Creates an instance of Endboss.
-     * @param {number} id - The unique identifier for the Endboss instance.
-     */
     constructor(id) {
         super();
         this.loadImages(this.ImagesFloating);
@@ -83,40 +68,12 @@ class Endboss extends movableObject {
         this.loadImages(this.ImagesHurt);
         this.loadImages(this.ImagesDead);
         this.loadImages(this.ImagesAttack);
-
-        /**
-         * The unique identifier for this Endboss instance.
-         * @type {number}
-         */
         this.id = id;
-
-        /**
-         * The horizontal position of the Endboss.
-         * @type {number}
-         */
         this.x = 2400;
-
-        /**
-         * The vertical position of the Endboss.
-         * @type {number}
-         */
         this.y = -1;
-
-        /**
-         * The width of the Endboss.
-         * @type {number}
-         */
         this.width = 400;
-
-        /**
-         * The height of the Endboss.
-         * @type {number}
-         */
         this.height = 400;
-
-        /** @type {boolean} Indicates if the puffer fish is dead. */
         this.dead = true;
-
         this.animate();
         this.endbossAttack();
         this.endbossAppears();

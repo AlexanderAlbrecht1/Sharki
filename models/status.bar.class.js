@@ -1,8 +1,4 @@
-/**
- * Represents a status bar displaying energy or health in the game.
- * The status bar dynamically updates its appearance based on the current percentage.
- * Inherits from the `DrawableObject` class.
- */
+
 class StatusBar extends DrawableObject {
 
     ImagesEnergy = [
@@ -15,10 +11,6 @@ class StatusBar extends DrawableObject {
     ];
     percentage = 100;
 
-    /**
-     * Creates a new StatusBar instance.
-     * Initializes the position, size, and default percentage for the status bar.
-     */
     constructor() {
         super();
         this.loadImages(this.ImagesEnergy);
