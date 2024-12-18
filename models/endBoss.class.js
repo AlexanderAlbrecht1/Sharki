@@ -4,46 +4,13 @@
  */
 class Endboss extends movableObject {
 
-    /**
-     * Indicates whether the Endboss has had its first interaction with the player.
-     * @type {boolean}
-     */
     hadFirstContact = false;
-
-    /**
-     * Indicates whether the Endboss is in a "hurt" state.
-     * @type {boolean}
-     */
     getHurt = false;
-
-    /**
-     * The left offset of the Endboss for collision detection.
-     * @type {number}
-     */
     offsetLeft = 10;
-
-    /**
-     * The right offset of the Endboss for collision detection.
-     * @type {number}
-     */
     offsetRight = 0;
-
-    /**
-     * The top offset of the Endboss for collision detection.
-     * @type {number}
-     */
     offsetTop = 125;
-
-    /**
-     * The bottom offset of the Endboss for collision detection.
-     * @type {number}
-     */
     offsetBottom = 75;
 
-    /**
-     * Image paths for the "floating" animation.
-     * @type {string[]}
-     */
     ImagesFloating = [
         './img/2.Enemy/3 Final Enemy/2.floating/1.png',
         './img/2.Enemy/3 Final Enemy/2.floating/2.png',
@@ -60,10 +27,6 @@ class Endboss extends movableObject {
         './img/2.Enemy/3 Final Enemy/2.floating/13.png'
     ];
 
-    /**
-     * Image paths for the "arise" animation.
-     * @type {string[]}
-     */
     ImagesArise = [
         'img/2.Enemy/3 Final Enemy/1.Introduce/1.png',
         'img/2.Enemy/3 Final Enemy/1.Introduce/2.png',
@@ -77,10 +40,6 @@ class Endboss extends movableObject {
         'img/2.Enemy/3 Final Enemy/1.Introduce/10.png'
     ];
 
-    /**
-     * Image paths for the "hurt" animation.
-     * @type {string[]}
-     */
     ImagesHurt = [
         './img/2.Enemy/3 Final Enemy/Hurt/1.png',
         './img/2.Enemy/3 Final Enemy/Hurt/2.png',
@@ -169,8 +128,8 @@ class Endboss extends movableObject {
      * Manages the timing and conditions for attacks, getting hurt, and dying.
      */
     animate() {
-        let i = 0; // Counter for the "arise" animation frames
-        let d = 0; // Counter for the "dead" animation frames
+        let i = 0; 
+        let d = 0; 
         setInterval(() => {
             if (gameOn) {
                 if (this.hadFirstContact) {

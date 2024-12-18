@@ -29,7 +29,7 @@ class PoisonBubble extends movableObject {
     moveLeft() {
         setInterval(() => {
             this.x -= this.speed;
-        }, 1000 / 60); // 60 frames per second
+        }, 1000 / 60);
     }
 
     /**
@@ -39,6 +39,6 @@ class PoisonBubble extends movableObject {
     moveRight() {
         setInterval(() => {
             this.x += this.speed;
-        }, 1000 / 60); // 60 frames per second
+        }, 1000 / 60); 
     }
 }

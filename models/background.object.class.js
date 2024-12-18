@@ -4,16 +4,8 @@
  * Inherits from the `movableObject` class.
  */
 class BackgroundObjects extends movableObject {
-    /**
-     * The width of the background object.
-     * @type {number}
-     */
-    width = 720;
 
-    /**
-     * The height of the background object.
-     * @type {number}
-     */
+    width = 720;
     height = 480;
 
     /**

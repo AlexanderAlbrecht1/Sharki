@@ -48,31 +48,14 @@ class pufferFish extends movableObject {
         this.loadImages(this.ImagesSwimming);
         this.loadImages(this.ImagesDead);
 
-        /** @type {number} The x-coordinate of the puffer fish. */
         this.x = x;
-
-        /** @type {number} The y-coordinate of the puffer fish. */
         this.y = 10 + Math.random() * 400;
-
-        /** @type {number} The width of the puffer fish. */
         this.width = 50;
-
-        /** @type {number} The height of the puffer fish. */
         this.height = 50;
-
-        /** @type {number|string} The unique identifier for the puffer fish. */
         this.id = id;
-
-        /** @type {boolean} Indicates if the puffer fish is dead. */
         this.dead = false;
-
-        /** @type {boolean} Indicates if the puffer fish has been hit. */
         this.getHit = false;
-
-        /** @type {number} The horizontal speed of the puffer fish. */
         this.speed = 0.1 + Math.random() * 0.1;
-
-        /** @type {number} The vertical speed of the puffer fish. */
         this.speed_Y = 0;
 
         this.animate();

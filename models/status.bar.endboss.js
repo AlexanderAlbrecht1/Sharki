@@ -5,10 +5,6 @@
  */
 class StatusBarBoss extends DrawableObject {
 
-    /**
-     * Array of image paths representing different energy levels for the boss's status bar.
-     * @type {string[]}
-     */
     ImagesEnergy = [
         './img/4. Marcadores/green/Life/0_  copia 3.png',
         './img/4. Marcadores/green/Life/20_ copia 4.png',
@@ -18,10 +14,6 @@ class StatusBarBoss extends DrawableObject {
         './img/4. Marcadores/green/Life/100_  copia 2.png',
     ];
 
-    /**
-     * The current percentage of the boss's health displayed on the status bar.
-     * @type {number}
-     */
     percentageBoss = 100;
 
     /**
@@ -31,17 +23,9 @@ class StatusBarBoss extends DrawableObject {
     constructor() {
         super();
         this.loadImages(this.ImagesEnergy);
-
-        /** @type {number} The x-coordinate of the boss's status bar. */
         this.x = 500;
-
-        /** @type {number} The y-coordinate of the boss's status bar. */
         this.y = 0;
-
-        /** @type {number} The width of the boss's status bar. */
         this.width = 200;
-
-        /** @type {number} The height of the boss's status bar. */
         this.height = 60;
 
         this.setPercentage(100);

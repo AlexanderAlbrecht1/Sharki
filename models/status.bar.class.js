@@ -5,10 +5,6 @@
  */
 class StatusBar extends DrawableObject {
 
-    /**
-     * Array of image paths representing different energy levels for the status bar.
-     * @type {string[]}
-     */
     ImagesEnergy = [
         './img/4. Marcadores/orange/0_  copia.png',
         './img/4. Marcadores/orange/20_ copia 2.png',
@@ -17,11 +13,6 @@ class StatusBar extends DrawableObject {
         './img/4. Marcadores/orange/80_  copia.png',
         './img/4. Marcadores/orange/100_  copia.png',
     ];
-
-    /**
-     * The current percentage of energy/health displayed on the status bar.
-     * @type {number}
-     */
     percentage = 100;
 
     /**
@@ -31,17 +22,9 @@ class StatusBar extends DrawableObject {
     constructor() {
         super();
         this.loadImages(this.ImagesEnergy);
-
-        /** @type {number} The x-coordinate of the status bar. */
         this.x = 10;
-
-        /** @type {number} The y-coordinate of the status bar. */
         this.y = 0;
-
-        /** @type {number} The width of the status bar. */
         this.width = 200;
-
-        /** @type {number} The height of the status bar. */
         this.height = 60;
 
         this.setPercentage(100);

@@ -1,13 +1,5 @@
-/**
- * Flag to indicate whether the game is muted.
- * @type {boolean}
- */
-let mute = false;
 
-/**
- * Flag to indicate whether the game is currently active.
- * @type {boolean}
- */
+let mute = false;
 let gameOn = false;
 
 /**
@@ -16,9 +8,14 @@ let gameOn = false;
  */
 function checkLandscapeMode() {
     if (window.matchMedia("(orientation: landscape)").matches) {
-        document.getElementById('start-screen').style.display = 'flex';
+        document.getElementById('start-screen').classList.remove('d-none');
+        document.getElementById('rotateAdvice').classList.add('d-none');
     } else {
-        document.getElementById('start-screen').style.display = 'none';
+        document.getElementById('rotateAdvice').classList.remove('d-none');
+        document.getElementById('start-screen').classList.add('d-none');
+        document.getElementById('game-over-screen').classList.add('d-none');
+        document.getElementById('mobile-buttons').classList.add('d-none');
+        
         if (isMobileDevice() && gameOn == true) {
             document.getElementById('mobile-buttons').classList.remove('d-none');
         }

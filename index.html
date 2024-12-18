@@ -48,13 +48,19 @@
     <div class="mute-overlay">
         <div id="muteWrapper" onclick="toggleMuteSound()">
         </div>
+
+    </div>    <div class="rotateAdvice" id="rotateAdvice">
+        <p>
+            Portrait mode is disabled, please turn your device into landscape mode.
+        </p>
+        <img class="rotateArrows" src="./img/rotate-solid.svg" alt="rotate arrows">
     </div>
 
     <div id="loading-screen" class="d-none">
         <p>loading ...</p>
     </div>
 
-    <div class="start-screen" id="start-screen">
+    <div class="start-screen d-none" id="start-screen">
         <div class="how-to-play-wrapper">
             <div class="how-to-play" onclick="howToPlay()">
                 <img src="./img/circle-question-regular.svg" alt="How to Play">
@@ -176,12 +182,7 @@
         </div>
     </div>
 
-    <div class="rotateAdvice">
-        <p>
-            Portrait mode is disabled, please turn your device into landscape mode.
-        </p>
-        <img class="rotateArrows" src="./img/rotate-solid.svg" alt="rotate arrows">
-    </div>
+
 
 </body>
 

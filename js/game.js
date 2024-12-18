@@ -1,25 +1,7 @@
-/**
- * Reference to the canvas element used for rendering the game.
- * @type {HTMLCanvasElement}
- */
+
 let canvas;
-
-/**
- * Instance of the World class, managing the game logic and state.
- * @type {World}
- */
 let world;
-
-/**
- * Instance of the Keyboard class to handle user input.
- * @type {Keyboard}
- */
 let keyboard = new Keyboard();
-
-/**
- * Array containing audio objects for game sounds.
- * @type {Audio[]}
- */
 let gameSounds = [
     backgroundSound = new Audio('./audio/background2.mp3'),
     swimmingSound = new Audio('./audio/swimming2.mp3'),
@@ -226,63 +208,3 @@ function mobilePlay() {
         }
     });
 }
-
-// function mobilePlay() {
-//     document.getElementById('up-arrow').addEventListener('touchstart', (event) => {
-//         event.preventDefault();
-//         keyboard.UP = true;
-//     })
-//     document.getElementById('up-arrow').addEventListener('touchend', (event) => {
-//         event.preventDefault();
-//         keyboard.UP = false;
-//     })
-//     document.getElementById('down-arrow').addEventListener('touchstart', (event) => {
-//         event.preventDefault();
-//         keyboard.DOWN = true;
-//     })
-//     document.getElementById('down-arrow').addEventListener('touchend', (event) => {
-//         event.preventDefault();
-//         keyboard.DOWN = false;
-//     })
-//     document.getElementById('left-arrow').addEventListener('touchstart', (event) => {
-//         event.preventDefault();
-//         keyboard.LEFT = true;
-//     })
-//     document.getElementById('left-arrow').addEventListener('touchend', (event) => {
-//         event.preventDefault();
-//         keyboard.LEFT = false;
-//     })
-//     document.getElementById('right-arrow').addEventListener('touchstart', (event) => {
-//         event.preventDefault();
-//         keyboard.RIGHT = true;
-//     })
-//     document.getElementById('right-arrow').addEventListener('touchend', (event) => {
-//         event.preventDefault();
-//         keyboard.RIGHT = false;
-//     })
-
-//     document.getElementById('Q').addEventListener('touchstart', (event) => {
-//         event.preventDefault();
-//         keyboard.Q = true;
-//     })
-//     document.getElementById('Q').addEventListener('touchend', (event) => {
-//         event.preventDefault();
-//         keyboard.Q = false;
-//     })
-//     document.getElementById('E').addEventListener('touchstart', (event) => {
-//         event.preventDefault();
-//         keyboard.E = true;
-//     })
-//     document.getElementById('E').addEventListener('touchend', (event) => {
-//         event.preventDefault();
-//         keyboard.E = false;
-//     })
-//     document.getElementById('space-bar').addEventListener('touchstart', (event) => {
-//         event.preventDefault();
-//         keyboard.SPACE = true;
-//     })
-//     document.getElementById('space-bar').addEventListener('touchend', (event) => {
-//         event.preventDefault();
-//         keyboard.SPACE = false;
-//     })
-// }

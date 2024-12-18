@@ -3,22 +3,12 @@
  * @extends DrawableObject
  */
 class movableObject extends DrawableObject {    
-    /** @type {number} The horizontal movement speed of the object. */
+
     speed = 0.3;
-
-    /** @type {boolean} Indicates whether the object is facing the opposite direction. */
     otherDirection = false;
-
-    /** @type {number} The vertical speed of the object. */
     speed_Y = 0;
-
-    /** @type {number} The acceleration due to gravity. */
     accerlation = 0.75;
-
-    /** @type {number} The energy level of the object. */
     energy = 100;
-
-    /** @type {number} The timestamp of the last time the object was hit. */
     lastHit = 0;
 
     /**

@@ -11,17 +11,9 @@ class PoisonCounter extends DrawableObject {
      */
     constructor() {
         super().loadImage('./img/4. Marcadores/Posión/Animada/1.png');
-
-        /** @type {number} The x-coordinate of the poison counter. */
         this.x = 10;
-
-        /** @type {number} The y-coordinate of the poison counter. */
         this.y = 50;
-
-        /** @type {number} The width of the poison counter. */
         this.width = 48;
-
-        /** @type {number} The height of the poison counter. */
         this.height = 64;
     }
 }

@@ -3,76 +3,18 @@
  * Provides methods to load images, cache them, and draw them onto a canvas.
  */
 class DrawableObject {
-    /**
-     * The horizontal position of the object.
-     * @type {number}
-     */
+
     x = 120;
-
-    /**
-     * The vertical position of the object.
-     * @type {number}
-     */
     y = 250;
-
-    /**
-     * The height of the object.
-     * @type {number}
-     */
     height = 200;
-
-    /**
-     * The width of the object.
-     * @type {number}
-     */
     width = 200;
-
-    /**
-     * The primary image for the object.
-     * @type {HTMLImageElement}
-     */
     img;
-
-    /**
-     * A cache of preloaded images, keyed by their file path.
-     * @type {Object.<string, HTMLImageElement>}
-     */
     imageCache = {};
-
-    /**
-     * The index of the currently displayed image in an animation sequence.
-     * @type {number}
-     */
     currentImage = 0;
-
-    /**
-     * Offset for collision detection or frame adjustments on the left side.
-     * @type {number}
-     */
     offsetLeft = 0;
-
-    /**
-     * Offset for collision detection or frame adjustments on the right side.
-     * @type {number}
-     */
     offsetRight = 0;
-
-    /**
-     * Offset for collision detection or frame adjustments on the top side.
-     * @type {number}
-     */
     offsetTop = 0;
-
-    /**
-     * Offset for collision detection or frame adjustments on the bottom side.
-     * @type {number}
-     */
     offsetBottom = 0;
-
-    /**
-     * Indicates whether the object is "dead" (no longer active or drawable).
-     * @type {boolean}
-     */
     dead = false;
 
     /**

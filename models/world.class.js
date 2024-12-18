@@ -49,8 +49,6 @@ class World {
                 this.level.enemies.forEach((enemy) => {
                     if (this.character.isColliding(enemy) && !world.keyboard.SPACE && enemy.dead == false) {
                         this.characterGetHurt(enemy);
-                        console.log(this.character.energy);
-                        
                     } else if (this.character.isColliding(enemy) && world.keyboard.SPACE) {
                         if (enemy instanceof pufferFish && enemy.getHit == false) {
                             this.killPufferfish(enemy);
@@ -60,11 +58,6 @@ class World {
                     } if (this.poisonBubble.length >= 1) {
                         this.checkPosionBubbleHit(enemy);
                     }
-
-
-                    // if (this.poisonBubble != null && this.poisonBubble.isColliding(enemy) && enemy instanceof Endboss) {
-                    //     this.bossGetHurt();
-                    // }
                 })
                 this.checkPickUpItems();
             }
@@ -75,10 +68,8 @@ class World {
         world.poisonBubble.forEach(bubble => {
             if(bubble.isColliding(enemy)) {
              if (enemy instanceof Endboss) {
-                 console.log(bubble.id);
                  this.bossGetHurt();
                  let bubbleIndex = this.searchPoisonBubble(bubble.id);
-                 console.log('Index = '+bubbleIndex);
                  world.poisonBubble.splice(bubbleIndex,1);
              }
             }
@@ -89,10 +80,8 @@ class World {
         world.bubbleTrap.forEach(bubble => {
            if(bubble.isColliding(enemy)) {
             if (enemy instanceof JellyFish) {
-                console.log(bubble.id);
                 this.JellyfishGetTrapped(enemy);
                 let bubbleIndex = this.searchBubble(bubble.id)
-                console.log('Index = '+bubbleIndex);
                 world.bubbleTrap.splice(bubbleIndex,1);
             }
            }
@@ -164,7 +153,6 @@ class World {
         setTimeout(() => {
             this.level.enemies[enemyIndex].dead = true;
         }, 1500);
-        // this.bubbleTrap = null;
     }
 
     /**
